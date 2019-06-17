@@ -9,6 +9,12 @@ let router = new Router({
       name: 'Home',
       component: resolve => require(['@/page/home/index'], resolve) ,
       meta:{index: 1, title: '首页', requireAuth: false}
+    },
+    {
+      path: '/sort/index',
+      name: 'SortIndex',
+      component: resolve => require(['@/page/sort/index'], resolve) ,
+      meta:{index: 1, title: '分类', requireAuth: false}
     }
   ],
   //回到顶部

@@ -92,19 +92,20 @@
   .navSwiperWrapper{
     background-color:white;
     font-size:28px;
-    padding:50px 0;
+    padding:40px 0;
     overflow: hidden;
     .swiperWd{
       .swiper-container{
         overflow: initial;
       }
       .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
-        bottom:-40px;
+        bottom:-30px;
       }
       .swiper-slide{
         margin:0 auto;
         a{
           display: block;
+          color:black;
           .swiper-img{
             width:90px;
             height:90px;

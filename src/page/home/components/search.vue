@@ -27,8 +27,8 @@
   .searchWrapper{
     background-color:white;
     padding:15px 30px;
-    font-size:26px;
     border-bottom:1px solid #eee;
+    font-size:26px;
     .searchInput{
       position:relative;
       input{

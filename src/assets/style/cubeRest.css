@@ -1,0 +1,52 @@
+.navBar .cube-tab-bar_inline .cube-tab{
+  display: block !important;
+}
+.navBar .cube-tab_active{
+  color:#ff0207;
+}
+.navBar .cube-tab-bar-slider{
+  display: none;
+  opacity: 0;
+}
+.navBar .cube-tab i{
+  display: block;
+  width:28px;
+  height:28px;
+  margin:0 auto;
+  margin-bottom:5px;
+}
+.cubeic-home{
+  background:url(./../ico/a-1.png) no-repeat center;
+  background-size:100%;
+}
+.cubeic-like{
+  background:url(./../ico/b-1.png) no-repeat center;
+  background-size:100%;
+}
+.cubeic-vip{
+  background:url(./../ico/c-1.png) no-repeat center;
+  background-size:100%;
+}
+.cubeic-person{
+  background:url(./../ico/d-1.png) no-repeat center;
+  background-size:100%;
+}
+.cube-tab_active .cubeic-home{
+  background:url(./../ico/a-2.png) no-repeat center;
+  background-size:100%;
+}
+.cube-tab_active .cubeic-like{
+  background:url(./../ico/b-2.png) no-repeat center;
+  background-size:100%;
+}
+.cube-tab_active .cubeic-vip{
+  background:url(./../ico/c-2.png) no-repeat center;
+  background-size:100%;
+}
+.cube-tab_active .cubeic-person{
+  background:url(./../ico/d-2.png) no-repeat center;
+  background-size:100%;
+}
+.cube-tab i::before{
+  content: "";
+}
