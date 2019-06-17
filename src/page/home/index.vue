@@ -1,16 +1,28 @@
 <template>
   <div class="homeIndex">
-    <h1>测试页面</h1>
-    <h2 id="test">jquery 测试</h2>
+    <home-search></home-search>
+    <home-swiper></home-swiper>
+    <nav-swiper></nav-swiper>
+    <advert-swiper></advert-swiper>
   </div>
 </template>
 <script>
+  import HomeSearch from './components/search.vue'
+  import HomeSwiper from './components/swiper.vue'
+  import NavSwiper from './components/navSwiper.vue'
+  import AdvertSwiper from './components/advertSwiper.vue'
   export default {
     name: 'homeIndex',
     data() {
       return {
 
       }
+    },
+    components: {
+      HomeSearch,
+      HomeSwiper,
+      NavSwiper,
+      AdvertSwiper
     },
     methods: {
 
