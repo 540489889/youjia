@@ -15,6 +15,12 @@ let router = new Router({
       name: 'SortIndex',
       component: resolve => require(['@/page/sort/index'], resolve) ,
       meta:{index: 1, title: '分类', requireAuth: false}
+    },
+    {
+      path: '/cart/index',
+      name: 'CartIndex',
+      component: resolve => require(['@/page/cart/index'], resolve) ,
+      meta:{index: 1, title: '购物车', requireAuth: false}
     }
   ],
   //回到顶部

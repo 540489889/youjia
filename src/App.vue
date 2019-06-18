@@ -41,7 +41,7 @@
           case 'MeIndex':
             this.showBar = true
             break
-          case '':
+          case 'CartIndex':
             this.showBar = true
             break
           default :

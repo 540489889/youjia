@@ -61,6 +61,7 @@
             this.$router.push('/sort/index')
             break
           case '购物车':
+            this.$router.push('/cart/index')
             break
         }
 

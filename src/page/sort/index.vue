@@ -39,7 +39,7 @@
   import goodsData from './components/goods-list.json'
 const goods = goodsData.goods
   export default {
-    name: 'mb',
+    name: 'sortIndex',
     data (){
       return {
         data: goods,
