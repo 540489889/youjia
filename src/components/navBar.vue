@@ -55,7 +55,7 @@
             this.$router.push('/')
             break
           case '我的':
-//            this.$router.push('/me/index')
+            this.$router.push('/me/index')
             break
           case '分类':
             this.$router.push('/sort/index')

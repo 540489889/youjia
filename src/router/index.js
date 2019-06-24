@@ -21,6 +21,24 @@ let router = new Router({
       name: 'CartIndex',
       component: resolve => require(['@/page/cart/index'], resolve) ,
       meta:{index: 1, title: '购物车', requireAuth: false}
+    },
+    {
+      path: '/me/index',
+      name: 'MeIndex',
+      component: resolve => require(['@/page/me/index'], resolve) ,
+      meta:{index: 1, title: '我的', requireAuth: false}
+    },
+    {
+      path: '/address/index',
+      name: 'AddressIndex',
+      component: resolve => require(['@/page/address/index'], resolve) ,
+      meta:{index: 1, title: '我的收货地址', requireAuth: false}
+    },
+    {
+      path: '/address/add',
+      name: 'AddressAdd',
+      component: resolve => require(['@/page/address/add'], resolve) ,
+      meta:{index: 1, title: '新增收货地址', requireAuth: false}
     }
   ],
   //回到顶部

@@ -39,7 +39,7 @@
   import goodsData from './components/goods-list.json'
 const goods = goodsData.goods
   export default {
-    name: 'sortIndex',
+    name: 'mb',
     data (){
       return {
         data: goods,
@@ -120,8 +120,8 @@ const goods = goodsData.goods
         font-size: 14px;
         line-height: 1.4;
         color: #666;
-        padding:0 5px;
-        overflow: hidden;
+        padding:0 10px;
+        overflow: ;
         li{
           float: left;
           width: 50%;
