@@ -3,7 +3,6 @@
     <header class="header">
       <!--<h1>{{title}}</h1>-->
       <!--<i @click="back" class="cubeic-back"></i>-->
-      <search></search>
     </header>
     <div class="wrapper">
       <section v-show="desc" class="desc"><slot name="desc">{{desc}}</slot></section>
@@ -15,7 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import search from './../../home/components/search.vue'
+  import search from './search.vue'
   export default {
     props: {
       title: {
@@ -48,8 +47,8 @@
 </script>
 <style>
   .header{
-    height:90px;
-    background-color:red;
+    /*height:90px;*/
+    /*background-color:red;*/
   }
 </style>
 

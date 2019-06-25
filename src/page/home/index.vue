@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-  import HomeSearch from './components/search.vue'
+  import HomeSearch from '../../components/search.vue'
   import HomeSwiper from './components/swiper.vue'
   import NavSwiper from './components/navSwiper.vue'
   import AdvertSwiper from './components/advertSwiper.vue'

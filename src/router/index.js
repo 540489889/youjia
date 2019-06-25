@@ -10,11 +10,33 @@ let router = new Router({
       component: resolve => require(['@/page/home/index'], resolve) ,
       meta:{index: 1, title: '首页', requireAuth: false}
     },
+    //一级分类
     {
       path: '/sort/index',
       name: 'SortIndex',
       component: resolve => require(['@/page/sort/index'], resolve) ,
       meta:{index: 1, title: '分类', requireAuth: false}
+    },
+    //二级分类
+    {
+      path: '/sort/list',
+      name: 'SortList',
+      component: resolve => require(['@/page/sort/list'], resolve) ,
+      meta:{index: 2, title: '分类', requireAuth: false}
+    },
+    //测试
+    {
+      path: '/sort/mb',
+      name: 'Sortmb',
+      component: resolve => require(['@/page/sort/mb'], resolve) ,
+      meta:{index: 2, title: '分类', requireAuth: false}
+    },
+    //商品详情
+    {
+      path: '/goods/index',
+      name: 'GoodsIndex',
+      component: resolve => require(['@/page/goods/index'], resolve) ,
+      meta:{index: 3, title: '详情', requireAuth: false}
     },
     {
       path: '/cart/index',

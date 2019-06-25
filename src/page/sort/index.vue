@@ -1,5 +1,6 @@
 <template>
   <div class="sortWrapper">
+    <home-search></home-search>
     <cube-page type="scroll-nav-side" title="ScrollNav">
       <div slot="content">
         <div class="view-wrapper">
@@ -20,12 +21,12 @@
               :label="item.name"
               :title="item.name">
               <ul>
-                <li v-for="food in item.foods">
+                <router-link tag="li" to="./list" v-for="food in item.foods" :key="food.id">
                   <div>
                     <img :src="food.icon">
                     <p>{{food.name}}</p>
                   </div>
-                </li>
+                </router-link>
               </ul>
             </cube-scroll-nav-panel>
           </cube-scroll-nav>
@@ -35,11 +36,12 @@
   </div>
 </template>
 <script>
-  import CubePage from './components/cube-page.vue'
+  import CubePage from '../../components/cube-page.vue'
   import goodsData from './components/goods-list.json'
+  import HomeSearch from '../../components/search.vue'
 const goods = goodsData.goods
   export default {
-    name: 'mb',
+    name: 'SortIndex',
     data (){
       return {
         data: goods,
@@ -47,7 +49,8 @@ const goods = goodsData.goods
       }
     },
     components: {
-      CubePage
+      CubePage,
+      HomeSearch
     },
     data() {
       return {

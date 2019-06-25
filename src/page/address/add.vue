@@ -99,7 +99,6 @@
           }
           .cube-input{
             text-align: right;
-
           }
           .cube-btn{
             text-align: right;

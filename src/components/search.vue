@@ -50,7 +50,7 @@
     .cart{
       width:40px;
       height:36px;
-      background:url(../../../assets/ico/cart-ico.png) no-repeat center;
+      background:url(../assets/ico/cart-ico.png) no-repeat center;
       background-size:100%;
       margin-left:20px;
       position:relative;
