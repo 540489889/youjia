@@ -1,30 +1,45 @@
 <template>
   <div class="meIndex">
-    <div class="title flex-box">
-      <div class="set-up flex-box">
-        <i class="cubeic-setting"></i>
-        设置
+    <div class="mbTitle">
+      <div class="title">
+        <div class="set-up flex-box">
+          <i class="cubeic-setting"></i>
+          设置
+        </div>
+        <div class="flex-box">
+          <div class="left">
+            <img src="./../../assets/ico/mb-tx.png" alt="">
+          </div>
+          <div class="right">
+            <h4 class="media_title">不吃白萝卜的兔子</h4>
+            <p class="flex-box">ID：335696 <span>优家会员</span></p>
+          </div>
+        </div>
+        <router-link tag="div" to="/reg/register" class="mbbt">
+          <img  src="../../assets/ico/mbbt.png" alt="">
+        </router-link>
       </div>
-      <div class="left">
-        <img src="./../../assets/ico/mb-tx.png" alt="">
-      </div>
-      <div class="right">
-        <h4 class="media_title">不吃白萝卜的兔子</h4>
-        <p class="flex-box">ID：335696 <span>优家会员</span></p>
+      <div class="flex-box mall-title">
+        <router-link tag="div" to="/integral/index" class="left box-1 flex-box">
+          <i class="mb-m-1"></i>积分
+        </router-link>
+        <div class="right box-1 flex-box">
+          <i class="mb-m-2"></i>商城
+        </div>
       </div>
     </div>
     <div class="content">
       <div class="mb-list-1 mb-list">
         <h2 class="flex-box list-title">
           我的订单
-          <span class="flex-box">全部订单 <i class="cubeic-arrow"></i></span>
+          <router-link tag="span" :to="'/order/index?type='+1" class="flex-box">全部订单 <i class="cubeic-arrow"></i></router-link>
         </h2>
         <ul class="flex-box">
           <li class="box-1">
-            <a>
+            <router-link tag="a" :to="'/order/index?type='+1">
               <img src="./../../assets/ico/mb-l1.png" alt="">
               <h4>待付款</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
             <a>
@@ -39,10 +54,10 @@
             </a>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" :to="'/order/index?type='+5">
               <img src="./../../assets/ico/mb-l4.png" alt="">
               <h4>已完成</h4>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -59,10 +74,10 @@
             </a>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" to="/me/code">
               <img src="./../../assets/ico/mb-a2.png" alt="">
               <h4>推广码</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
             <a>
@@ -91,10 +106,10 @@
             </a>
           </li>
           <li>
-            <a class="flex-box">
+            <router-link tag="a" to="/refund/index" class="flex-box">
               <img src="./../../assets/ico/mb-b2.png" alt="">
               <h4 class="flex-box box-1"><p class="box-1 media_title">售后/退款</p> <i class="cubeic-arrow"></i></h4>
-            </a>
+            </router-link>
           </li>
           <li>
             <router-link tag="a" to="/address/index" class="flex-box">
@@ -125,7 +140,7 @@
 
     },
     mounted (){
-
+      this.$store.commit('changeLoading',false)
     }
   }
 </script>
@@ -136,6 +151,35 @@
     background-color:aliceblue;
     font-size:28px;
     padding-bottom:120px;
+    .mbTitle{
+      .mall-title{
+        background-color:white;
+        height:100px;
+        .left{
+          justify-content: center;
+          .mb-m-1{
+            display: inline-block;
+            width:34px;
+            height:34px;
+            background:url(../../assets/ico/mb-m-1.png) no-repeat center;
+            background-size:100%;
+            margin-right:10px;
+          }
+        }
+        .right{
+          border-left:1px solid #ccc;
+          justify-content: center;
+          .mb-m-2{
+            display: inline-block;
+            width:34px;
+            height:34px;
+            background:url(../../assets/ico/mb-m-2.png) no-repeat center;
+            background-size:100%;
+            margin-right:10px;
+          }
+        }
+      }
+    }
     .title{
       width:750px;
       height:250px;
@@ -145,6 +189,18 @@
       padding:20px 25px;
       color:white;
       position:relative;
+      overflow: hidden;
+      .mbbt{
+        position:absolute;
+        bottom:-20px;
+        width:690px;
+        height:95px;
+        left:30px;
+        img{
+          width:100%;
+          height:100%;
+        }
+      }
       .set-up{
         position:absolute;
         right:20px;
@@ -251,9 +307,12 @@
                 width:50px;
                 height:50px;
                 margin-right:10px;
+                position:relative;
+                top:-2px;
               }
               h4{
                 p{
+                  line-height:1.4;
                   text-align: left;
                   margin-right:10px;
                 }

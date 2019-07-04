@@ -6,30 +6,26 @@ const TIME_OUT_MS = 60 * 1000 // 默认请求超时时间
  * @param response 返回数据列表
  */
 function handleResults (response) {
-  let result = response.data
-  // var result = {
-  //   success: false,
-  //   message: '',
-  //   status: [],
-  //   errorCode: '',
-  //   data: {
-  //     total: 0,
-  //     results: []
-  //   }
-  // }
-  // if (remoteResponse.success) {
-  //   result.data.results = remoteResponse.data
-  //   result.data.total = remoteResponse.total
-  //   result.success = true
-  // }
-  // if (!remoteResponse.success) {
-  //   let code = remoteResponse.errorCode
-  //   if (code === 400) {
-  //     console.log('传参错误')
-  //   }
-  //   result.errorCode = remoteResponse.errorCode
-  //   result.message = remoteResponse.message
-  // }
+  let res = response.data
+  let result = {
+    success: false,
+    msg: '',
+    status: '',
+    code: '',
+    data: {}
+  }
+  if(res.code===200){
+    result.data = res.data
+    result.success = true
+  }
+  if(!result.success){
+    let code = res.code
+    if(code===400){
+      console.log('1')
+    }
+  }
+  result.code = res.code
+  result.msg = res.msg
   return result
 }
 
@@ -86,6 +82,28 @@ export default {
   get (url, response, exception) {
     axios({
       method: 'get',
+      url: handleUrl(url),
+      timeout: TIME_OUT_MS,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    }).then(
+      (result) => {
+        response(handleResults(result))
+      }
+    ).catch(
+      (error) => {
+        if (exception) {
+          exception(error)
+        } else {
+          console.log(error)
+        }
+      }
+    )
+  },
+  delete (url, response, exception) {
+    axios({
+      method: 'delete',
       url: handleUrl(url),
       timeout: TIME_OUT_MS,
       headers: {

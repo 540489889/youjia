@@ -12,7 +12,8 @@
       :label="item.label"
       :key="item.label">
       <!-- name为icon的插槽 -->
-      <i slot="icon" :class="item.icon"></i>
+      <i slot="icon" :class="item.icon" v-if="index==2"><b>{{$store.state.cartNum}}</b></i>
+      <i slot="icon" :class="item.icon" v-else></i>
       <!-- 默认插槽 -->
       {{item.label}}
     </cube-tab>
@@ -87,8 +88,27 @@
     background-color:white;
     border-top:1px solid #eee;
     z-index: 99;
+    .cube-tab{
+      /*position:relative;*/
+    }
+    .cubeic-vip{
+      position:relative;
+    }
   }
   .navBar .cube-tab_active{
     color: #ff0207;
+  }
+  .cubeic-vip b{
+    position:absolute;
+    right:-5px;
+    top:-5px;
+    color:white;
+    background-color:#ff0207;
+    display: inline-block;
+    border-radius: 50%;
+    width:15px;
+    height:15px;
+    line-height:15px;
+    font-size:10px;
   }
 </style>

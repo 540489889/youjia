@@ -14,7 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import search from './search.vue'
+  import search from './searchBar.vue'
   export default {
     props: {
       title: {

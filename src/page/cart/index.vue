@@ -6,29 +6,31 @@
           <cube-scroll>
             <cube-swipe>
               <transition-group name="swipe" tag="ul">
-                <li class="swipe-item-wrapper" v-for="(data,index) in swipeData" :key="data.item.id">
+                <li class="swipe-item-wrapper" v-for="(data,index) in list" :key="data.id">
                   <cube-swipe-item
                     ref="swipeItem"
                     :btns="data.btns"
                     :index="index"
                     @btn-click="onBtnClick">
-                    <div @click="onItemClick(data.item, index)" class="item-inner flex-box">
-                      <cube-checkbox v-model="data.item.checked" @input="changeCheck" option="" ></cube-checkbox>
+                    <div @click="onItemClick(data, index)" class="item-inner flex-box">
+                      <cube-checkbox v-if="data.number_stock" v-model="data.checked" @input="changeCheck" option="" ></cube-checkbox>
+                      <cube-checkbox v-else v-model="data.checked" @input="changeCheck" :option="optionNo" ></cube-checkbox>
                       <div class="flex-box box-1 twoItem">
                         <div class="icon">
-                          <img width="168" height="168" :src="data.item.imgurl">
+                          <img width="168" height="168" :src="data.imgurl">
+                          <b v-if="!data.number_stock" class="stockNo">库存不足</b>
                         </div>
                         <div class="text box-1">
-                          <h2 class="item-name media_title" v-html="data.item.name"></h2>
-                          <p class="item-desc media_desc" v-html="data.item.desc"></p>
+                          <h2 class="item-name media_title" v-html="data.goods_name"></h2>
+                          <p class="item-desc media_desc" v-html="data.goods_spec"></p>
                           <h4 class="item-money flex-box">
                             <div class="left">
-                              ￥<span v-html="data.item.price"></span>
+                              ￥<span v-html="data.price"></span>
                             </div>
                             <div class="right flex-box">
-                              <span @click="reduce(data.item)">-</span>
-                              <cube-input :min="1" :max="10" type="number" @change="handleNumChange(data.item)" v-model="data.item.num"></cube-input>
-                              <span @click="plus(data.item)">+</span>
+                              <span @click="reduce(data)">-</span>
+                              <cube-input :min="1" :max="10" type="number" @change="handleNumChange(data)" v-model="data.number"></cube-input>
+                              <span @click="plus(data)">+</span>
                             </div>
                           </h4>
                         </div>
@@ -51,7 +53,7 @@
       <div class="all-money box-1">
         合计: <span>￥{{total}}</span>
       </div>
-      <a class="go-ck">去结算({{number}})</a>
+      <a class="go-ck" @click="Settlement">去结算({{number}})</a>
     </div>
   </div>
 </template>
@@ -62,11 +64,18 @@
     name: 'cartIndex',
     data (){
       return {
+        goods_id: '',//商品id
+        key: '', //商品key
+        count:'', //商品数量
+        list: [],//购物车列表
         number:0,
         checked: false, //全选
         option: {
           label: '全选',
           value: false
+        },
+        optionNo: {
+          disabled: true
         },
         swipeData: customData
       }
@@ -77,13 +86,27 @@
     computed: {
       //合计
       total: function () {
+        let goods_id = ''
+        let key = ''
+        let count = 0
         let num = 0;
-        let tempData = this.swipeData
+        let number = 0;
+        let tempData = this.list
         for(let i=0;i<tempData.length;i++){
-          if(tempData[i].item.checked){
-            num+=tempData[i].item.num*tempData[i].item.price
+          if(tempData[i].checked){
+            goods_id += tempData[i].goods_id+'ღ'
+            key +=  tempData[i].goods_spec+'ღ'
+            count +=  tempData[i].number+'ღ'
+            num+=tempData[i].number*tempData[i].price
+            number += parseInt(tempData[i].number)
           }
         }
+        this.goods_id = encodeURIComponent(goods_id.substr(0,goods_id.length-1))
+        this.key = encodeURIComponent(key.substr(0,key.length-1))
+        let newCount = String(count).substr(1)
+        this.count = encodeURIComponent(newCount.substr(0,newCount.length-1))
+        this.number = number
+//        console.log(this.goods_id,this.key,this.count)
         return num
       }
     },
@@ -94,6 +117,43 @@
           type: 'txt'
         })
         this.toast.show()
+      },
+      getIndexData(){
+        this.http.get(this.ports.cart.index, res =>{
+          this.$store.commit('changeLoading',false)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+            this.list.forEach((event)=>{
+              this.$set(event,'checked',false)
+              this.$set(event,'btns',[
+                {
+                  action: 'delete',
+                  text: '删除',
+                  color: '#ff3a32'
+                }
+              ])
+            })
+            console.log(this.list)
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      //去结算
+      Settlement(){
+        if(!this.number){
+          this.showToastTxtOnly('请至少选择一件商品')
+          return false
+        }
+        this.$router.push({
+          path: '/order/orders',
+          query: {
+            goods_id: this.goods_id,
+            key: this.key,
+            count:this.count
+          }
+        })
       },
       onItemClick(item) {
 //        alert('click item:', item)
@@ -107,53 +167,61 @@
               {content: '删除'}
             ],
             onSelect: () => {
-              this.swipeData.splice(index, 1)
+              this.http.delete(this.ports.cart.index+'/'+this.list[index].id, res =>{
+                if(res.success){
+//                  let data = res.data
+//                  this.list = data.res
+                  this.list.splice(index, 1)
+                }else{
+                  this.showToastTxtOnly(res.msg)
+                }
+              })
             }
           }).show()
         } else {
-          this.$refs.swipeItem[index].shrink()
+          this.$refs.list[index].shrink()
         }
       },
       //减法
       reduce(item){
-        if(item.num<=1){
+        if(item.number<=1){
           this.showToastTxtOnly('受不了了，宝贝不能再减少了哦')
           return false
         }else{
-          item.num -=1;
+          item.number -=1;
         }
       },
       //加法
       plus(item){
-        if(item.num>=item.stock) {
+        if(item.number>=item.number_stock) {
           this.showToastTxtOnly('已经没有更多的库存了，下次再来吧')
           return false
         }else{
-          item.num +=1
+          item.number +=1
         }
       },
       //数量监听限制
       handleNumChange(item){
-        if(item.num>=item.stock){
+        if(item.number>=item.number_stock){
           this.showToastTxtOnly('超出范围')
-          item.num = item.stock
+          item.number = item.number_stock
         }
       },
       //选择监听
       changeCheck(val){
         let nums = 0
-        let newNum = this.swipeData.map((currVal,index,arr)=>{
-          if(!currVal.item.checked){
+        let newNum = this.list.map((currVal,index,arr)=>{
+          if(!currVal.checked){
             nums = 0
           }else{
             nums = 1
           }
           return nums
         })
-        this.number = eval(newNum.join('+'))
-        if(this.swipeData.every((currentValue,index,arr)=>{
+//        this.number = eval(newNum.join('+'))
+        if(this.list.every((currentValue,index,arr)=>{
 //          console.log(currentValue,index,arr)
-          if(currentValue.item.checked === false){
+          if(currentValue.checked === false){
             return false
           }else{
             return true
@@ -166,12 +234,13 @@
       },
       //全选
       changeAllCheck(val){
-        for(let i=0;i<this.swipeData.length;i++){
-          if(val) {
-            this.$set(this.swipeData[i].item,'checked',true)
-            this.number = this.swipeData.length
+        for(let i=0;i<this.list.length;i++){
+          if(val&&this.list[i].number_stock) {
+            this.$set(this.list[i],'checked',true)
+            console.log(this.list[i].number)
+            this.number += this.list[i].number
           }else{
-            this.$set(this.swipeData[i].item,'checked',false)
+            this.$set(this.list[i],'checked',false)
             this.number = 0
           }
         }
@@ -179,7 +248,7 @@
       }
     },
     mounted (){
-
+      this.getIndexData()
     }
   }
 </script>
@@ -265,7 +334,20 @@
         .icon{
           width: 168px;
           height:168px;
-          margin-right: 20px;
+          position:relative;
+          overflow: hidden;
+          b{
+            position:absolute;
+            left:0;
+            bottom:0;
+            width:100%;
+            background:rgba(0,0,0,0.5);
+            padding:10px;
+            font-size:24px;
+            color:white;
+            text-align: center;
+            box-sizing: border-box;
+          }
           img{
             width:100%;
             height:100%;
@@ -273,6 +355,7 @@
           }
         }
         .text{
+          margin-left: 20px;
           line-height: 28px;
           overflow: hidden;
           font-size: 28px;

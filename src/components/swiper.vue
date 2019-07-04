@@ -1,21 +1,11 @@
 <template>
-  <div class="swiperWrapper">
+  <div class="swiperWrapper" v-if="showSwiper">
     <div class="swiperWd">
       <swiper :options="swiperOption" ref="mySwiper">
         <!--slide-->
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="../assets/img/goods-b1.png" alt="">
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="../assets/img/goods-b1.png" alt="">
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="../assets/img/goods-b1.png" alt="">
+        <swiper-slide v-for="(item,index) in banner" :key="index">
+          <a>
+            <img class="swiper-img" :src="item" alt="">
           </a>
         </swiper-slide>
         <div class="swiper-pagination swiper-pagination-white"  slot="pagination"></div>
@@ -46,12 +36,15 @@
         }
       }
     },
+    props: {
+      banner: Array
+    },
     methods: {
 
     },
     computed: {
       showSwiper () {
-        return this.list.length
+        return this.banner.length
       },
       swiper() {
         return this.$refs.mySwiper.swiper
@@ -80,7 +73,7 @@
           display: block;
           .swiper-img{
             width:100%;
-            height:525px;
+            height:350px;
           }
         }
       }

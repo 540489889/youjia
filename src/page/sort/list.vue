@@ -10,18 +10,16 @@
             <cube-sticky-ele ele-key="123">
               <index-sort></index-sort>
             </cube-sticky-ele>
-
-            <data-sort></data-sort>
+            <data-sort :list="list"></data-sort>
           </cube-scroll>
         </cube-sticky>
       </div>
     </template>
   </cube-page>
-
 </template>
 <script>
   import CubePage from '../../components/cube-page.vue'
-  import HomeSearch from '../../components/search.vue'
+  import HomeSearch from '../../components/searchBar.vue'
   import IndexSort from './components/sort.vue'
   import DataSort from './components/data.vue'
   export default {
@@ -30,6 +28,7 @@
       return {
         scrollEvents: ['scroll'],
         scrollY: 0,
+        list: [],//商品列表
       }
     },
     components: {
@@ -39,12 +38,32 @@
       CubePage
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
       scrollHandler({ y }) {
         this.scrollY = -y
+      },
+      getListData(){
+        let id = this.$route.query.cate
+        this.http.get(this.ports.sort.list+'?cate='+id, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
       }
     },
     mounted (){
-
+      this.getListData()
     }
   }
 </script>

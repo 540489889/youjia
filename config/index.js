@@ -13,7 +13,7 @@ module.exports = {
     //跨越设置
     proxyTable: {
       '/api': {
-        target: 'http://cqeic.swkj2014.com',//域名
+        target: 'http://youjia.svkeji.cn',//域名
         changeOrigin: true,//是否允许跨越
         pathRewrite:{
           '^/api':'/'

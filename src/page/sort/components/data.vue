@@ -1,159 +1,40 @@
 <template>
   <div class="dataWrapper">
     <ul>
-      <router-link tag="li" to="/goods/index" class="flex-box">
+      <router-link tag="li" v-for="item in list" :key="item.id" :to="'/goods/index/'+item.id" class="flex-box">
         <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
+          <img :src="item.image" alt="">
         </div>
         <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
+          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">{{item.title}}</p></h4>
+          <p class="desc">{{item.desc}}</p>
+          <h5 class="sold">已售：{{item.number_sales}}件</h5>
           <div class="money flex-box">
             <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
+              ￥<span>{{item.price_market}}</span>
+              <b>￥{{item.price_selling}}</b>
             </div>
             <div class="right-2">查看详情</div>
           </div>
         </div>
       </router-link>
-      <router-link tag="li" to="/goods/index" class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </router-link>
-      <router-link tag="li" to="/goods/index" class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </router-link>
-      <router-link tag="li" to="/goods/index" class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </router-link>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </li>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </li>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </li>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </li>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/sort1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>
-          <p class="desc">超高清 5G传输速度</p>
-          <h5 class="sold">已售：288件</h5>
-          <div class="money flex-box">
-            <div class="left-2">
-              ￥<span>540</span>
-              <b>￥600</b>
-            </div>
-            <div class="right-2">查看详情</div>
-          </div>
-        </div>
-      </li>
+      <!--<router-link tag="li" to="/goods/index" class="flex-box">-->
+        <!--<div class="left">-->
+          <!--<img src="../../../assets/img/sort1.png" alt="">-->
+        <!--</div>-->
+        <!--<div class="right box-1">-->
+          <!--<h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">重庆有线来点套餐重庆有线来点套餐重庆有线来点套餐</p></h4>-->
+          <!--<p class="desc">超高清 5G传输速度</p>-->
+          <!--<h5 class="sold">已售：288件</h5>-->
+          <!--<div class="money flex-box">-->
+            <!--<div class="left-2">-->
+              <!--￥<span>540</span>-->
+              <!--<b>￥600</b>-->
+            <!--</div>-->
+            <!--<div class="right-2">查看详情</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</router-link>-->
     </ul>
   </div>
 </template>
@@ -164,6 +45,9 @@
       return {
 
       }
+    },
+    props: {
+      list: Array
     },
     methods: {
 

@@ -2,13 +2,37 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 let router = new Router({
-  module: 'history',
+  mode: 'history',
   routes: [
+    {
+      path: '/reg/register',
+      name: 'RgeRegister',
+      component: resolve => require(['@/page/reg/register'], resolve) ,
+      meta:{index: 0, title: '注册', requireAuth: false}
+    },
+    {
+      path: '/reg/index',
+      name: 'RgeIndex',
+      component: resolve => require(['@/page/reg/index'], resolve) ,
+      meta:{index: 0, title: '登录', requireAuth: false}
+    },
+    {
+      path: '/reg/forgetPwd',
+      name: 'RgeForgetPwd',
+      component: resolve => require(['@/page/reg/forgetPwd'], resolve) ,
+      meta:{index: 0, title: '忘记密码', requireAuth: false}
+    },
     {
       path: '/',
       name: 'Home',
       component: resolve => require(['@/page/home/index'], resolve) ,
       meta:{index: 1, title: '首页', requireAuth: false}
+    },
+    {
+      path: '/search/index',
+      name: 'SearchIndex',
+      component: resolve => require(['@/page/search/index'], resolve) ,
+      meta:{index: 5, title: '搜索', requireAuth: false}
     },
     //一级分类
     {
@@ -33,10 +57,37 @@ let router = new Router({
     },
     //商品详情
     {
-      path: '/goods/index',
+      path: '/goods/index/:id',
       name: 'GoodsIndex',
       component: resolve => require(['@/page/goods/index'], resolve) ,
       meta:{index: 3, title: '详情', requireAuth: false}
+    },
+    //确认订单
+    {
+      path: '/order/orders',
+      name: 'OrderOrders',
+      component: resolve => require(['@/page/order/orders'], resolve) ,
+      meta:{index: 3, title: '确认订单', requireAuth: false}
+    },
+    //订单信息
+    {
+      path: '/order/index',
+      name: 'OrderIndex',
+      component: resolve => require(['@/page/order/index'], resolve) ,
+      meta:{index: 4, title: '我的订单', requireAuth: false}
+    },
+    //退款
+    {
+      path: '/refund/index',
+      name: 'RefundIndex',
+      component: resolve => require(['@/page/refund/index'], resolve) ,
+      meta:{index: 3, title: '退款/售后', requireAuth: false}
+    },
+    {
+      path: '/refund/apply',
+      name: 'RefundApply',
+      component: resolve => require(['@/page/refund/apply'], resolve) ,
+      meta:{index: 4, title: '申请退款', requireAuth: false}
     },
     {
       path: '/cart/index',
@@ -49,6 +100,18 @@ let router = new Router({
       name: 'MeIndex',
       component: resolve => require(['@/page/me/index'], resolve) ,
       meta:{index: 1, title: '我的', requireAuth: false}
+    },
+    {
+      path: '/me/code',
+      name: 'MeCode',
+      component: resolve => require(['@/page/me/code'], resolve) ,
+      meta:{index: 2, title: '我的推广二维码', requireAuth: false}
+    },
+    {
+      path: '/integral/index',
+      name: 'IntegralIndex',
+      component: resolve => require(['@/page/integral/index'], resolve) ,
+      meta:{index: 3, title: '我的积分', requireAuth: false}
     },
     {
       path: '/address/index',

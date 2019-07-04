@@ -10,57 +10,18 @@
     </div>
     <div class="content">
       <ul>
-        <li>
-          <a class="flex-box" href="">
+        <li v-for="item in choice.res" :key="item.id">
+          <router-link tag="a" :to="'/goods/index/'+item.id" class="flex-box">
             <div class="left">
-              <img src="./../../../assets/img/l-banner-2.png" alt="">
+              <img :src="item.image" alt="">
             </div>
             <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
+              <h4 class="media_title"><span v-if="item.a">认证</span>{{item.title}}L</h4>
+              <p class="media_title">{{item.desc}}</p>
+              <h5><span v-for="it in item.tags">{{it.tag_name}}</span></h5>
+              <h6 class="flex-box"><span class="money">￥<a>{{parseInt(item.price_selling)}}</a><em>￥{{parseInt(item.price_market)}}</em></span> <span>已售：{{item.number_sales}}件</span></h6>
             </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-1.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-2.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-1.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -75,57 +36,18 @@
     </div>
     <div class="content">
       <ul>
-        <li>
-          <a class="flex-box" href="">
+        <li v-for="item in newList.res" :key="item.id">
+          <router-link tag="a" :to="'/goods/index/'+item.id" class="flex-box">
             <div class="left">
-              <img src="./../../../assets/img/l-banner-2.png" alt="">
+              <img :src="item.image" alt="">
             </div>
             <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
+              <h4 class="media_title"><span v-if="item.a">认证</span>{{item.title}}L</h4>
+              <p class="media_title">{{item.desc}}</p>
+              <h5><span v-for="it in item.tags">{{it.tag_name}}</span></h5>
+              <h6 class="flex-box"><span class="money">￥<a>{{parseInt(item.price_selling)}}</a><em>￥{{parseInt(item.price_market)}}</em></span> <span>已售：{{item.number_sales}}件</span></h6>
             </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-1.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-2.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a class="flex-box" href="">
-            <div class="left">
-              <img src="./../../../assets/img/l-banner-1.png" alt="">
-            </div>
-            <div class="right box-1">
-              <h4 class="media_title"><span>认证</span>米家智能摄像头 KML-10L</h4>
-              <p class="media_title">1080P高清  360° 视角</p>
-              <h5><span>热卖</span></h5>
-              <h6 class="flex-box"><span class="money">￥<a>135</a><em>￥180</em></span> <span>已售：288件</span></h6>
-            </div>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -139,11 +61,15 @@
 
       }
     },
+    props: {
+      choice: Object,
+      newList: Object
+    },
     methods: {
 
     },
     mounted (){
-
+      this.$store.commit('changeLoading',false)
     }
   }
 </script>
@@ -181,9 +107,11 @@
             color:black;
             .left{
               margin-right:15px;
+              width:170px;
+              height:172px;
               img{
-                width:168px;
-                height:168px;
+                width:100%;
+                height:100%;
                 border-radius: 10px;
               }
             }
@@ -210,6 +138,7 @@
               }
               h5{
                 span{
+                  margin-right:10px;
                   color:#ff0207;
                   font-size:22px;
                   border:1px solid #ff0207;
