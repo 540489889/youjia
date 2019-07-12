@@ -2,12 +2,13 @@
   <div class="integralIndex">
     <div class="title">
       <div class="left">
-        <i class="member-1"></i>
-        <p>还需1200积分升级</p>
+        <i :class="'member-'+list.vip"></i>
+        <p>还需{{list.level_score}}积分升级</p>
       </div>
-      <div class="right">明细</div>
-      <h2>1288</h2>
-      <a class="signBtn">立即签到</a>
+      <router-link tag="div" to="./detailed" class="right">明细</router-link>
+      <h2>{{list.score}}</h2>
+      <a v-if="list.sign" class="signBtn">已签到</a>
+      <a v-else class="signBtn" @click="sign">立即签到</a>
       <p>每日签到可获得积分奖励哦！</p>
     </div>
     <div class="content">
@@ -19,7 +20,7 @@
             <h4>商城购物获得积分</h4>
             <p>下单成功会获得一定积分奖励</p>
           </div>
-          <div class="btn">去赚积分</div>
+          <router-link tag="div" to="/" class="btn">去赚积分</router-link>
         </li>
         <li class="flex-box">
           <i class="i-ico-2"></i>
@@ -27,25 +28,76 @@
             <h4>分享好友得积分</h4>
             <p>分享商城或商品给好友可获得积分</p>
           </div>
-          <div class="btn">去赚积分</div>
+          <div @click="shareClick()" class="btn">去赚积分</div>
         </li>
       </ul>
     </div>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated tada"
+      leave-active-class="animated bounceOutRight"
+    >
+    <integral-popul @changeClosePopup="changeClosePopup" v-if="isSign"></integral-popul>
+    </transition>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated bounceOutRight"
+    >
+    <div class="popup_layer shareWrapper" @click="changeCloseShare" v-if="isShare">
+      <img src="../../assets/ico/arrow.png" alt="">
+      <h4>点击右上角分享给好友哟！</h4>
+    </div>
+    </transition>
   </div>
 </template>
 <script>
+  import integralPopul from './components/popup.vue'
   export default {
     name: 'integralIndex',
     data (){
       return {
-
+        isShare: false,
+        isSign: false,
+        list: {}
       }
     },
+    components: {
+      integralPopul
+    },
     methods: {
-
+      //分享
+      shareClick(){
+        this.isShare = true
+      },
+      //分享关闭
+      changeCloseShare(){
+        this.isShare = false
+      },
+      //获取数据
+      getIntegralData(){
+        this.http.get(this.ports.integral.index, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      //签到
+      sign(){
+        this.isSign = true
+      },
+      //关闭签到弹窗
+      changeClosePopup(val){
+        this.isSign = false
+      }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getIntegralData()
     }
   }
 </script>
@@ -55,6 +107,20 @@
     min-height:100vh;
     background-color:#fff;
     font-size:28px;
+    position:relative;
+    .shareWrapper{
+      color:white;
+      padding:30px;
+      text-align: right;
+      box-sizing: border-box;
+      img{
+        width:186px;
+      }
+      h4{
+        text-align: center;
+        line-height:2;
+      }
+    }
     .title{
       width:750px;
       height:350px;

@@ -10,7 +10,9 @@
         <div class="left box-1">会员价</div>
         <div class="right box-1">￥{{parseInt(goods.price_member)}}</div>
       </div>
-      <div class="collect flex-box"><i class="collect-ico"></i>收藏</div>
+      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.id)"><i class="collect-ico collect-yes"></i>收藏</div>
+      <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
+
       <div class="share flex-box"><i class="share-ico"></i>分享</div>
     </div>
     <div class="gd-ui-2">
@@ -86,6 +88,7 @@
         lists: [],//商品参数 型号/颜色/数量
         banner: [],//商品轮播图
         isBall: false,//加入购物车动画元素
+        collect: 0, //是否收藏
       }
     },
     components: {
@@ -95,6 +98,35 @@
       CubePage
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      //商品收藏新增
+      collectionClick(id){
+        this.http.post(this.ports.goods.collection,{goods_id: id}, res =>{
+          if(res.success){
+            let data = res.data
+            this.collect = true
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      //取消收藏
+      cancelClick(id){
+        alert(1)
+        this.http.delete(this.ports.goods.collection+'/'+id, res =>{
+          if(res.success){
+            this.collect = false
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       //加入购物车动画
       beforeEnter(el){
         el.style.transform = "translate(0, 0)"
@@ -121,6 +153,7 @@
             this.goods = data
             this.lists = data.lists
             this.banner = data.image
+            this.collect = data.collect
             console.log(this.goods)
           }else{
             this.showToastTxtOnly(res.msg)
@@ -260,6 +293,10 @@
           background:url(../../assets/ico/collect-1.png) no-repeat center;
           background-size:100%;
           margin-right:5px;
+        }
+        .collect-yes{
+          background:url(../../assets/ico/collect-2.png) no-repeat center;
+          background-size:100%;
         }
       }
       .share{

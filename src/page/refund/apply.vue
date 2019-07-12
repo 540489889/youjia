@@ -74,7 +74,7 @@
       },
     },
     mounted (){
-
+      this.$store.commit('changeLoading',false)
     }
   }
 </script>

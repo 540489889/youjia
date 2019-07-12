@@ -2,17 +2,18 @@
   <div class="meIndex">
     <div class="mbTitle">
       <div class="title">
-        <div class="set-up flex-box">
+        <router-link tag="div" to="/setUp/index" class="set-up flex-box">
           <i class="cubeic-setting"></i>
           设置
-        </div>
+        </router-link>
         <div class="flex-box">
           <div class="left">
-            <img src="./../../assets/ico/mb-tx.png" alt="">
+            <img v-if="list.headimg" src="./../../assets/ico/mb-tx.png" alt="">
+            <img v-else src="./../../assets/ico/mb-tx.png" alt="">
           </div>
           <div class="right">
-            <h4 class="media_title">不吃白萝卜的兔子</h4>
-            <p class="flex-box">ID：335696 <span>优家会员</span></p>
+            <h4 class="media_title">{{list.nickname}}</h4>
+            <p class="flex-box">ID：{{list.openid}} <span :class="'mb-bz-'+list.vip_level"></span></p>
           </div>
         </div>
         <router-link tag="div" to="/reg/register" class="mbbt">
@@ -23,35 +24,35 @@
         <router-link tag="div" to="/integral/index" class="left box-1 flex-box">
           <i class="mb-m-1"></i>积分
         </router-link>
-        <div class="right box-1 flex-box">
+        <router-link tag="div" to="/integralMall/index" class="right box-1 flex-box">
           <i class="mb-m-2"></i>商城
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="content">
       <div class="mb-list-1 mb-list">
         <h2 class="flex-box list-title">
           我的订单
-          <router-link tag="span" :to="'/order/index?type='+1" class="flex-box">全部订单 <i class="cubeic-arrow"></i></router-link>
+          <router-link tag="span" :to="'/order/index?type='+2" class="flex-box">全部订单 <i class="cubeic-arrow"></i></router-link>
         </h2>
         <ul class="flex-box">
           <li class="box-1">
-            <router-link tag="a" :to="'/order/index?type='+1">
+            <router-link tag="a" :to="'/order/index?type='+2">
               <img src="./../../assets/ico/mb-l1.png" alt="">
               <h4>待付款</h4>
             </router-link>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" :to="'/order/index?type='+3">
               <img src="./../../assets/ico/mb-l2.png" alt="">
               <h4>待发货</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" :to="'/order/index?type='+4">
               <img src="./../../assets/ico/mb-l3.png" alt="">
               <h4>待收货</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+5">
@@ -68,10 +69,10 @@
         </h2>
         <ul class="flex-box">
           <li class="box-1">
-            <a>
+            <router-link tag="a" to="/me/assets">
               <img src="./../../assets/ico/mb-a1.png" alt="">
               <h4>佣金资产</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" to="/me/code">
@@ -80,16 +81,16 @@
             </router-link>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" to="/me/team">
               <img src="./../../assets/ico/mb-a3.png" alt="">
               <h4>我的团队</h4>
-            </a>
+            </router-link>
           </li>
           <li class="box-1">
-            <a>
+            <router-link tag="a" to="/me/reseller">
               <img src="./../../assets/ico/mb-a4.png" alt="">
               <h4>成为分销商</h4>
-            </a>
+            </router-link>
           </li>
         </ul>
       </div>
@@ -100,10 +101,10 @@
         </h2>
         <ol>
           <li>
-            <a class="flex-box">
+            <router-link tag="a" to="/collect/index" class="flex-box">
               <img src="./../../assets/ico/mb-b1.png" alt="">
               <h4 class="flex-box box-1"><p class="box-1 media_title">我的商品收藏</p> <i class="cubeic-arrow"></i></h4>
-            </a>
+            </router-link>
           </li>
           <li>
             <router-link tag="a" to="/refund/index" class="flex-box">
@@ -133,14 +134,25 @@
     name: 'MeIndex',
     data (){
       return {
-
+        list: {}
       }
     },
     methods: {
-
+      getMeData(){
+        this.http.get(this.ports.me.index, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getMeData()
     }
   }
 </script>
@@ -227,14 +239,31 @@
         }
         p{
           span{
-            width:115px;
-            height:32px;
-            background:url(./../../assets/ico/hy-t-bg.png) no-repeat center;
-            background-size:100%;
+            width:178px;
+            height:54px;
             font-size:24px;
             margin-left:10px;
-            line-height:32px;
             text-align: center;
+          }
+          .mb-bz-1{
+            background:url(./../../assets/ico/mb-bz-1.png) no-repeat center;
+            background-size:100%;
+          }
+          .mb-bz-2{
+            background:url(./../../assets/ico/mb-bz-2.png) no-repeat center;
+            background-size:100%;
+          }
+          .mb-bz-3{
+            background:url(./../../assets/ico/mb-bz-3.png) no-repeat center;
+            background-size:100%;
+          }
+          .mb-bz-4{
+            background:url(./../../assets/ico/mb-bz-4.png) no-repeat center;
+            background-size:100%;
+          }
+          .mb-bz-5{
+            background:url(./../../assets/ico/mb-bz-5.png) no-repeat center;
+            background-size:100%;
           }
         }
       }

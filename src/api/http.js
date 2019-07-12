@@ -73,6 +73,29 @@ export default {
       }
     )
   },
+  put (url, data, response, exception) {
+    axios({
+      method: 'put',
+      url: handleUrl(url),
+      data: handleParams(data),
+      timeout: TIME_OUT_MS,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    }).then(
+      (result) => {
+        response(handleResults(result))
+      }
+    ).catch(
+      (error) => {
+        if (exception) {
+          exception(error)
+        } else {
+          console.log(error)
+        }
+      }
+    )
+  },
   /*
    * get 请求
    * @param url

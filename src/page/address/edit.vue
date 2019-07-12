@@ -24,7 +24,7 @@
         </li>
       </ul>
     </div>
-    <a class="addBtn" @click="addAddress">新增收货地址</a>
+    <a class="addBtn" @click="addAddress">保存</a>
   </div>
 </template>
 <script>
@@ -62,14 +62,41 @@
         }
 
       },
+      getInitData(){
+        let id = this.$route.params.id
+        this.http.get(this.ports.me.address+'/'+id+'/edit', res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            if(data.is_default){
+              this.defaultVal = true
+            }else{
+              this.defaultVal = false
+            }
+            this.is_default = data.is_default
+            this.name = data.name
+            this.tel = data.phone
+            this.address = data.address
+            this.province = data.province
+            this.area = data.area
+            this.city = data.city
+            this.cityShow = this.province+this.city+this.area
+//            this.$router.push({ path: '/address/index' });
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       addAddress(){
+        let id = this.$route.params.id
         let tellReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
         if(!this.name){
           this.showToastTxtOnly('请输入姓名')
           return false
         }
         if(!tellReg.test(this.tel)){
-          this.showToastTxtOnly('请输入电话')
+          this.showToastTxtOnly('请输入正确的电话号码')
           return false
         }
         if(!this.city){
@@ -88,7 +115,7 @@
         params.address = this.address
         params.area = this.area
         params.is_default = this.is_default //0：不是默认，1：默认
-        this.http.post(this.ports.me.address,params, res =>{
+        this.http.put(this.ports.me.address+'/'+id,params, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
           if(res.success){
@@ -137,6 +164,7 @@
       }
     },
     mounted (){
+      this.getInitData()
       this.$store.commit('changeLoading',false)
       this.setDataPicker = this.$createCascadePicker({
         title: '地址选择',

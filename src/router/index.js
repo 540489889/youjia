@@ -102,10 +102,52 @@ let router = new Router({
       meta:{index: 1, title: '我的', requireAuth: false}
     },
     {
+      path: '/setUp/index',
+      name: 'setUpIndex',
+      component: resolve => require(['@/page/setUp/index'], resolve) ,
+      meta:{index: 3, title: '设置', requireAuth: false}
+    },
+    {
+      path: '/setUp/nickname',
+      name: 'setUpNickname',
+      component: resolve => require(['@/page/setUp/nickname'], resolve) ,
+      meta:{index: 4, title: '设置昵称', requireAuth: false}
+    },
+    {
+      path: '/setUp/tel',
+      name: 'setUpTel',
+      component: resolve => require(['@/page/setUp/tel'], resolve) ,
+      meta:{index: 4, title: '设置手机号', requireAuth: false}
+    },
+    {
+      path: '/collect/index',
+      name: 'CollectIndex',
+      component: resolve => require(['@/page/collect/index'], resolve) ,
+      meta:{index: 2, title: '我的收藏', requireAuth: false}
+    },
+    {
       path: '/me/code',
       name: 'MeCode',
       component: resolve => require(['@/page/me/code'], resolve) ,
       meta:{index: 2, title: '我的推广二维码', requireAuth: false}
+    },
+    {
+      path: '/me/team',
+      name: 'MeTeam',
+      component: resolve => require(['@/page/me/team'], resolve) ,
+      meta:{index: 2, title: '我的团队', requireAuth: false}
+    },
+    {
+      path: '/me/reseller',
+      name: 'MeReseller',
+      component: resolve => require(['@/page/me/reseller'], resolve) ,
+      meta:{index: 2, title: '分销商', requireAuth: false}
+    },
+    {
+      path: '/me/assets',
+      name: 'MeAssets',
+      component: resolve => require(['@/page/me/assets'], resolve) ,
+      meta:{index: 2, title: '佣金资产', requireAuth: false}
     },
     {
       path: '/integral/index',
@@ -114,16 +156,34 @@ let router = new Router({
       meta:{index: 3, title: '我的积分', requireAuth: false}
     },
     {
+      path: '/integral/detailed',
+      name: 'IntegralDetailed',
+      component: resolve => require(['@/page/integral/detailed'], resolve) ,
+      meta:{index: 4, title: '积分明细', requireAuth: false}
+    },
+    {
+      path: '/integralMall/index',
+      name: 'MallIndex',
+      component: resolve => require(['@/page/integralMall/index'], resolve) ,
+      meta:{index: 2, title: '积分商城', requireAuth: false}
+    },
+    {
       path: '/address/index',
       name: 'AddressIndex',
       component: resolve => require(['@/page/address/index'], resolve) ,
-      meta:{index: 1, title: '我的收货地址', requireAuth: false}
+      meta:{index: 2, title: '我的收货地址', requireAuth: false}
     },
     {
       path: '/address/add',
       name: 'AddressAdd',
       component: resolve => require(['@/page/address/add'], resolve) ,
-      meta:{index: 1, title: '新增收货地址', requireAuth: false}
+      meta:{index: 3, title: '新增收货地址', requireAuth: false}
+    },
+    {
+      path: '/address/edit/:id',
+      name: 'AddressEdit',
+      component: resolve => require(['@/page/address/edit'], resolve) ,
+      meta:{index: 3, title: '地址编辑', requireAuth: false}
     }
   ],
   //回到顶部

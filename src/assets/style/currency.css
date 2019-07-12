@@ -135,3 +135,10 @@ body{
 .orderIndex .cube-sticky-ele{
   height:initial !important;
 }
+.addressAdd .cube-switch .cube-switch-input:checked+.cube-switch-ui{
+  border-color: #ff0207;
+  background-color: #ff0207;
+}
+.searchInput .cube-input-field{
+  padding:0;
+}

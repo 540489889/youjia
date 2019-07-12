@@ -2,19 +2,33 @@
   <div class="addressIndex">
     <div class="content">
       <ul>
-        <li>
+        <li v-for="(item,index) in list" :key="item.id">
           <h4 class="flex-box">
-            <span class="box-1 media_title">喜洋洋</span>
-            <span>18375875809</span>
+            <span class="box-1 media_title">{{item.name}}</span>
+            <span>{{item.phone}}</span>
           </h4>
-          <h5>重庆市渝中区XX街道阳光小区13号</h5>
+          <h5>{{item.city+item.area+item.address}}</h5>
           <h6 class="flex-box">
-            <cube-checkbox v-model="checked">
-              设为默认地址
-            </cube-checkbox>
+            <div class="cube-checkbox cube-checkbox_checked" v-if="item.is_default">
+              <label class="cube-checkbox-wrap">
+                <!--<input class="cube-checkbox-input" type="radio" name="ra" :value="item.is_default" :checked="true">-->
+                <span class="cube-checkbox-ui"><i class="cubeic-right"></i></span>
+                设为默认地址
+              </label>
+            </div>
+            <div class="" v-else @click="defaultClick(item)">
+              <label class="cube-checkbox-wrap">
+                <span class="cube-checkbox-ui cubeic-round-border"></span>
+                设为默认地址
+              </label>
+            </div>
+            <!--<label :for="'ch'+index" v-else>-->
+              <!--<input type="radio" name="ra" :value="item.is_default">-->
+              <!--设为默认地址-->
+            <!--</label>-->
             <div class="box-1 flex-box right-bb">
-              <a>编辑</a>
-              <a>删除</a>
+              <router-link tag="a" :to="'/address/edit/'+item.id">编辑</router-link>
+              <a @click="deleteAddress(item.id,index)">删除</a>
             </div>
           </h6>
         </li>
@@ -28,14 +42,61 @@
     name: 'AddressIndex',
     data (){
       return {
-        checked: false
+        checkedTrue: true,
+        checkedFalse: false,
+        list: []
       }
     },
     methods: {
-
+      //删除
+      deleteAddress(id,index){
+        this.http.delete(this.ports.me.address+'/'+id, res =>{
+          console.log(res)
+          if(res.success){
+            this.list.splice(index, 1)
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      //设置默认地址
+      defaultClick(item){
+        this.list.forEach((even,i)=>{
+          even.is_default = 0
+        })
+        item.is_default = 1
+        this.http.put(this.ports.me.address+'/'+item.id,{is_default: 1}, res =>{
+          if(res.success){
+//            let data = res.data
+//            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      //获取列表数据
+      getAddressData(){
+        this.http.get(this.ports.me.address, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
-
+      this.getAddressData()
     }
   }
 </script>

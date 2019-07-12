@@ -20,6 +20,7 @@
     name: 'orderNav',
     data (){
       return {
+        activeIndex: 0,
         selectedLabelSlots: '待付款',
         showSlider: false,
         inline:true,
@@ -39,16 +40,44 @@
       }
     },
     methods: {
+      activeInit(){
+        let type = this.$route.query.type
+        if(type == 2) {
+          this.selectedLabelSlots = '待付款'
+        }
+        if(type == 3) {
+          this.selectedLabelSlots = '待发货'
+        }
+        if(type == 4) {
+          this.selectedLabelSlots = '待收货'
+        }
+        if(type == 5) {
+          this.selectedLabelSlots = '已完成'
+        }
+      },
       clickHandler (label) {
+
+        if(label=='待付款'){
+          this.activeIndex = 2
+        }
+        if(label=='待发货'){
+          this.activeIndex = 3
+        }
+        if(label=='待收货'){
+          this.activeIndex = 4
+        }
+        if(label=='已完成'){
+          this.activeIndex = 5
+        }
+        this.$emit('changeNavClick',this.activeIndex)
         // if you clicked home tab, then print 'Home'
-        console.log(label)
       },
       changeHandler (label) {
-        console.log(label)
         // if you clicked different tab, this methods can be emitted
       }
     },
     mounted (){
+      this.activeInit()
     }
   }
 </script>

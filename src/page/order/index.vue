@@ -9,9 +9,9 @@
               @scroll="scrollHandler">
               <div style="height:1px;"></div>
               <cube-sticky-ele ele-key="123">
-                <order-nav></order-nav>
+                <order-nav @changeNavClick="changeNavClick"></order-nav>
               </cube-sticky-ele>
-              <order-data :list="list" @changeCallcelOrder="confirmClick"></order-data>
+              <order-data @deleteOrder="deleteOrder" :list="list" @changeCallcelOrder="confirmClick"></order-data>
             </cube-scroll>
           </cube-sticky>
           <!--<div v-if="!selected" class="mergePay">合并付款（已选2件）</div>-->
@@ -51,6 +51,7 @@
         scrollEvents: ['scroll'],
         scrollY: 0,
         list: [],//列表数据
+        toastTime:null,
       }
     },
     components: {
@@ -60,6 +61,22 @@
       cancelOrder
     },
     methods: {
+      //删除订单
+      deleteOrder(val){
+        alert(val)
+      },
+      showToastTime() {
+         this.toastTime = this.$createToast({
+          time: 0,
+          txt: '加载中...'
+        })
+        this.toastTime.show()
+      },
+      //nav切换
+      changeNavClick(val){
+        this.showToastTime()
+        this.getOrderData(val)
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
@@ -67,12 +84,20 @@
         })
         this.toast.show()
       },
-      getOrderData(){
-        let type = this.$route.query.type
-        this.http.get(this.ports.order.index+'?type='+type, res =>{
+      getOrderData(val){
+        let index = 0
+        if(!val){
+          let type = this.$route.query.type
+          index = type
+        }else{
+          index = val
+        }
+        this.http.get(this.ports.order.index+'?type='+index, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
-
+          if(this.toastTime){
+            this.toastTime.hide()
+          }
           if(res.success){
             let data = res.data
             this.list = data.res

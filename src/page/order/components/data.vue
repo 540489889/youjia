@@ -2,26 +2,52 @@
   <div class="orderData">
     <ul class="dataList">
       <li class="" v-for="item in list" :key="item.id">
-        <div class="tsInfor">等待买家付款</div>
-        <div class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
-          <!--<div class="left-check">-->
+        <!--{{item}}-->
+        <template v-if="item.childOrder">
+          <div class="tsInfor">等待买家付款</div>
+          <div class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
+            <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
-          <!--</div>-->
-          <div class="right-img"><img :src="it.goods_logo" alt=""></div>
-          <div class="right-text box-1">
-            <div class="flex-box tpText">
-              <h2 class="media_desc box-1">{{it.goods_title}}</h2>
-              <span>￥<b>{{it.price_selling}}</b></span>
+            <!--</div>-->
+            <div class="right-img"><img :src="it.goods_logo" alt=""></div>
+            <div class="right-text box-1">
+              <div class="flex-box tpText">
+                <h2 class="media_desc box-1">{{it.goods_title}}</h2>
+                <span>￥<b>{{it.price_selling}}</b></span>
+              </div>
+              <p>{{it.goods_spec}}</p>
+              <p>数量：1</p>
             </div>
-            <p>{{it.goods_spec}}</p>
-            <p>数量：1</p>
           </div>
-        </div>
-        <h6>共{{item.childOrder.length}}件商品 共计：<span>￥{{item.price_goods}}</span></h6>
-        <div class="btn-ui">
-          <a class="offBtn" @click="confirmClick()"> 取消订单</a>
-          <a class="payBtn"> 立即付款</a>
-        </div>
+          <h6>共{{item.childOrder.length}}件商品 共计：<span>￥{{item.price_goods}}</span></h6>
+          <div class="btn-ui">
+            <a class="offBtn" @click="confirmClick(it.id)"> 取消订单</a>
+            <a class="payBtn"> 立即付款</a>
+          </div>
+        </template>
+        <template v-else>
+          <div class="tsInfor">等待卖家家发货</div>
+          <div class="goodsBox flex-box" >
+            <!--<div class="left-check">-->
+            <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
+            <!--</div>-->
+            <div class="right-img"><img :src="item.goods_logo" alt=""></div>
+            <div class="right-text box-1">
+              <div class="flex-box tpText">
+                <h2 class="media_desc box-1">{{item.goods_title}}</h2>
+                <span>￥<b>{{item.price_selling}}</b></span>
+              </div>
+              <p>{{item.goods_spec}}</p>
+              <p>数量：1</p>
+            </div>
+          </div>
+          <div class="btn-ui">
+            <a class="offBtn" @click=""> 申请退款</a>
+          </div>
+        </template>
+
+
+
       </li>
     </ul>
   </div>
@@ -43,12 +69,11 @@
       list: Array
     },
     methods: {
-      confirmClick(){
-        this.$emit('changeCallcelOrder',true)
+      confirmClick(id){
+        this.$emit('deleteOrder',id)
       }
     },
     mounted (){
-
     }
   }
 </script>
@@ -56,7 +81,7 @@
   .orderData{
     padding:0 30px;
     overflow: hidden;
-    padding-bottom:100px;
+    /*padding-bottom:100px;*/
     /*position:relative;*/
     .dataList{
       li{

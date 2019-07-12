@@ -2,7 +2,12 @@
   <div class="searchIndex">
     <div class="searchWrapper flex-box">
       <div class="searchInput box-1">
-        <input type="text" placeholder="有线来点套餐">
+        <!--<input type="text"  placeholder="有线来点套餐">-->
+        <cube-input
+          :placeholder="placeholder"
+          :autofocus="autofocus"
+          ref="siteInput"
+          v-model="value" ></cube-input>
         <i class="cubeic-search"></i>
       </div>
       <div class="cart">搜索</div>
@@ -15,7 +20,6 @@
         <span>牛奶</span>
         <span>啤酒</span>
       </div>
-
     </div>
   </div>
 
@@ -25,7 +29,9 @@
     name: 'search',
     data (){
       return {
-
+        value: '',
+        autofocus: true,
+        placeholder: '请输入搜索内容'
       }
     },
     methods: {
@@ -33,6 +39,7 @@
     },
     mounted (){
       this.$store.commit('changeLoading',false)
+      this.$refs['siteInput'].focus();
     }
   }
 </script>
@@ -41,6 +48,9 @@
     background-color:white;
     min-height:100vh;
     width:100%;
+    position:absolute;
+    top:0;
+    left:0;
     .searchWrapper{
       background-color:white;
       padding:15px 30px;
@@ -59,11 +69,24 @@
           border-radius: 30px;
           padding:0 30px 0 70px;
         }
+        .cube-input{
+          height:35px;
+          width:100%;
+          box-sizing: border-box;
+          background-color:#f5f5f5;
+          color:black;
+          border-radius: 40px;
+          padding:0 10px 0 35px;
+        }
+
+        .cube-input:after{
+          content: initial;
+        }
         i{
           font-size:38px;
           position:absolute;
           left:20px;
-          top:12px;
+          top:15px;
         }
       }
       .cart{

@@ -27,7 +27,7 @@
           observeParents:true,//修改swiper的父元素时，自动初始化swiper
           paginationClickable: true,
           direction: 'vertical',//垂直切换
-          autoplay:true,
+          autoplay:false,
           preventClicks : false,
 
         },
@@ -68,6 +68,7 @@
       background-size:100%;
       margin-right:10px;
       position:relative;
+      top:-5px;
     }
     .adverIco::before{
       /*content: "";*/
@@ -95,6 +96,7 @@
           line-height:50px;
         }
         .media_title{
+          height:50px;
           display: block;
           padding-left:15px;
           font-size:28px;
