@@ -1,5 +1,6 @@
 <template>
   <div class="orderIndex">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <cube-page type="sticky-view-scroll" title="Sticky">
       <template slot="content">
         <div class="listWrapper sticky-view-container">

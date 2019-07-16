@@ -1,9 +1,10 @@
 <template>
   <div class="detailedWrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
       <div class="flex-box hTitle">
         <div class="box-1"><span>960</span>积分</div>
-        <a class="exchangeBtn">积分兑换商品</a>
+        <router-link tag="a" to="/integralMall/index" class="exchangeBtn">积分兑换商品</router-link>
       </div>
       <p>积分又可以在积分商城兑换礼品</p>
     </div>

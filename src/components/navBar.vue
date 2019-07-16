@@ -64,6 +64,8 @@
           case '购物车':
             this.$router.push('/cart/index')
             break
+          default:
+            this.$router.push('/')
         }
 
       },

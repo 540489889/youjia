@@ -7,18 +7,18 @@
       <ul class="list">
         <li class="flex-box">
           <span>联系电话</span>
-          <p>18375875809</p>
+          <p>{{address.phone}}</p>
         </li>
         <li class="flex-box">
           <span>安装地址</span>
-          <p>重庆市渝中区长江二路38号1栋26-10</p>
+          <p>{{address.province+address.city+address.address}}</p>
         </li>
         <li class="flex-box">
           <span>安装费用</span>
           <p>免费安装</p>
         </li>
       </ul>
-      <div class="serviceBtn">确定</div>
+      <div class="serviceBtn" @click="serviceClick">确定</div>
     </div>
   </div>
 </template>
@@ -30,7 +30,13 @@
 
       }
     },
+    props:{
+      address: Object
+    },
     methods: {
+      serviceClick(){
+        this.$emit('changeServiceClick',this.address)
+      },
       closeSelected(){
         this.$emit('changeSelected',false)
       }

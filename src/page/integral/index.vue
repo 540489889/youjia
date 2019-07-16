@@ -1,5 +1,6 @@
 <template>
   <div class="integralIndex">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
       <div class="left">
         <i :class="'member-'+list.vip"></i>
@@ -11,6 +12,10 @@
       <a v-else class="signBtn" @click="sign">立即签到</a>
       <p>每日签到可获得积分奖励哦！</p>
     </div>
+    <router-link tag="div" to="./order" class="flex-box orderText">
+      <span>我的订单</span>
+      <p>查看详情 <i class="cubeic-arrow"></i></p>
+    </router-link>
     <div class="content">
       <h1>赚取积分</h1>
       <ul>
@@ -118,6 +123,16 @@
       }
       h4{
         text-align: center;
+        line-height:2;
+      }
+    }
+    .orderText{
+      padding:30px;
+      justify-content: space-between;
+      border-bottom:20px solid #f5f5f5;
+      p{
+        color:#bfbfbf;
+        font-size:24px;
         line-height:2;
       }
     }

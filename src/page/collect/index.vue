@@ -1,5 +1,6 @@
 <template>
   <div class="cart-wrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <cube-page type="swipe-view" title="Swipe">
       <template slot="content">
         <div class="swipe-wrapper">

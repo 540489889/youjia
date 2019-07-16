@@ -1,5 +1,6 @@
 <template>
   <div class="assetsWrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
       <p class="test">6月佣金余额 (元)</p>
       <h1 class="money">￥<span>25</span></h1>

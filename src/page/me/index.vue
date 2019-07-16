@@ -1,5 +1,6 @@
 <template>
   <div class="meIndex">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="mbTitle">
       <div class="title">
         <router-link tag="div" to="/setUp/index" class="set-up flex-box">

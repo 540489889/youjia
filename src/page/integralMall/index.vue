@@ -1,5 +1,6 @@
 <template>
   <div class="mallIndex">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <goods-swiper :banner="banner"></goods-swiper>
     <hot-data></hot-data>
     <thing-data></thing-data>

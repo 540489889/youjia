@@ -4,7 +4,10 @@
       <input type="text" placeholder="有线来点套餐" @focus="changeSearch()">
       <i class="cubeic-search"></i>
     </div>
-    <div class="cart"><span v-if="$store.state.cartNum">{{$store.state.cartNum}}</span></div>
+    <router-link
+      tag="div"
+      to="/cart/index"
+      class="cart"><span v-if="$store.state.cartNum">{{$store.state.cartNum}}</span></router-link>
   </div>
 </template>
 <script>

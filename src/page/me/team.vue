@@ -1,5 +1,6 @@
 <template>
   <div class="teamWrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title flex-box">
       <b class="text">团队成员</b>
       共 <span>128</span> 人

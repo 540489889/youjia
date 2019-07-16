@@ -3,38 +3,38 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="content">
       <ul>
-        <li v-for="(item,index) in list" :key="item.id">
+        <li @click.stop.prevent="checkAddress(item)" v-for="(item,index) in list" :key="item.id">
           <h4 class="flex-box">
             <span class="box-1 media_title">{{item.name}}</span>
             <span>{{item.phone}}</span>
           </h4>
           <h5>{{item.city+item.area+item.address}}</h5>
           <h6 class="flex-box">
-            <div class="cube-checkbox cube-checkbox_checked" v-if="item.is_default">
-              <label class="cube-checkbox-wrap">
-                <!--<input class="cube-checkbox-input" type="radio" name="ra" :value="item.is_default" :checked="true">-->
-                <span class="cube-checkbox-ui"><i class="cubeic-right"></i></span>
-                设为默认地址
-              </label>
-            </div>
-            <div class="" v-else @click="defaultClick(item)">
-              <label class="cube-checkbox-wrap">
-                <span class="cube-checkbox-ui cubeic-round-border"></span>
-                设为默认地址
-              </label>
-            </div>
+            <!--<div class="cube-checkbox cube-checkbox_checked" v-if="item.is_default">-->
+              <!--<label class="cube-checkbox-wrap">-->
+                <!--&lt;!&ndash;<input class="cube-checkbox-input" type="radio" name="ra" :value="item.is_default" :checked="true">&ndash;&gt;-->
+                <!--<span class="cube-checkbox-ui"><i class="cubeic-right"></i></span>-->
+                <!--设为默认地址-->
+              <!--</label>-->
+            <!--</div>-->
+            <!--<div class="" v-else @click="defaultClick(item)">-->
+              <!--<label class="cube-checkbox-wrap">-->
+                <!--<span class="cube-checkbox-ui cubeic-round-border"></span>-->
+                <!--设为默认地址-->
+              <!--</label>-->
+            <!--</div>-->
             <!--<label :for="'ch'+index" v-else>-->
               <!--<input type="radio" name="ra" :value="item.is_default">-->
               <!--设为默认地址-->
             <!--</label>-->
             <div class="box-1 flex-box right-bb">
-              <router-link tag="a" :to="'/address/edit/'+item.id">编辑</router-link>
-              <a @click="deleteAddress(item.id,index)">删除</a>
+              <!--<router-link tag="a" :to="'/address/edit/'+item.id">编辑</router-link>-->
+              <!--<a @click="deleteAddress(item.id,index)">删除</a>-->
             </div>
           </h6>
         </li>
       </ul>
-      <router-link tag="a" to="./add" class="addBtn">新增收货地址</router-link>
+      <router-link tag="a" to="/order/add" class="addBtn">新增收货地址</router-link>
     </div>
   </div>
 </template>
@@ -49,6 +49,18 @@
       }
     },
     methods: {
+      //地址选择
+      checkAddress(val){
+        let goods_id = this.$route.query.goods_id
+        let key = this.$route.query.key
+        let count = this.$route.query.count
+        this.$router.push({path: '/order/orders',query:{
+          goods_id: goods_id,
+          key: key,
+          count: count,
+          address: val
+        }})
+      },
       //删除
       deleteAddress(id,index){
         this.http.delete(this.ports.me.address+'/'+id, res =>{

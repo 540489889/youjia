@@ -29,5 +29,8 @@ export default {
   integral: {
     index: '/api/v1/points',//积分首页
     loglist: '/api/v1/points/loglist',//积分明细
+  },
+  search: {
+    index: '/api/v1/search'
   }
 }

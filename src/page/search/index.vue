@@ -10,7 +10,7 @@
           v-model="value" ></cube-input>
         <i class="cubeic-search"></i>
       </div>
-      <div class="cart">搜索</div>
+      <div class="cart" @click="searchClick">搜索</div>
     </div>
     <div class="rmSearch">
       <h2>热门搜索</h2>
@@ -35,7 +35,28 @@
       }
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      //搜索
+      searchClick(){
+        let type = this.$route.query.type //当带有此参数时，为首页的新品推荐和平台精选。new为新品，choice为精选
+        let cate = this.$route.query.cate //分类id
 
+        if(!this.value){
+          this.showToastTxtOnly('请输入搜索内容')
+          return false
+        }
+        this.$router.push({path: '/sort/list',query:{
+          type: type,
+          cate: cate,
+          title: this.value
+        }})
+      }
     },
     mounted (){
       this.$store.commit('changeLoading',false)

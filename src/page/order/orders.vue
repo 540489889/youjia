@@ -1,10 +1,18 @@
 <template>
   <div class="ordersWrapper">
-    <div class="adderssBox flex-box">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
+    <div v-if="address" @click="checkAddress" class="adderssBox flex-box">
       <div class="address-ico flex-box"><i></i></div>
       <div class="address-text box-1">
         <h4>{{address.name}}  <span>{{address.phone}}</span></h4>
         <h6 class="media_desc">{{address.city+address.area+address.address}}</h6>
+      </div>
+      <div class="address-right cubeic-arrow"></div>
+    </div>
+    <div v-else @click="checkAddress" class="adderssBox flex-box">
+      <div class="address-ico flex-box"><i></i></div>
+      <div class="address-text box-1">
+        <h1>请新增地址</h1>
       </div>
       <div class="address-right cubeic-arrow"></div>
     </div>
@@ -37,16 +45,22 @@
         </li>
         <li class="flex-box checkLi">
           <span>开具发票</span>
-          <div class="liVal" @click="confirmClick('invoice')">本次不开具发票 <i class="cubeic-arrow"></i></div>
+          <div v-if="item.goods.invoice">
+            <div class="liVal" v-if="item.goods.invoice.name" @click="confirmClick('invoice',item.goods,index)">{{item.goods.invoice.name}} <i class="cubeic-arrow"></i></div>
+            <div class="liVal" v-else-if="item.goods.invoice.unit" @click="confirmClick('invoice',item.goods,index)">{{item.goods.invoice.unit}} <i class="cubeic-arrow"></i></div>
+          </div>
+          <div class="liVal" v-else @click="confirmClick('invoice',item.goods,index)">本次不开具发票 <i class="cubeic-arrow"></i></div>
         </li>
         <li class="flex-box checkLi">
           <span>安装服务</span>
-          <div  v-if="item.goods.is_install" class="liVal">本次不需要安装 <i class="cubeic-arrow"></i></div>
-          <div  v-else class="liVal" @click="confirmClick('service')">本次不需要安装 <i class="cubeic-arrow"></i></div>
+          <div v-if="item.goods.is_install">
+            <div  v-if="item.goods.ress" @click="confirmClick('service',item.goods)" class="liVal">{{item.goods.ress.address}}<i class="cubeic-arrow"></i></div>
+          </div>
+          <div  v-else class="liVal">本次不需要安装</div>
         </li>
         <li class="flex-box checkLi">
           <span>订单备注</span>
-          <div class="liVal box-1"><cube-input v-model="remarks" placeholder="选填请提前与商家协商一致" ></cube-input></div>
+          <div class="liVal box-1"><cube-input v-model="item.goods.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
         </li>
         <li class="subtotal">
           共一件 小计：<span>{{item.goods.number_express*item.goods.price}}元</span>
@@ -61,8 +75,9 @@
       <div class="left box-1">
         共一件 合计：<span>{{total_price}}元</span>
       </div>
-      <div class="rightBtn">提交订单</div>
+      <div class="rightBtn" @click="rightSubClick">提交订单</div>
     </div>
+    <!--安装信息-->
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
       <template slot="content">
         <div class="scroll-list-wrap">
@@ -70,12 +85,17 @@
             <transition
               name="slide-fade"
             >
-              <order-service  v-if="selected" @changeSelected="changeSelected()"></order-service>
+              <order-service
+                v-if="selected"
+                :list="address"
+                @changeServiceClick="changeServiceClick"
+                @changeSelected="changeSelected()"></order-service>
             </transition>
           </cube-scroll>
         </div>
       </template>
     </cube-page>
+    <!--发票信息-->
     <cube-page v-if="maskShowTwo" type="swipe-scroll" title="Scroll">
       <template slot="content">
         <div class="scroll-list-wrap">
@@ -83,7 +103,10 @@
             <transition
               name="slide-fade"
             >
-              <order-invoice  v-if="selectedTwo" @changeSelected="changeSelectedTwo()"></order-invoice>
+              <order-invoice
+                v-if="selectedTwo"
+                @changeInvoiceSub="changeInvoiceSub"
+                @changeSelected="changeSelectedTwo()"></order-invoice>
             </transition>
           </cube-scroll>
         </div>
@@ -109,6 +132,7 @@
         goodsarr: {},//商品信息
         express: {},
         total_price: 0,// 总金额
+        orderInfor: {}
       }
     },
     components: {
@@ -117,7 +141,38 @@
       CubePage
     },
     methods: {
+      //确认订单
+      rightSubClick(){
+        this.http.post(this.ports.order.index,this.orderInfor, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(this.toastTime){
+            this.toastTime.hide()
+          }
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+//            this.$store.commit('changeCartNum',this.cart)
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
+      //地址选择
+      checkAddress(){
+        let goods_id = this.$route.query.goods_id
+        let key = this.$route.query.key
+        let count = this.$route.query.count
+        this.$router.push({path: '/order/address',query:{
+          goods_id: goods_id,
+          key: key,
+          count: count
+        }})
+      },
+      //默认数据
       getOrdersData(){
+        let checkAddress = this.$route.query.address
+        console.log(checkAddress)
         let goods_id = this.$route.query.goods_id
         let key = this.$route.query.key
         let count = this.$route.query.count
@@ -128,8 +183,19 @@
           if(res.success){
             let data = res.data
             this.address = data.address
+            if(checkAddress){
+              this.address = checkAddress
+            }
             this.goodsarr = data.goodsarr
             this.total_price = data.total_price
+            //订单提交基本数据
+            let goods = []
+            this.goodsarr.forEach((even,i)=>{
+              goods.push(even.goods)
+              this.orderInfor.goods = goods
+            })
+            this.orderInfor.address = this.address
+            console.log(this.orderInfor)
 //            this.goods = data.goods
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
@@ -137,25 +203,74 @@
           }
         })
       },
-      confirmClick(val){
+      //备注信息
+      remarksVal(val){
+        console.log(this.orderInfor)
+      },
+      //确认发票信息
+      changeInvoiceSub(val){
+        if(!val){
+          this.changeSelectedTwo(val)
+        }else{
+          let invoice = {}
+          if(val.name==1){
+            val.name = this.address.name
+          }else{
+            if(!val.unit){
+              this.showToastTxtOnly('请输入单位名称')
+              return false
+            }
+            if(!val.sbCode){
+              this.showToastTxtOnly('请输入纳税人识别码')
+              return false
+            }
+          }
+          this.goodsarr.forEach((even,i)=>{
+            if(even.goods.a=='a'){
+              this.$set(even.goods,'invoice',val)
+            }
+          })
+          this.changeSelectedTwo(false)
+
+        }
+      },
+      //确认安装信息
+      changeServiceClick(val){
+          this.goodsarr.forEach((even,i)=>{
+            if(even.goods.b=='b'){
+              this.$set(even.goods,'ress',val)
+            }
+          })
+          this.changeSelected(false)
+      },
+      //弹出发票，安装弹出窗
+      confirmClick(val,item,index){
         const that = this
         if(val==='invoice'){
           this.maskShowTwo = true
           setTimeout( ()=>{
             that.selectedTwo = true
+            this.goodsarr.forEach((even,i)=>{
+              even.goods.a = 'b'
+            })
+            item.a = 'a'
           },200)
         }else{
           this.maskShow = true
           setTimeout( ()=>{
+            this.goodsarr.forEach((even,i)=>{
+              even.goods.b = 'a'
+            })
+            item.b = 'b'
             that.selected = true
           },200)
         }
 
       },
       changeSelected(val){
-        this.selected = val
+        this.selected = false
         const that = this
-        if(!this.selected){
+        if(!val){
           setTimeout( ()=>{
             that.maskShow = false
           },300)
@@ -288,6 +403,10 @@
       .address-text{
         text-align: left;
         margin:0 15px;
+        h1{
+          font-size:36px;
+          font-weight: bold;
+        }
         h4{
           font-size:26px;
           margin-bottom:10px;

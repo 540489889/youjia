@@ -1,10 +1,10 @@
 <template>
   <div class="homeIndex">
-    <loading v-if="isLoading"></loading>
+    <my-loading v-if="isLoading"></my-loading>
     <home-search></home-search>
     <home-swiper :banner="banner"></home-swiper>
     <nav-swiper></nav-swiper>
-    <advert-swiper></advert-swiper>
+    <advert-swiper :information="information"></advert-swiper>
     <home-list
       :choice="choice"
       :newList="newList"></home-list>
@@ -16,7 +16,7 @@
   import NavSwiper from './components/navSwiper.vue'
   import AdvertSwiper from './components/advertSwiper.vue'
   import HomeList from './components/list.vue'
-  import loading from '../../components/loading.vue'
+//  import loading from '../../components/loading.vue'
   export default {
     name: 'homeIndex',
     data() {
@@ -26,6 +26,8 @@
         choice: {}, //平台精选
         newList: {}, //新品推荐
         cart: 0, //
+        information: [],//来点快讯
+        menu: [],//menu
       }
     },
     components: {
@@ -34,7 +36,7 @@
       NavSwiper,
       AdvertSwiper,
       HomeList,
-      loading
+//      loading
     },
     created (){
     },
@@ -49,7 +51,7 @@
       getIndexData(){
         this.http.get(this.ports.home.index, res =>{
           this.isLoading = false
-//          this.$store.commit('changeLoading',false)
+          this.$store.commit('changeLoading',false)
           console.log(res)
           if(res.success){
             let data = res.data
@@ -57,6 +59,8 @@
             this.choice = data.choice
             this.newList = data.new
             this.cart = data.cart
+            this.menu = data.menu
+            this.information = data.information
             this.$store.commit('changeCartNum',this.cart)
           }else{
             this.showToastTxtOnly(res.msg)

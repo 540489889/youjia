@@ -46,7 +46,7 @@ let router = new Router({
       path: '/sort/list',
       name: 'SortList',
       component: resolve => require(['@/page/sort/list'], resolve) ,
-      meta:{index: 2, title: '分类', requireAuth: false}
+      meta:{index: 6, title: '分类', requireAuth: false}
     },
     //测试
     {
@@ -68,6 +68,19 @@ let router = new Router({
       name: 'OrderOrders',
       component: resolve => require(['@/page/order/orders'], resolve) ,
       meta:{index: 3, title: '确认订单', requireAuth: false}
+    },
+    {
+      path: '/order/address',
+      name: 'OrderAddress',
+      component: resolve => require(['@/page/order/address'], resolve) ,
+      meta:{index: 4, title: '地址选择', requireAuth: false}
+    },
+    //订单新增地址
+    {
+      path: '/order/add',
+      name: 'OrderAdd',
+      component: resolve => require(['@/page/order/add'], resolve) ,
+      meta:{index: 4, title: '新增地址', requireAuth: false}
     },
     //订单信息
     {
@@ -154,6 +167,12 @@ let router = new Router({
       name: 'IntegralIndex',
       component: resolve => require(['@/page/integral/index'], resolve) ,
       meta:{index: 3, title: '我的积分', requireAuth: false}
+    },
+    {
+      path: '/integral/order',
+      name: 'IntegralOrder',
+      component: resolve => require(['@/page/integral/order'], resolve) ,
+      meta:{index: 4, title: '我的订单', requireAuth: false}
     },
     {
       path: '/integral/detailed',

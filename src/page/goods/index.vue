@@ -1,5 +1,6 @@
 <template>
   <div class="goodsIndex">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <goods-swiper :banner="banner"></goods-swiper>
     <div class="gd-ui-1 flex-box">
       <div class="money">
@@ -10,10 +11,11 @@
         <div class="left box-1">会员价</div>
         <div class="right box-1">￥{{parseInt(goods.price_member)}}</div>
       </div>
-      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.id)"><i class="collect-ico collect-yes"></i>收藏</div>
+
+      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
       <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
 
-      <div class="share flex-box"><i class="share-ico"></i>分享</div>
+      <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
     </div>
     <div class="gd-ui-2">
       <div class="content-1 flex-box">
@@ -69,7 +71,16 @@
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
       <img class="circle" src="../../assets/img/l-banner-1.png" v-if="isBall"/>
     </transition>
-
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated bounceOutRight"
+    >
+      <div class="popup_layer shareWrapper" @click="changeCloseShare" v-if="isShare">
+        <img src="../../assets/ico/arrow.png" alt="">
+        <h4>点击右上角分享给好友哟！</h4>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -89,6 +100,7 @@
         banner: [],//商品轮播图
         isBall: false,//加入购物车动画元素
         collect: 0, //是否收藏
+        isShare: false
       }
     },
     components: {
@@ -98,6 +110,14 @@
       CubePage
     },
     methods: {
+      //分享
+      shareClick(){
+        this.isShare = true
+      },
+      //分享关闭
+      changeCloseShare(){
+        this.isShare = false
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
@@ -118,7 +138,6 @@
       },
       //取消收藏
       cancelClick(id){
-        alert(1)
         this.http.delete(this.ports.goods.collection+'/'+id, res =>{
           if(res.success){
             this.collect = false
@@ -238,6 +257,22 @@
     height:100vh;
     background-color:aliceblue;
     position:relative;
+    .shareWrapper{
+      color:white;
+      padding:30px;
+      text-align: right;
+      box-sizing: border-box;
+      img{
+        width:186px;
+      }
+      h4{
+        text-align: center;
+        line-height:2;
+      }
+    }
+    .cube-page{
+      background:none;
+    }
     /*padding-bottom:130px;*/
     .gd-ui-1{
       background-color:white;
@@ -258,8 +293,8 @@
         }
       }
       .mb-ui{
-        margin-left:40px;
-        margin-right:50px;
+        margin-left:20px;
+        margin-right:30px;
         .left,.right{
           width:120px;
           height:40px;

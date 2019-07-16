@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <transition name="slide-fade">
+    <transition :name="transitionName">
       <router-view/>
     </transition>
-    <loading v-if="$store.state.isLoading"></loading>
-    <nav-bar :selectedNavTitle="$store.state.defaultTitle" v-show="showBar"></nav-bar>
+    <!--<loading v-if="$store.state.isLoading"></loading>-->
+    <nav-bar :selectedNavTitle="NavTitle" v-if="showBar"></nav-bar>
   </div>
 </template>
 <script>
@@ -20,9 +20,15 @@
       }
     },
     created (){
+
     },
     methods:{
 
+    },
+    computed: {
+      NavTitle (){
+        return this.$store.state.defaultTitle
+      }
     },
     components:{
       navBar,
@@ -92,7 +98,7 @@
   .slide-left-enter-active,
   .slide-left-leave-active{
     will-change: transform;
-    transition: all 1s ease-in-out	;
+    transition: all 500ms ease-in-out	;
     position: absolute;
   }
   .slide-right-enter {

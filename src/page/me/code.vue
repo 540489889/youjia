@@ -1,5 +1,6 @@
 <template>
   <div class="MeCode">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="content">
       <h2 class="title">邀请好友得现金奖励 多邀多得</h2>
       <div class="infor">

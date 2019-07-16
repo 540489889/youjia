@@ -1,5 +1,6 @@
 <template>
   <div class="resellerWrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title flex-box">
       <img src="../../assets/img/p2.png" alt="">
       <p>不吃萝卜的小可爱</p>

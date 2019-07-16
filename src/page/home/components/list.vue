@@ -1,13 +1,13 @@
 <template>
   <div class="listWrapper">
-    <div class="title flex-box">
+    <router-link tag="div" :to="'/sort/list?type='+1" class="title flex-box">
       <div class="left">
         平台精选 <span>达人精选好物</span>
       </div>
       <div class="right">
         更多 <i class="cubeic-arrow"></i>
       </div>
-    </div>
+    </router-link>
     <div class="content">
       <ul>
         <li v-for="item in choice.res" :key="item.id">
@@ -25,7 +25,7 @@
         </li>
       </ul>
     </div>
-    <div class="title flex-box">
+    <router-link tag="div" :to="'/sort/list?type='+2" class="title flex-box">
       <div class="left">
         新品推荐
          <!--<span>达人精选好物</span>-->
@@ -33,7 +33,7 @@
       <div class="right">
         更多 <i class="cubeic-arrow"></i>
       </div>
-    </div>
+    </router-link>
     <div class="content">
       <ul>
         <li v-for="item in newList.res" :key="item.id">

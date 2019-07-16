@@ -1,5 +1,6 @@
 <template>
   <div class="addressAdd">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="content">
       <ul>
         <li class="flex-box">

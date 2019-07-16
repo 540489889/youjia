@@ -1,5 +1,6 @@
 <template>
   <div class="sortWrapper">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <home-search></home-search>
     <cube-page type="scroll-nav-side" title="ScrollNav">
       <div slot="content">

@@ -45,7 +45,7 @@
           </div>
         </li>
       </ul>
-      <div class="invoiceBtn">确定</div>
+      <div class="invoiceBtn" @click="invoiceSub">确定</div>
     </div>
   </div>
 </template>
@@ -95,6 +95,20 @@
       }
     },
     methods: {
+      //确定
+      invoiceSub(){
+        if(this.checkerContent==1&&this.checkerRise==0){
+          //个人商品明细发票
+          this.$emit('changeInvoiceSub',{name: 1})
+        }
+        else if(this.checkerContent==1&&this.checkerRise==1){
+          //单位明细发票
+          this.$emit('changeInvoiceSub',{unit: this.name,sbCode:this.sbCode})
+        }else{
+          this.$emit('changeInvoiceSub',false)
+        }
+
+      },
       closeSelected(){
         this.$emit('changeSelected',false)
       },

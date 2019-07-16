@@ -1,5 +1,6 @@
 <template>
   <cube-page type="sticky-view-scroll" title="Sticky">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <template slot="content">
       <div class="listWrapper sticky-view-container">
         <cube-sticky :pos="scrollY">
@@ -49,10 +50,11 @@
         this.scrollY = -y
       },
       getListData(){
-        let id = this.$route.query.cate
-        this.http.get(this.ports.sort.list+'?cate='+id, res =>{
+        let id = this.$route.query.cate //分类id
+        let title = this.$route.query.title //搜索内容
+        let type = this.$route.query.type //当带有此参数时，为首页的新品推荐和平台精选。new为新品，choice为精选
+        this.http.get(this.ports.search.index+'?cate='+id+'&title='+title+'&type='+type, res =>{
           this.$store.commit('changeLoading',false)
-          console.log(res)
           if(res.success){
             let data = res.data
             this.list = data.res

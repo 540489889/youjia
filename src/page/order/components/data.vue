@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="btn-ui">
-            <a class="offBtn" @click=""> 申请退款</a>
+            <router-link tag="a" to="/refund/apply" class="offBtn"> 申请退款</router-link>
           </div>
         </template>
 

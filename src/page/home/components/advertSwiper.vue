@@ -4,11 +4,9 @@
     <div class="box-1">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide  >
-          <div class="media_title"><span>测试</span>大量运动鞋5折起，手慢无!。</div>
-        </swiper-slide>
-        <swiper-slide  >
-          <div class="media_title"><span>样板</span>理论的试试队伍而奋斗撒。</div>
+        <swiper-slide  v-for="(item,index) in information" :key="index">
+          <div class="media_title" v-if="index==0"><span>最新</span>{{item.content}}</div>
+          <div v-else class="media_title">{{item.content}}</div>
         </swiper-slide>
         <!--<div class="swiper-pagination"  slot="pagination"></div>-->
       </swiper>
@@ -34,7 +32,7 @@
       }
     },
     props: {
-      list: Array,
+      information: Array,
       path: String
     },
     methods:{
@@ -44,7 +42,7 @@
     },
     computed: {
       showSwiper () {
-        return this.list.length
+        return this.information.length
       },
       swiper() {
         return this.$refs.mySwiper.swiper

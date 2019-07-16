@@ -80,7 +80,9 @@ import {
 } from 'cube-ui'
 import App from './App'
 import router from './router'
-
+//注册全局加载组件
+import myLoading from './components/loading.vue'  // 引入组件
+Vue.component("my-loading",myLoading); // 全局注册组件
 Vue.use(Button)
 Vue.use(Loading)
 Vue.use(Tip)
