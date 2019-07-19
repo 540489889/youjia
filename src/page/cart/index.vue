@@ -269,7 +269,7 @@
   .all-check{
     position:fixed;
     bottom:120px;
-    width:100%;
+    width:750px;
     background-color:white;
     z-index: 10;
     height:110px;

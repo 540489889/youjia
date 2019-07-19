@@ -21,16 +21,25 @@ export default {
   order: {
     index: '/api/v1/order',//获取订单列表
     create: '/api/v1/order/create',//提交订单
+    pay: '/api/v1/order/pay',//支付
+  },
+  refund: {
+    aftersave:'/api/v1/order/aftersave',//申请退货
+    afterindex:'/api/v1/order/afterindex',//售后申请页
   },
   me: {
     index: '/api/v1/member',//个人中心首页
     address: '/api/v1/address',//我的地址
+    team: '/api/v1/distribution/team',//我的团队
+    distribution:'/api/v1/distribution',//成为分销商
+    code:'/api/v1/qrcode/index',//我的推广码
   },
   integral: {
     index: '/api/v1/points',//积分首页
     loglist: '/api/v1/points/loglist',//积分明细
+    sign: '/api/v1/points/sign',//签到
   },
   search: {
     index: '/api/v1/search'
-  }
+  },
 }

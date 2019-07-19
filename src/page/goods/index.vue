@@ -12,7 +12,7 @@
         <div class="right box-1">￥{{parseInt(goods.price_member)}}</div>
       </div>
 
-      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
+      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
       <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
 
       <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
@@ -155,7 +155,7 @@
         // el.offsetWidth 这句话如何不写就不会有动画效果直接渲染的
         el.offsetWidth;
         el.style.transform = "translate(-70px, 68vh) scale(0.01)";
-        el.style.transition = "all 2s ease";
+        el.style.transition = "all 1s ease";
 //        console.log(done);
         done()
       },
@@ -189,7 +189,7 @@
         },200)
       },
       //加入购物车
-      changeAddCart(val){
+      changeAddCart(val,type){
         let that = this
         this.cartNum = val
         this.selected = false
@@ -197,7 +197,12 @@
           setTimeout(()=>{
             this.maskShow = false
             this.isBall = true
-            that.$store.commit('changeCartNum',parseInt(this.$store.state.cartNum)+val)
+            if(type){
+              that.$store.commit('changeCartNum',parseInt(this.$store.state.cartNum)+0)
+            }else{
+              that.$store.commit('changeCartNum',parseInt(this.$store.state.cartNum)+val)
+
+            }
           },500)
         }
       },

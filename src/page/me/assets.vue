@@ -3,19 +3,19 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
       <p class="test">6月佣金余额 (元)</p>
-      <h1 class="money">￥<span>25</span></h1>
+      <h1 class="money">￥<span>{{all}}</span></h1>
       <ul class="flex-box">
         <li class="box-1">
           待发放
-          <b>￥0</b>
+          <b>￥{{wait}}</b>
         </li>
-        <li class="box-1">
-          冻结中
-          <b>￥0</b>
-        </li>
+        <!--<li class="box-1">-->
+          <!--冻结中-->
+          <!--<b>￥0</b>-->
+        <!--</li>-->
         <li class="box-1">
           累计提现
-          <b>￥0</b>
+          <b>￥{{cash}}</b>
         </li>
       </ul>
     </div>
@@ -26,48 +26,18 @@
         <cube-button class="box-1" @click="showDatePicker">其他月份 <i class="cubeic-pulldown"></i></cube-button>
       </h3>
       <ul>
-        <li>
-          <h4 class="list-tilte">好友注册</h4>
+        <li v-for="item in list">
+          <h4 class="list-tilte">{{item.type}}</h4>
           <div class="flex-box infor">
             <div class="text-1 flex-box box-1">
               <img src="./../../assets/ico/mb-tx.png" alt="">
-              <p class="media_title">一个好人</p>
+              <p class="media_title">{{item.nickname}}</p>
             </div>
             <div class="text-2 box-1">
-              2018-11-08 18:22
+              {{item.create_at}}
             </div>
             <div class="text-3 box-1">
-              5元现金
-            </div>
-          </div>
-        </li>
-        <li>
-          <h4 class="list-tilte">好友注册</h4>
-          <div class="flex-box infor">
-            <div class="text-1 flex-box box-1">
-              <img src="./../../assets/ico/mb-tx.png" alt="">
-              <p class="media_title">一个好人</p>
-            </div>
-            <div class="text-2 box-1">
-              2018-11-08 18:22
-            </div>
-            <div class="text-3 box-1">
-              5元现金
-            </div>
-          </div>
-        </li>
-        <li>
-          <h4 class="list-tilte">好友注册</h4>
-          <div class="flex-box infor">
-            <div class="text-1 flex-box box-1">
-              <img src="./../../assets/ico/mb-tx.png" alt="">
-              <p class="media_title">一个好人</p>
-            </div>
-            <div class="text-2 box-1">
-              2018-11-08 18:22
-            </div>
-            <div class="text-3 box-1">
-              5元现金
+              {{item.profit_price}}元现金
             </div>
           </div>
         </li>
@@ -80,13 +50,42 @@
     name: 'assetsWrapper',
     data (){
       return {
-        defaultVal: '本月佣金明细'
+        defaultVal: '本月佣金明细',
+        all: 0,//总金额
+        cash: 0,//累计提现
+        wait: 0,//带发放
+        list: []
       }
     },
     computed:{
 
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      getAssetsData(date){
+        this.http.get(this.ports.me.distribution+'?date='+date, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.all = data.all
+            this.cash = data.cash
+            this.list = data.list.res
+            let tList = data.list
+            if(JSON.stringify(tList) == '{}'){
+              this.showToastTxtOnly('无数据...')
+            }
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       showDatePicker() {
         if (!this.datePicker) {
           this.datePicker = this.$createDatePicker({
@@ -94,6 +93,10 @@
             min: new Date(2019, 1),
             max: new Date(2020, 9),
             value: new Date(),
+            format: {
+              year: 'YYYY',
+              month: 'MM',
+            },
             columnCount: 2,
             onSelect: this.selectHandle,
             onCancel: this.cancelHandle
@@ -103,8 +106,9 @@
         this.datePicker.show()
       },
       selectHandle(date, selectedVal, selectedText) {
-        console.log(selectedText)
+        console.log(date,selectedVal,selectedText)
         this.defaultVal = selectedText.join('-')
+        this.getAssetsData(this.defaultVal)
 //        this.$createDialog({
 //          type: 'warn',
 //          content: `Selected Item: <br/> - date: ${date} <br/> - value: ${selectedVal.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
@@ -120,7 +124,7 @@
       }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getAssetsData("")
     }
   }
 </script>

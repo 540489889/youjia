@@ -25,9 +25,9 @@
                             <div class="left">
                               ￥<span v-html="data.price"></span>
                             </div>
-                            <div class="right">
+                            <router-link tag="div" :to="'/goods/index/'+data.goods_id" class="right">
                               购买
-                            </div>
+                            </router-link>
                           </h4>
                         </div>
                       </div>
@@ -114,8 +114,8 @@
               {content: '删除'}
             ],
             onSelect: () => {
-              console.log(this.list[index].id)
-              this.http.delete(this.ports.goods.collection+'/'+this.list[index].id, res =>{
+              console.log(this.list[index].goods_id)
+              this.http.delete(this.ports.goods.collection+'/'+this.list[index].goods_id, res =>{
                 if(res.success){
 //                  let data = res.data
 //                  this.list = data.res

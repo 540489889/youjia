@@ -11,7 +11,7 @@
               <cube-sticky-ele>
                 <order-nav></order-nav>
               </cube-sticky-ele>
-              <order-data @changeCallcelOrder="confirmClick"></order-data>
+              <order-data :list="list" @changeCallcelOrder="confirmClick"></order-data>
             </cube-scroll>
           </cube-sticky>
         </div>
@@ -49,6 +49,7 @@
         maskShow: false,
         scrollEvents: ['scroll'],
         scrollY: 0,
+        list: []
       }
     },
     components: {
@@ -58,6 +59,18 @@
       cancelOrder
     },
     methods: {
+      getData(){
+        this.http.get(this.ports.refund.afterindex, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       confirmClick(val){
         const that = this
         this.maskShow = true
@@ -84,7 +97,7 @@
       }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getData()
     }
   }
 </script>

@@ -3,7 +3,7 @@
     <my-loading v-if="isLoading"></my-loading>
     <home-search></home-search>
     <home-swiper :banner="banner"></home-swiper>
-    <nav-swiper></nav-swiper>
+    <nav-swiper :menu="menu"></nav-swiper>
     <advert-swiper :information="information"></advert-swiper>
     <home-list
       :choice="choice"

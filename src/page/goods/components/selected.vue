@@ -97,7 +97,8 @@
         this.http.post(this.ports.cart.index,params, res =>{
           if(res.success){
             let data = res.data
-            this.$emit('changeAddCart',this.number)
+            console.log(data,9999)
+            this.$emit('changeAddCart',this.number,data.type)
 //            this.$emit('changeSelected',false)
           }else{
             this.showToastTxtOnly(res.msg)

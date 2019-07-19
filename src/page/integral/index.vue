@@ -95,6 +95,16 @@
       //签到
       sign(){
         this.isSign = true
+        this.http.get(this.ports.integral.sign, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
       },
       //关闭签到弹窗
       changeClosePopup(val){

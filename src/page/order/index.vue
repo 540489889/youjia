@@ -9,10 +9,15 @@
               :scroll-events="scrollEvents"
               @scroll="scrollHandler">
               <div style="height:1px;"></div>
-              <cube-sticky-ele ele-key="123">
+              <cube-sticky-ele>
                 <order-nav @changeNavClick="changeNavClick"></order-nav>
               </cube-sticky-ele>
-              <order-data @deleteOrder="deleteOrder" :list="list" @changeCallcelOrder="confirmClick"></order-data>
+              <order-data
+                @deleteOrder="deleteOrder"
+                @changePayClick="changePayClick"
+                :list="list"
+                :type="type"
+                @changeCallcelOrder="confirmClick"></order-data>
             </cube-scroll>
           </cube-sticky>
           <!--<div v-if="!selected" class="mergePay">合并付款（已选2件）</div>-->
@@ -53,6 +58,7 @@
         scrollY: 0,
         list: [],//列表数据
         toastTime:null,
+        type: 2, //默认待付款
       }
     },
     components: {
@@ -62,9 +68,27 @@
       cancelOrder
     },
     methods: {
+      //去付款
+      changePayClick(id,index){
+        this.http.get(this.ports.order.pay+'?id='+id, res =>{
+          if(res.success){
+            this.list.splice(index, 1)
+//            this.$store.commit('changeCartNum',this.cart)
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       //删除订单
-      deleteOrder(val){
-        alert(val)
+      deleteOrder(id,index){
+        this.http.delete(this.ports.order.index+'/'+id, res =>{
+          if(res.success){
+            this.list.splice(index, 1)
+//            this.$store.commit('changeCartNum',this.cart)
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
       },
       showToastTime() {
          this.toastTime = this.$createToast({
@@ -75,6 +99,9 @@
       },
       //nav切换
       changeNavClick(val){
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+        this.type = val
         this.showToastTime()
         this.getOrderData(val)
       },
@@ -88,7 +115,8 @@
       getOrderData(val){
         let index = 0
         if(!val){
-          let type = this.$route.query.type
+          let type = parseInt(this.$route.query.type)
+          this.type = type
           index = type
         }else{
           index = val
@@ -140,6 +168,7 @@
   }
 </script>
 <style lang="less" scoped>
+
   .slide-fade-enter-active {
     transition: all .6s ease;
   }

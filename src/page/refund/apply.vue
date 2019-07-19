@@ -10,11 +10,27 @@
     </div>
     <div class="list">
       <ul>
-        <li class="flex-box"><span>退款原因：</span> <div @click="confirmClick" class="box-1 flex-box"><p class="box-1">请选择退款原因</p> <i class="cubeic-pulldown"></i></div></li>
-        <li class="flex-box"><span>退款联系人：</span> 罩得住</li>
-        <li class="flex-box"><span>联系方式：</span> 188****1234</li>
+        <li>
+          <cube-select
+            @change="changeType"
+            :placeholder="placeholder"
+            v-model="value"
+            :options="options">
+          </cube-select>
+        </li>
+        <li class="flex-box"><span>退款原因：</span>
+          <div @click="confirmClick" class="box-1 flex-box">
+            <p class="box-1">{{reasonTs}}</p> <i class="cubeic-pulldown"></i>
+          </div>
+        </li>
+        <li class="flex-box"><span>属性：</span> <cube-input class="box-1" v-model="attr_val" placeholder="请填退换货属性"></cube-input></li>
+        <li class="flex-box"><span>姓名：
+        </span> <cube-input class="box-1" v-model="name" placeholder="请填写姓名"></cube-input></li>
+        <li class="flex-box"><span>联系方式：</span> <cube-input class="box-1" v-model="tell" placeholder="请填写电话"></cube-input></li>
+        <li class="flex-box"><span>备注：</span> <cube-input class="box-1" v-model="mark" placeholder="请填备注"></cube-input></li>
+
       </ul>
-      <a class="okBtn">确定</a>
+      <a class="okBtn" @click="subClick">确定</a>
     </div>
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
       <template slot="content">
@@ -41,10 +57,20 @@
     name: 'refundApply',
     data (){
       return {
+        placeholder: '退换货类型',
+        options: ['退款', '换货'],
+        value: '',
         selected: false,
         maskShow: false,
         scrollEvents: ['scroll'],
         scrollY: 0,
+        mark: '',//备注
+        attr_val: '',//退换货属性
+        name: '',
+        tell: '',
+        type: '',//退换货类型值
+        reason:'',//退换货原因
+        reasonTs: '请选择退换货原因'
       }
     },
     components: {
@@ -52,6 +78,66 @@
       refumdReaspm
     },
     methods: {
+      changeType(type){
+        if(type=='退款'){
+          this.type = 0
+        }else{
+          this.type = 1
+        }
+      },
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      subClick(){
+        let id = this.$route.query.id
+        if(!this.value){
+          this.showToastTxtOnly('请选择退换货类型')
+          return false
+        }
+        if(!this.reason){
+          this.showToastTxtOnly('请选择退换货原因')
+          return false
+        }
+        if(!this.attr_val){
+          this.showToastTxtOnly('请填写退换货属性')
+          return false
+        }
+        if(!this.name){
+          this.showToastTxtOnly('请填写姓名')
+          return false
+        }
+        if(!this.tell){
+          this.showToastTxtOnly('请填写联系方式')
+          return false
+        }
+        if(!this.mark){
+          this.showToastTxtOnly('请填写备注信息')
+          return false
+        }
+        let params = {}
+        params.id = id
+        params.return_type = this.tell
+        params.receivables_type = this.type
+        params.attr_val = this.attr_val
+        params.cause = this.reason
+        params.remark = this.remark
+        this.http.post(this.ports.refund.aftersave,params, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.count = data.count
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+
+      },
       confirmClick(val){
         const that = this
         this.maskShow = true
@@ -69,7 +155,8 @@
         }
       },
       changeDeleteOrder(val){
-        alert(val)
+        this.reason = val.value
+        this.reasonTs = val.label
         this.changeSelected(false)
       },
     },
@@ -141,6 +228,16 @@
         li{
           padding:30px 0;
           border-bottom:1px solid #eee;
+          .cube-select{
+            text-align: left;
+            background:#eef4f8;
+          }
+          .cube-select:after{
+            content: initial;
+          }
+          .cube-input-field{
+            padding:0;
+          }
           span{
             width:170px;
             text-align: left;

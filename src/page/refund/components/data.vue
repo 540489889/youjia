@@ -1,22 +1,22 @@
 <template>
   <div class="orderData">
     <ul class="dataList">
-      <li class="">
+      <li class="" v-for="item in list" :key="item.id">
         <div class="tsInfor">卖家已发货</div>
         <div class="goodsBox flex-box">
-          <div class="right-img"><img src="../../../assets/img/sort1.png" alt=""></div>
+          <div class="right-img"><img :src="item.goods_logo" alt=""></div>
           <div class="right-text box-1">
             <div class="flex-box tpText">
-              <h2 class="media_desc box-1">青藏高原正宗土鸡蛋/5斤青藏高原正宗土鸡蛋5斤青藏高原正宗土鸡蛋</h2>
-              <span>￥<b>56</b></span>
+              <h2 class="media_desc box-1">{{item.goods_title}}</h2>
+              <span>￥<b>{{item.price_selling}}</b></span>
             </div>
-            <p>盒装/土鸡蛋/5斤/约30个</p>
+            <p>{{item.goods_spec}}</p>
             <p>数量：1</p>
           </div>
         </div>
-        <h6>共一件商品 共计：<span>￥56.0</span></h6>
+        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_selling}}</span></h6>
         <div class="btn-ui">
-          <router-link tag="a" to="/refund/apply" class="offBtn"> 申请退款</router-link>
+          <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
           <a class="lookBtn">查看物流</a>
         </div>
       </li>
@@ -35,6 +35,9 @@
           disabled: false
         }
       }
+    },
+    props: {
+      list: Array
     },
     methods: {
       confirmClick(){

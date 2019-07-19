@@ -3,48 +3,36 @@
     <div class="swiperWd">
       <swiper :options="swiperOption" ref="mySwiper">
         <!--slide-->
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-1.png" alt="">
-            <h4>有限电视</h4>
+        <swiper-slide v-for="(item,index) in menu" :key="index">
+          <a :href="item.url">
+            <img class="swiper-img" :src="item.logo" alt="">
+            <h4>{{item.title}}</h4>
           </a>
         </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-2.png" alt="">
-            <h4>智慧商城</h4>
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-3.png" alt="">
-            <h4>生活服务</h4>
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-4.png" alt="">
-            <h4>旅行游玩</h4>
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-5.png" alt="">
-            <h4>分销赚钱</h4>
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-1.png" alt="">
-            <h4>有限电视</h4>
-          </a>
-        </swiper-slide>
-        <swiper-slide>
-          <a href="#">
-            <img class="swiper-img" src="./../../../assets/ico/sp-2.png" alt="">
-            <h4>智慧商城</h4>
-          </a>
-        </swiper-slide>
+        <!--<swiper-slide>-->
+          <!--<a href="#">-->
+            <!--<img class="swiper-img" src="./../../../assets/ico/sp-2.png" alt="">-->
+            <!--<h4>智慧商城</h4>-->
+          <!--</a>-->
+        <!--</swiper-slide>-->
+        <!--<swiper-slide>-->
+          <!--<a href="#">-->
+            <!--<img class="swiper-img" src="./../../../assets/ico/sp-3.png" alt="">-->
+            <!--<h4>生活服务</h4>-->
+          <!--</a>-->
+        <!--</swiper-slide>-->
+        <!--<swiper-slide>-->
+          <!--<a href="#">-->
+            <!--<img class="swiper-img" src="./../../../assets/ico/sp-4.png" alt="">-->
+            <!--<h4>旅行游玩</h4>-->
+          <!--</a>-->
+        <!--</swiper-slide>-->
+        <!--<swiper-slide>-->
+          <!--<a href="#">-->
+            <!--<img class="swiper-img" src="./../../../assets/ico/sp-5.png" alt="">-->
+            <!--<h4>分销赚钱</h4>-->
+          <!--</a>-->
+        <!--</swiper-slide>-->
         <div class="swiper-pagination swiper-pagination-white"  slot="pagination"></div>
       </swiper>
     </div>
@@ -71,6 +59,9 @@
           },
         }
       }
+    },
+    props:{
+      menu: Array
     },
     methods: {
 
@@ -110,6 +101,7 @@
             width:90px;
             height:90px;
             margin-bottom:20px;
+            border-radius: 50%;
           }
         }
       }

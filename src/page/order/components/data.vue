@@ -1,11 +1,11 @@
 <template>
   <div class="orderData">
     <ul class="dataList">
-      <li class="" v-for="item in list" :key="item.id">
+      <li  class="" v-for="(item,index) in list" :key="item.id">
         <!--{{item}}-->
         <template v-if="item.childOrder">
           <div class="tsInfor">等待买家付款</div>
-          <div class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
+          <router-link tag="div" :to="'/goods/index/'+it.goods_id" class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
             <!--</div>-->
@@ -18,15 +18,16 @@
               <p>{{it.goods_spec}}</p>
               <p>数量：1</p>
             </div>
-          </div>
+          </router-link>
           <h6>共{{item.childOrder.length}}件商品 共计：<span>￥{{item.price_goods}}</span></h6>
-          <div class="btn-ui">
-            <a class="offBtn" @click="confirmClick(it.id)"> 取消订单</a>
-            <a class="payBtn"> 立即付款</a>
+          <div class="btn-ui" v-if="type==2">
+            <a class="offBtn" @click="confirmClick(item.id,index)"> 取消订单</a>
+            <a class="payBtn" @click="payClick(item.id,index)"> 立即付款</a>
           </div>
         </template>
         <template v-else>
-          <div class="tsInfor">等待卖家家发货</div>
+          <div class="tsInfor" v-if="type==3">等待卖家发货</div>
+          <div class="tsInfor" v-if="type==4">等待卖家收货</div>
           <div class="goodsBox flex-box" >
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
@@ -41,13 +42,18 @@
               <p>数量：1</p>
             </div>
           </div>
-          <div class="btn-ui">
-            <router-link tag="a" to="/refund/apply" class="offBtn"> 申请退款</router-link>
+          <div class="btn-ui" v-if="type==3">
+            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+          </div>
+          <div class="btn-ui" v-if="type==4">
+            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <router-link tag="a" to="'/refund/apply" class="offBtn"> 查看物流</router-link>
+            <router-link tag="a" to="/refund/apply" class="offBtn"> 确认收货</router-link>
+          </div>
+          <div class="btn-ui" v-if="type==5">
+            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
           </div>
         </template>
-
-
-
       </li>
     </ul>
   </div>
@@ -66,11 +72,18 @@
       }
     },
     props: {
-      list: Array
+      list: Array,
+      type: Number
     },
     methods: {
-      confirmClick(id){
-        this.$emit('deleteOrder',id)
+      //去付款
+      payClick(id,index){
+        this.$emit('changePayClick',id,index)
+      },
+      //取消
+      confirmClick(id,index){
+        console.log(id)
+        this.$emit('deleteOrder',id,index)
       }
     },
     mounted (){

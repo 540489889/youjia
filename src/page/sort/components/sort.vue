@@ -2,13 +2,13 @@
   <div class="sortBox">
     <div class="flex-box">
       <div class="sort-l sort-1">推荐</div>
-      <div class="sort-l sort-2">价格
-        <i class="cubeic-pullup cksort"></i>
-        <i class="cubeic-pulldown"></i>
+      <div @click="priceClick" class="sort-l sort-2">价格
+        <i class="cubeic-pullup" :class="{cksort: cksort&&!amount&&sortFs}"></i>
+        <i class="cubeic-pulldown" :class="{cksort:!cksort&&!amount&&sortFs}"></i>
       </div>
-      <div class="sort-l sort-3">销量
-        <i class="cubeic-pullup"></i>
-        <i class="cubeic-pulldown"></i>
+      <div class="sort-l sort-3" @click="amountClick">销量
+        <i class="cubeic-pullup" :class="{cksort: amount&&!cksort&&!sortFs}"></i>
+        <i class="cubeic-pulldown" :class="{cksort:!amount&&!cksort&&!sortFs}"></i>
       </div>
     </div>
   </div>
@@ -18,11 +18,26 @@
     name: 'sort',
     data (){
       return {
-
+        sortFs: true,
+        cksort: true,
+        amount: false
       }
     },
     methods: {
-
+      //价格排序
+      priceClick(){
+        this.sortFs = true
+        this.amount = false
+        this.cksort = !this.cksort
+        this.$emit('changePriceClick',this.cksort)
+      },
+      //销量排序
+      amountClick(){
+        this.sortFs = false
+        this.cksort = false
+        this.amount = !this.amount
+        this.$emit('changeAmountClick',this.amount)
+      }
     },
     mounted (){
 

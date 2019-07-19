@@ -108,6 +108,9 @@
     min-height:100vh;
     background-color:white;
     overflow: hidden;
+    [class*=" cubeic-"], [class^=cubeic-]{
+      font-size: 120%;
+    }
     .content{
       ul{
         li{

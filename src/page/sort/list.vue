@@ -9,7 +9,7 @@
             @scroll="scrollHandler">
             <home-search></home-search>
             <cube-sticky-ele ele-key="123">
-              <index-sort></index-sort>
+              <index-sort @changePriceClick="changePriceClick" @changeAmountClick="changeAmountClick"></index-sort>
             </cube-sticky-ele>
             <data-sort :list="list"></data-sort>
           </cube-scroll>
@@ -39,6 +39,22 @@
       CubePage
     },
     methods: {
+      //价格排序
+      changePriceClick(val){
+        if(val){
+          this.getListData('price_market+desc')
+        }else{
+          this.getListData('number_sales+asc')
+        }
+      },
+      //销量排序
+      changeAmountClick(val){
+        if(val){
+          this.getListData('price_market+desc')
+        }else{
+          this.getListData('price_market+asc')
+        }
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
@@ -49,11 +65,12 @@
       scrollHandler({ y }) {
         this.scrollY = -y
       },
-      getListData(){
+      getListData(order){
         let id = this.$route.query.cate //分类id
         let title = this.$route.query.title //搜索内容
         let type = this.$route.query.type //当带有此参数时，为首页的新品推荐和平台精选。new为新品，choice为精选
-        this.http.get(this.ports.search.index+'?cate='+id+'&title='+title+'&type='+type, res =>{
+        this.http.get(this.ports.search.index+'?cate='+id+'&title='+title+'&type='+type+'&order='+order, res =>{
+          console.log(res)
           this.$store.commit('changeLoading',false)
           if(res.success){
             let data = res.data
@@ -65,7 +82,7 @@
       }
     },
     mounted (){
-      this.getListData()
+      this.getListData('')
     }
   }
 </script>

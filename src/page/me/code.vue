@@ -9,7 +9,7 @@
       </div>
       <div class="code">
         <h3>重庆有线优家商城</h3>
-        <img src="../../assets/img/ewm.png" alt="">
+        <img src="http://youjia.svkeji.cn/api/v1/qrcode/index" alt="">
       </div>
       <cube-button class="shareBtn">分享给好友</cube-button>
     </div>
@@ -24,9 +24,29 @@
       }
     },
     methods: {
-
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      getCodeData(){
+        this.http.get(this.ports.me.code, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.count = data.count
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
+//      this.getCodeData()
       this.$store.commit('changeLoading',false)
     }
   }

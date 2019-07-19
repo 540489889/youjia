@@ -1,10 +1,10 @@
 <template>
   <div class="serviceBox flex-box">
     <div class="serviceWrapper">
-      <h2 class="title">请选择申请退款的原因 （必选）
+      <h2 class="title">请选择退换货的原因 （必选）
         <i class="closeBtn cubeic-wrong" @click="closeSelected()"></i>
       </h2>
-      <p class="test">请选择取消订单原因</p>
+      <p class="test">请选择退换货的原因</p>
       <ul class="list">
         <li class="flex-box">
           <cube-radio-group v-model="selected2" :options="options2" position="right" :hollow-style="true" />
@@ -19,7 +19,7 @@
     name: 'mb',
     data (){
       return {
-        selected2: 4,
+        selected2: 5,
         options2: [
           {
             label: '商品无货',
@@ -50,7 +50,13 @@
         this.$emit('changeSelected',false)
       },
       handleClickCancel(){
-        this.$emit('changeDeleteOrder',this.selected2)
+        let data = '';
+        for(let i=0;i<this.options2.length;i++){
+          if(this.selected2==this.options2[i].value){
+            data = this.options2[i]
+            this.$emit('changeDeleteOrder',data)
+          }
+        }
       }
     },
     mounted (){

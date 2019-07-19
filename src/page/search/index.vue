@@ -31,7 +31,7 @@
       return {
         value: '',
         autofocus: true,
-        placeholder: '请输入搜索内容'
+        placeholder: '请输入搜索内容',
       }
     },
     methods: {
@@ -42,20 +42,47 @@
         })
         this.toast.show()
       },
+      getListData(callback){
+        let cond = false
+        let id = this.$route.query.cate //分类id
+        let title = this.value //搜索内容
+        let type = this.$route.query.type //当带有此参数时，为首页的新品推荐和平台精选。new为新品，choice为精选
+        this.http.get(this.ports.search.index+'?cate='+id+'&title='+title+'&type='+type, res =>{
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            if(!data.res.length){
+              cond = false
+            }else{
+              cond = true
+            }
+          }else{
+            cond = false
+          }
+          callback(cond)
+        })
+      },
       //搜索
       searchClick(){
         let type = this.$route.query.type //当带有此参数时，为首页的新品推荐和平台精选。new为新品，choice为精选
         let cate = this.$route.query.cate //分类id
-
+        let that = this
         if(!this.value){
           this.showToastTxtOnly('请输入搜索内容')
           return false
         }
-        this.$router.push({path: '/sort/list',query:{
-          type: type,
-          cate: cate,
-          title: this.value
-        }})
+        this.getListData(function (cond) {
+          if(cond){
+            that.$router.push({path: '/sort/list',query:{
+              type: type,
+              cate: cate,
+              title: that.value
+            }})
+          }else{
+            that.showToastTxtOnly('太难了！')
+          }
+        })
+
       }
     },
     mounted (){

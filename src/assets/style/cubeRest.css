@@ -50,3 +50,12 @@
 .navBar .cube-tab i::before{
   content: "";
 }
+.refundApply .cube-input-field{
+  padding:0;
+}
+.refundApply .cube-input:after{
+  content: initial;
+}
+.orderIndex .cube-sticky-ele{
+  min-height: 45px;
+}

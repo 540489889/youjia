@@ -3,48 +3,22 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title flex-box">
       <b class="text">团队成员</b>
-      共 <span>128</span> 人
+      共 <span>{{count}}</span> 人
     </div>
     <div class="content">
       <h2>团队成员列表</h2>
       <ul>
-        <li class="flex-box">
+        <li class="flex-box" v-for="item in list" :key="item.id">
           <div class="left flex-box box-1">
-            <img src="../../assets/img/goods-b1.png" alt="">
+            <img :src="item.headimg" alt="">
             <div class="infor">
-              <h4 class="media_title">一个可爱的昵称</h4>
-              <p>手机：18375875809</p>
+              <h4 class="media_title">{{item.nickname}}</h4>
+              <p>手机：{{item.phone}}</p>
             </div>
           </div>
           <div class="right">
             <h5>级别：一级</h5>
-            <p>加入时间：2019-05-18</p>
-          </div>
-        </li>
-        <li class="flex-box">
-          <div class="left flex-box box-1">
-            <img src="../../assets/img/goods-b1.png" alt="">
-            <div class="infor">
-              <h4 class="media_title">一个可爱的昵称</h4>
-              <p>手机：18375875809</p>
-            </div>
-          </div>
-          <div class="right">
-            <h5>级别：一级</h5>
-            <p>加入时间：2019-05-18</p>
-          </div>
-        </li>
-        <li class="flex-box">
-          <div class="left flex-box box-1">
-            <img src="../../assets/img/goods-b1.png" alt="">
-            <div class="infor">
-              <h4 class="media_title">一个可爱的昵称</h4>
-              <p>手机：18375875809</p>
-            </div>
-          </div>
-          <div class="right">
-            <h5>级别：一级</h5>
-            <p>加入时间：2019-05-18</p>
+            <p>加入时间：{{item.create_at}}</p>
           </div>
         </li>
       </ul>
@@ -56,14 +30,26 @@
     name: 'MeTeam',
     data (){
       return {
-
+        list: [],
+        count: 0,//总人数
       }
     },
     methods: {
-
+      getTeamData(){
+        this.http.get(this.ports.me.team, res =>{
+          this.$store.commit('changeLoading',false)
+          if(res.success){
+            let data = res.data
+            this.count = data.count
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getTeamData()
     }
   }
 </script>
