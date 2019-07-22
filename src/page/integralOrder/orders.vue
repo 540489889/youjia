@@ -52,10 +52,10 @@
           <span>安装服务</span>
           <div class="liVal">本次不需要安装</div>
         </li>
-        <li class="flex-box checkLi">
-          <span>订单备注</span>
-          <div class="liVal box-1"><cube-input v-model="goodsarr.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
-        </li>
+        <!--<li class="flex-box checkLi">-->
+          <!--<span>订单备注</span>-->
+          <!--<div class="liVal box-1"><cube-input v-model="goodsarr.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>-->
+        <!--</li>-->
         <li class="subtotal">
           共一件 小计：<span>{{number*goodsarr.point_price}}元</span>
         </li>
@@ -137,9 +137,14 @@
     methods: {
       //确认订单
       rightSubClick(){
-        this.http.post(this.ports.order.index,this.orderInfor, res =>{
+        let params = {}
+        params.goods_id = this.$route.query.goods_id
+        params.count = this.$route.query.count
+        params.address_id = this.address.id
+        this.http.post(this.ports.integral.points,params, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
+          this.showToastTxtOnly(res.msg)
           if(this.toastTime){
             this.toastTime.hide()
           }
