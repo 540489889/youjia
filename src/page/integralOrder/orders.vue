@@ -157,6 +157,7 @@
           }
         })
       },
+
       //地址选择
       checkAddress(){
         let goods_id = this.$route.query.goods_id
