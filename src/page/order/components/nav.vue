@@ -20,7 +20,7 @@
     name: 'orderNav',
     data (){
       return {
-        activeIndex: 0,
+        activeIndex: 2,
         selectedLabelSlots: '待付款',
         showSlider: false,
         inline:true,
@@ -56,7 +56,6 @@
         }
       },
       clickHandler (label) {
-
         if(label=='待付款'){
           this.activeIndex = 2
         }
