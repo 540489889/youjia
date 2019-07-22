@@ -28,7 +28,8 @@
         <template v-else>
           <div class="tsInfor" v-if="type==3">等待卖家发货</div>
           <div class="tsInfor" v-if="type==4">等待卖家收货</div>
-          <div class="goodsBox flex-box" >
+          <router-link tag="div" :to="'/goods/index/'+item.goods_id" class="goodsBox flex-box">
+          <!--<div class="goodsBox flex-box" >-->
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
             <!--</div>-->
@@ -41,7 +42,8 @@
               <p>{{item.goods_spec}}</p>
               <p>数量：1</p>
             </div>
-          </div>
+          <!--</div>-->
+          </router-link>
           <div class="btn-ui" v-if="type==3">
             <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
           </div>

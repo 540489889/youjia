@@ -133,6 +133,7 @@
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
             this.showToastTxtOnly(res.msg)
+            this.list = []
           }
         })
       },
