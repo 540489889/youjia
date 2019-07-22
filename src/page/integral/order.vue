@@ -22,6 +22,10 @@
           </div>
         </li>
       </ul>
+      <div class="nullBox" v-if="!list.length" style="z-index: 1">
+        <img src="../../assets/ico/null-ico.png" alt="">
+        <p>暂无数据</p>
+      </div>
     </div>
   </div>
 </template>
@@ -49,7 +53,7 @@
             let data = res.data
             this.list = data.res
           }else{
-            this.showToastTxtOnly(res.msg)
+//            this.showToastTxtOnly(res.msg)
           }
         })
       }

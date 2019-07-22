@@ -11,6 +11,10 @@
             <cube-sticky-ele ele-key="123">
               <index-sort @changePriceClick="changePriceClick" @changeAmountClick="changeAmountClick"></index-sort>
             </cube-sticky-ele>
+            <div class="nullBox" v-if="!list.length">
+              <img src="../../assets/ico/null-ico.png" alt="">
+              <p>暂无数据</p>
+            </div>
             <data-sort :list="list"></data-sort>
           </cube-scroll>
         </cube-sticky>
@@ -76,7 +80,7 @@
             let data = res.data
             this.list = data.res
           }else{
-            this.showToastTxtOnly(res.msg)
+//            this.showToastTxtOnly(res.msg)
           }
         })
       }

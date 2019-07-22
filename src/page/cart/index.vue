@@ -141,7 +141,7 @@
             })
             console.log(this.list)
           }else{
-            this.showToastTxtOnly(res.msg)
+//            this.showToastTxtOnly(res.msg)
           }
         })
       },
