@@ -12,6 +12,10 @@
               <cube-sticky-ele>
                 <order-nav @changeNavClick="changeNavClick"></order-nav>
               </cube-sticky-ele>
+              <div class="nullBox" v-if="!list.length">
+                <img src="../../assets/ico/null-ico.png" alt="">
+                <p>暂无订单！</p>
+              </div>
               <order-data
                 @deleteOrder="deleteOrder"
                 @changePayClick="changePayClick"
@@ -24,10 +28,6 @@
         </div>
       </template>
     </cube-page>
-    <div class="nullBox" v-if="!list.length">
-      <img src="../../assets/ico/null-ico.png" alt="">
-      <p>暂无订单！</p>
-    </div>
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
       <template slot="content">
         <div class="scroll-list-wrap">

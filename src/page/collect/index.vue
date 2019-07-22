@@ -32,18 +32,19 @@
                         </div>
                       </div>
                     </div>
+
                   </cube-swipe-item>
                 </li>
               </transition-group>
+              <div class="nullBox" v-if="!list.length">
+                <img src="../../assets/ico/null-ico.png" alt="">
+                <p>购物车什么也没有哦！</p>
+              </div>
             </cube-swipe>
           </cube-scroll>
         </div>
       </template>
     </cube-page>
-    <div class="nullBox" v-if="!list.length">
-      <img src="../../assets/ico/null-ico.png" alt="">
-      <p>暂无收藏！</p>
-    </div>
   </div>
 </template>
 <script>

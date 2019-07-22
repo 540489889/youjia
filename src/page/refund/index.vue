@@ -11,6 +11,10 @@
               <cube-sticky-ele>
                 <order-nav></order-nav>
               </cube-sticky-ele>
+              <div class="nullBox" v-if="!list.length">
+                <img src="../../assets/ico/null-ico.png" alt="">
+                <p>暂无数据</p>
+              </div>
               <order-data :list="list" @changeCallcelOrder="confirmClick"></order-data>
             </cube-scroll>
           </cube-sticky>
@@ -33,12 +37,7 @@
         </div>
       </template>
     </cube-page>
-    <div class="nullBox" v-if="!list.length">
-      <img src="../../assets/ico/null-ico.png" alt="">
-      <p>暂无数据</p>
-    </div>
   </div>
-
 </template>
 <script>
   import CubePage from '../../components/cube-page.vue'
