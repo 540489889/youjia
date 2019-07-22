@@ -2,34 +2,13 @@
   <div class="thingWrapper">
     <h2 class="title">全部好物</h2>
     <ul>
-      <li>
+      <router-link tag="li" :to="'/integralGoods/index/'+item.id" class="flex-box" v-for="item in list" :key="item.id">
         <a>
-          <img src="../../../assets/img/goods-b1.png" alt="">
-          <h4 class="media_title">豆浆机家用小型实用</h4>
-          <h5><span>4000</span>积分</h5>
+          <img :src="item.image" alt="">
+          <h4 class="media_title">{{item.title}}</h4>
+          <h5><span>{{item.point_price}}</span>积分</h5>
         </a>
-      </li>
-      <li>
-        <a>
-          <img src="../../../assets/img/goods-b1.png" alt="">
-          <h4 class="media_title">豆浆机家用小型实用</h4>
-          <h5><span>4000</span>积分</h5>
-        </a>
-      </li>
-      <li>
-        <a>
-          <img src="../../../assets/img/goods-b1.png" alt="">
-          <h4 class="media_title">豆浆机家用小型实用</h4>
-          <h5><span>4000</span>积分</h5>
-        </a>
-      </li>
-      <li>
-        <a>
-          <img src="../../../assets/img/goods-b1.png" alt="">
-          <h4 class="media_title">豆浆机家用小型实用</h4>
-          <h5><span>4000</span>积分</h5>
-        </a>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -40,6 +19,9 @@
       return {
 
       }
+    },
+    props: {
+      list: Array
     },
     methods: {
 
@@ -71,6 +53,7 @@
           img{
             width:100%;
             height:330px;
+            border-radius: 10px;
           }
           h4{
             font-size:28px;

@@ -2,8 +2,8 @@
   <div class="mallIndex">
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <goods-swiper :banner="banner"></goods-swiper>
-    <hot-data></hot-data>
-    <thing-data></thing-data>
+    <hot-data :hot="hot"></hot-data>
+    <thing-data :list="list"></thing-data>
   </div>
 </template>
 <script>
@@ -14,7 +14,9 @@
     name: 'mallIndex',
     data (){
       return {
-        banner: []
+        banner: [],
+        hot: [],//热门
+        list: [],//全部
       }
     },
     components: {
@@ -23,10 +25,22 @@
       thingData
     },
     methods: {
-
+      getGoodsIndex(){
+        this.http.get(this.ports.integral.goodsIndex, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.hot = data.hot
+            this.list = data.all
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getGoodsIndex()
     }
   }
 </script>

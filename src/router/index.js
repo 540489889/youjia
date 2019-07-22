@@ -187,6 +187,30 @@ let router = new Router({
       meta:{index: 2, title: '积分商城', requireAuth: false}
     },
     {
+      path: '/integralGoods/index/:id',
+      name: 'integralGoodsIndex',
+      component: resolve => require(['@/page/integralGoods/index'], resolve) ,
+      meta:{index: 3, title: '详情', requireAuth: false}
+    },
+    {
+      path: '/integralOrder/orders',
+      name: 'integralOrderIndex',
+      component: resolve => require(['@/page/integralOrder/orders'], resolve) ,
+      meta:{index: 4, title: '订单', requireAuth: false}
+    },
+    {
+      path: '/integralOrder/address',
+      name: 'integralOrderAddress',
+      component: resolve => require(['@/page/integralOrder/address'], resolve) ,
+      meta:{index: 4, title: '地址选择', requireAuth: false}
+    },
+    {
+      path: '/integralOrder/add',
+      name: 'integralOrderAdd',
+      component: resolve => require(['@/page/integralOrder/add'], resolve) ,
+      meta:{index: 5, title: '新增收货地址', requireAuth: false}
+    },
+    {
       path: '/address/index',
       name: 'AddressIndex',
       component: resolve => require(['@/page/address/index'], resolve) ,

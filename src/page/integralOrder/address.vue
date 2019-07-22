@@ -34,7 +34,7 @@
           </h6>
         </li>
       </ul>
-      <router-link tag="a" to="/order/add" class="addBtn">新增收货地址</router-link>
+      <router-link tag="a" to="./add" class="addBtn">新增收货地址</router-link>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@
         let goods_id = this.$route.query.goods_id
         let key = this.$route.query.key
         let count = this.$route.query.count
-        this.$router.push({path: '/order/orders',query:{
+        this.$router.push({path: '/integralOrder/orders',query:{
           goods_id: goods_id,
           key: key,
           count: count,

@@ -16,15 +16,16 @@
       </div>
       <div class="address-right cubeic-arrow"></div>
     </div>
-    <div class="orderInfor" v-for="(item,index) in goodsarr" :key="index">
+    <div class="orderInfor">
       <div class="infor-1 flex-box">
-        <div class="left"><img :src="item.goods.logo" alt=""></div>
+        <div class="left"><img :src="goodsarr.logo" alt=""></div>
         <div class="text box-1">
           <div class="flex-box">
-            <h6 class="media_desc box-1">{{item.goods.goods_name}}</h6>
-            <span>￥{{item.goods.price}}</span>
+            <h6 class="media_desc box-1">{{goodsarr.title}}</h6>
+            <span>￥{{goodsarr.point_price}}</span>
           </div>
-          <div class="typeInfo">{{item.goods.goods_spec}}</div>
+          <!--<div class="typeInfo"></div>-->
+          <p class="desc media_desc">{{goodsarr.desc}}</p>
         </div>
       </div>
       <ul class="infor-list">
@@ -35,35 +36,28 @@
               <!--<span @click="reduce()">-</span>-->
               <!--<cube-input :min="1" :max="10" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>-->
               <!--<span @click="plus()">+</span>-->
-              <b>{{item.goods.number_express}}</b>
+              <b>{{number}}</b>
             </div>
           </div>
         </li>
         <li class="flex-box checkLi">
           <span>配送方式</span>
-          <div class="liVal">{{item.express.express_desc}}</div>
+          <div class="liVal">{{goodsarr.express_desc}}</div>
         </li>
         <li class="flex-box checkLi">
           <span>开具发票</span>
-          <div v-if="item.goods.invoice">
-            <div class="liVal" v-if="item.goods.invoice.name" @click="confirmClick('invoice',item.goods,index)">{{item.goods.invoice.name}} <i class="cubeic-arrow"></i></div>
-            <div class="liVal" v-else-if="item.goods.invoice.unit" @click="confirmClick('invoice',item.goods,index)">{{item.goods.invoice.unit}} <i class="cubeic-arrow"></i></div>
-          </div>
-          <div class="liVal" v-else @click="confirmClick('invoice',item.goods,index)">本次不开具发票 <i class="cubeic-arrow"></i></div>
+          <div class="liVal" >本次不开具发票</div>
         </li>
         <li class="flex-box checkLi">
           <span>安装服务</span>
-          <div v-if="item.goods.is_install">
-            <div  v-if="item.goods.ress" @click="confirmClick('service',item.goods)" class="liVal">{{item.goods.ress.address}}<i class="cubeic-arrow"></i></div>
-          </div>
-          <div  v-else class="liVal">本次不需要安装</div>
+          <div class="liVal">本次不需要安装</div>
         </li>
         <li class="flex-box checkLi">
           <span>订单备注</span>
-          <div class="liVal box-1"><cube-input v-model="item.goods.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
+          <div class="liVal box-1"><cube-input v-model="goodsarr.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
         </li>
         <li class="subtotal">
-          共一件 小计：<span>{{item.goods.number_express*item.goods.price}}元</span>
+          共一件 小计：<span>{{number*goodsarr.point_price}}元</span>
         </li>
       </ul>
     </div>
@@ -73,7 +67,7 @@
     </div>
     <div class="subOrder flex-box">
       <div class="left box-1">
-        共一件 合计：<span>{{total_price}}元</span>
+        共一件 合计：<span>{{number*goodsarr.point_price}}元</span>
       </div>
       <div class="rightBtn" @click="rightSubClick">提交订单</div>
     </div>
@@ -163,7 +157,7 @@
         let goods_id = this.$route.query.goods_id
         let key = this.$route.query.key
         let count = this.$route.query.count
-        this.$router.push({path: '/order/address',query:{
+        this.$router.push({path: '/integralOrder/address',query:{
           goods_id: goods_id,
           key: key,
           count: count
@@ -172,30 +166,29 @@
       //默认数据
       getOrdersData(){
         let checkAddress = this.$route.query.address
-        console.log(checkAddress)
         let goods_id = this.$route.query.goods_id
-        let key = this.$route.query.key
         let count = this.$route.query.count
-        console.log(count,key,goods_id)
-        this.http.get(this.ports.order.create+'?goods_id='+goods_id+'&key='+key+'&count='+count, res =>{
+        this.number = count
+        console.log(checkAddress)
+        this.http.get(this.ports.integral.create+'?goods_id='+goods_id+'&count='+count, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
           if(res.success){
             let data = res.data
             this.address = data.address
             if(checkAddress){
-              this.address = JSON.parse(checkAddress)
+              this.address =JSON.parse(checkAddress)
             }
-            this.goodsarr = data.goodsarr
+            this.goodsarr = data.goods
             this.total_price = data.total_price
             //订单提交基本数据
             let goods = []
-            this.goodsarr.forEach((even,i)=>{
-              goods.push(even.goods)
-              this.orderInfor.goods = goods
-            })
+//            this.goodsarr.forEach((even,i)=>{
+//              goods.push(even.goods)
+//              this.orderInfor.goods = goods
+//            })
             this.orderInfor.address = this.address
-            console.log(this.orderInfor)
+//            console.log(this.orderInfor)
 //            this.goods = data.goods
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
@@ -437,6 +430,9 @@
             height:170px;
             border-radius: 15px;
           }
+        }
+        .desc{
+          line-height:1.4;
         }
         .text{
           text-align: left;

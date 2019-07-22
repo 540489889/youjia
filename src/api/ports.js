@@ -38,6 +38,9 @@ export default {
     index: '/api/v1/points',//积分首页
     loglist: '/api/v1/points/loglist',//积分明细
     sign: '/api/v1/points/sign',//签到
+    goodsIndex: '/api/v1/points/goodsindex',//积分商城首页
+    points: '/api/v1/points',//详情页
+    create: '/api/v1/points/create',//兑换
   },
   search: {
     index: '/api/v1/search'

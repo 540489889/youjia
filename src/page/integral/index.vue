@@ -64,7 +64,8 @@
       return {
         isShare: false,
         isSign: false,
-        list: {}
+        list: {},
+        signScore:0,
       }
     },
     components: {
@@ -100,7 +101,8 @@
           console.log(res)
           if(res.success){
             let data = res.data
-            this.list = data
+            this.signScore = data.score
+            this.list.score += this.signScore
           }else{
             this.showToastTxtOnly(res.msg)
           }

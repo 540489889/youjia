@@ -3,7 +3,7 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
       <div class="flex-box hTitle">
-        <div class="box-1"><span>960</span>积分</div>
+        <div class="box-1"><span>{{sum}}</span>积分</div>
         <router-link tag="a" to="/integralMall/index" class="exchangeBtn">积分兑换商品</router-link>
       </div>
       <p>积分又可以在积分商城兑换礼品</p>
@@ -17,9 +17,9 @@
       </h3>
       <ul>
         <li class="flex-box" v-for="(item,index) in list" :key="index">
-          <span class="t1">+100</span>
-          <span class="t1">兑换商品</span>
-          <span class="box-1">2017-05-03 17:35</span>
+          <span class="t1">{{item.point}}</span>
+          <span class="t1">{{item.type}}</span>
+          <span class="box-1">{{item.create_at}}</span>
         </li>
       </ul>
     </div>
@@ -30,7 +30,8 @@
     name: 'detailedWrapper',
     data (){
       return {
-        list: []
+        list: [],
+        sum: '',//总积分
       }
     },
     methods: {
@@ -42,6 +43,7 @@
           if(res.success){
             let data = res.data
             this.list = data.res
+            this.sum = data.sum
           }else{
             this.showToastTxtOnly(res.msg)
           }

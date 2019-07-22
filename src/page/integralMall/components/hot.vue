@@ -2,34 +2,20 @@
   <div class="hotWrapper">
     <h2 class="title">热门兑换</h2>
     <ul>
-      <li class="flex-box">
+      <router-link tag="li" :to="'/integralGoods/index/'+item.id" class="flex-box" v-for="item in hot" :key="item.id">
         <div class="left">
-          <img src="../../../assets/img/goods-b1.png" alt="">
+          <img :src="item.image" alt="">
         </div>
         <div class="right box-1">
-          <h4 class="media_title">智能手表电话蓝牙手环</h4>
-          <h5><span>限量500份</span></h5>
-          <p>234人已领</p>
+          <h4 class="media_title">{{item.title}}</h4>
+          <h5><span>限量{{item.number_stock}}份</span></h5>
+          <p>{{item.number_sales}}人已领</p>
           <div class="integral flex-box">
-            <div class="left-i"><span>675</span>积分</div>
+            <div class="left-i"><span>{{item.point_price}}</span>积分</div>
             <div class="right-i">立即兑换</div>
           </div>
         </div>
-      </li>
-      <li class="flex-box">
-        <div class="left">
-          <img src="../../../assets/img/goods-b1.png" alt="">
-        </div>
-        <div class="right box-1">
-          <h4 class="media_title">智能手表电话蓝牙手环</h4>
-          <h5><span>限量500份</span></h5>
-          <p>234人已领</p>
-          <div class="integral flex-box">
-            <div class="left-i"><span>675</span>积分</div>
-            <div class="right-i">立即兑换</div>
-          </div>
-        </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
@@ -40,6 +26,9 @@
       return {
 
       }
+    },
+    props: {
+      hot: Array
     },
     methods: {
 
