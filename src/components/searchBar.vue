@@ -7,7 +7,7 @@
     <router-link
       tag="div"
       to="/cart/index"
-      class="cart"><span v-if="$store.state.cartNum">{{$store.state.cartNum}}</span></router-link>
+      class="cart"><span v-if="$store.state.cartNum!=0">{{$store.state.cartNum}}</span></router-link>
   </div>
 </template>
 <script>

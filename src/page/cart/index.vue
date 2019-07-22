@@ -46,7 +46,11 @@
         </div>
       </template>
     </cube-page>
-    <div class="all-check flex-box">
+    <div class="nullBox" v-if="!list.length">
+      <img src="../../assets/ico/null-ico.png" alt="">
+      <p>购物车什么也没有哦！</p>
+    </div>
+    <div class="all-check flex-box" v-if="list.length">
       <cube-checkbox
         v-model="checked"
         @input="changeAllCheck"
@@ -254,7 +258,6 @@
   }
 </script>
 <style lang="less" scoped>
-
   .swipe-enter-active,.swipe-leave-active{
     transition: all .5s;
     .item-inner{

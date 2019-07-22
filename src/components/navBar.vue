@@ -12,7 +12,7 @@
       :label="item.label"
       :key="item.label">
       <!-- name为icon的插槽 -->
-      <i slot="icon" :class="item.icon" v-if="index==2"><b>{{$store.state.cartNum}}</b></i>
+      <i slot="icon" :class="item.icon" v-if="index==2&&$store.state.cartNum!=0"><b>{{$store.state.cartNum}}</b></i>
       <i slot="icon" :class="item.icon" v-else></i>
       <!-- 默认插槽 -->
       {{item.label}}

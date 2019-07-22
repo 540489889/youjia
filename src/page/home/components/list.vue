@@ -13,7 +13,7 @@
         <li v-for="item in choice.res" :key="item.id">
           <router-link tag="a" :to="'/goods/index/'+item.id" class="flex-box">
             <div class="left">
-              <img :src="item.image" alt="">
+              <img :src="item.logo" alt="">
             </div>
             <div class="right box-1">
               <h4 class="media_title"><span v-if="item.a">认证</span>{{item.title}}L</h4>
@@ -39,7 +39,7 @@
         <li v-for="item in newList.res" :key="item.id">
           <router-link tag="a" :to="'/goods/index/'+item.id" class="flex-box">
             <div class="left">
-              <img :src="item.image" alt="">
+              <img :src="item.logo" alt="">
             </div>
             <div class="right box-1">
               <h4 class="media_title"><span v-if="item.a">认证</span>{{item.title}}L</h4>

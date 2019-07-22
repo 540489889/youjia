@@ -24,6 +24,10 @@
         </div>
       </template>
     </cube-page>
+    <div class="nullBox" v-if="!list.length">
+      <img src="../../assets/ico/null-ico.png" alt="">
+      <p>暂无订单！</p>
+    </div>
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
       <template slot="content">
         <div class="scroll-list-wrap">

@@ -33,6 +33,10 @@
         </div>
       </template>
     </cube-page>
+    <div class="nullBox" v-if="!list.length">
+      <img src="../../assets/ico/null-ico.png" alt="">
+      <p>暂无数据</p>
+    </div>
   </div>
 
 </template>
@@ -59,6 +63,13 @@
       cancelOrder
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
       getData(){
         this.http.get(this.ports.refund.afterindex, res =>{
           this.$store.commit('changeLoading',false)

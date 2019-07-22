@@ -40,6 +40,10 @@
         </div>
       </template>
     </cube-page>
+    <div class="nullBox" v-if="!list.length">
+      <img src="../../assets/ico/null-ico.png" alt="">
+      <p>暂无收藏！</p>
+    </div>
   </div>
 </template>
 <script>

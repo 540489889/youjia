@@ -1,6 +1,6 @@
 <template>
   <div class="orderWrapper">
-    <!--<my-loading v-if="$store.state.isLoading"></my-loading>-->
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="orderData">
       <ul class="dataList">
         <li class="">
@@ -30,14 +30,32 @@
     name: 'integralOrder',
     data (){
       return {
-
+        list: []
       }
     },
     methods: {
-
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      getListData(){
+        this.http.get(this.ports.integral.orderlist, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      }
     },
     mounted (){
-
+      this.getListData()
     }
   }
 </script>

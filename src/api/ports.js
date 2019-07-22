@@ -41,6 +41,8 @@ export default {
     goodsIndex: '/api/v1/points/goodsindex',//积分商城首页
     points: '/api/v1/points',//详情页
     create: '/api/v1/points/create',//兑换
+    orderlist: '/api/v1/points/orderlist',//积分商城我的订单
+
   },
   search: {
     index: '/api/v1/search'

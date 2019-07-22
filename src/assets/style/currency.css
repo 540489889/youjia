@@ -142,3 +142,20 @@ body{
 .searchInput .cube-input-field{
   padding:0;
 }
+.nullBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  text-align: center;
+}
+.nullBox img{
+  width:250px;
+  margin-top:40%;
+}
+.nullBox p{
+  color: #aaa;
+  margin-top:20px;
+}
