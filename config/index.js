@@ -65,7 +65,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     // assetsPublicPath: '/dist/', //history 模式打包
-    assetsPublicPath: '/dist/',
+    assetsPublicPath: '/',
     /**
      * Source Maps
      */
