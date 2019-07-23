@@ -2,7 +2,7 @@
   <div class="integralPopup popup_layer">
     <div class="content">
       <h6>恭喜您，签到成功！</h6>
-      <h2><span>+10</span>积分</h2>
+      <h2><span>+{{signScore}}</span>积分</h2>
       <a @click="changeClick">确定</a>
     </div>
   </div>
@@ -14,6 +14,9 @@
       return {
 
       }
+    },
+    props: {
+      signScore: Number
     },
     methods: {
       changeClick(){

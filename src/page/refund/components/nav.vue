@@ -39,7 +39,7 @@
     methods: {
       clickHandler (label) {
         // if you clicked home tab, then print 'Home'
-        console.log(label)
+        this.$emit('changeClick',label)
       }
     },
     mounted (){

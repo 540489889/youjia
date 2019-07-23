@@ -35,7 +35,7 @@
               <!--<span @click="reduce()">-</span>-->
               <!--<cube-input :min="1" :max="10" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>-->
               <!--<span @click="plus()">+</span>-->
-              <b>{{item.goods.number_express}}</b>
+              <b>{{item.goods.count}}</b>
             </div>
           </div>
         </li>
@@ -63,7 +63,7 @@
           <div class="liVal box-1"><cube-input v-model="item.goods.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
         </li>
         <li class="subtotal">
-          共一件 小计：<span>{{item.goods.number_express*item.goods.price}}元</span>
+          共{{item.goods.count}}件 小计：<span>{{(item.goods.count*item.goods.price)+Number(item.express.express_price)}}元</span>
         </li>
       </ul>
     </div>

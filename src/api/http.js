@@ -18,11 +18,8 @@ function handleResults (response) {
     result.data = res.data
     result.success = true
   }
-  if(!result.success){
-    let code = res.code
-    if(code===400){
-      console.log('1')
-    }
+  if(!result.code===404){
+    result.success = false
   }
   result.code = res.code
   result.msg = res.msg

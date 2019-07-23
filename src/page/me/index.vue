@@ -17,7 +17,7 @@
             <p class="flex-box">ID：{{list.openid}} <span :class="'mb-bz-'+list.vip_level"></span></p>
           </div>
         </div>
-        <router-link tag="div" to="/reg/register" class="mbbt">
+        <router-link tag="div" v-if="!list.vip_level" to="/reg/register" class="mbbt">
           <img  src="../../assets/ico/mbbt.png" alt="">
         </router-link>
       </div>
@@ -39,18 +39,21 @@
         <ul class="flex-box">
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+2">
+              <b v-if="list.order[0]">{{list.order[0]}}</b>
               <img src="./../../assets/ico/mb-l1.png" alt="">
               <h4>待付款</h4>
             </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+3">
+              <b v-if="list.order[1]">{{list.order[1]}}</b>
               <img src="./../../assets/ico/mb-l2.png" alt="">
               <h4>待发货</h4>
             </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+4">
+              <b v-if="list.order[2]">{{list.order[2]}}</b>
               <img src="./../../assets/ico/mb-l3.png" alt="">
               <h4>待收货</h4>
             </router-link>
@@ -296,6 +299,20 @@
               display: block;
               color:black;
               text-align: center;
+              position:relative;
+              b{
+                position:absolute;
+                top:-15px;
+                right:30px;
+                display: inline-block;
+                border-radius: 50%;
+                font-size:22px;
+                color:white;
+                background-color:#ff0207;
+                padding:5px;
+                width:20px;
+                height:20px;
+              }
               h4{
                 line-height:1.8;
               }

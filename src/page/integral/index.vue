@@ -42,7 +42,7 @@
       enter-active-class="animated tada"
       leave-active-class="animated bounceOutRight"
     >
-    <integral-popul @changeClosePopup="changeClosePopup" v-if="isSign"></integral-popul>
+    <integral-popul @changeClosePopup="changeClosePopup" :signScore="signScore" v-if="isSign"></integral-popul>
     </transition>
     <transition
       name="custom-classes-transition"
@@ -101,7 +101,7 @@
           console.log(res)
           if(res.success){
             let data = res.data
-            this.signScore = data.score
+            this.signScore = data
             this.list.score += this.signScore
           }else{
             this.showToastTxtOnly(res.msg)

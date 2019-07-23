@@ -26,6 +26,7 @@ export default {
   refund: {
     aftersave:'/api/v1/order/aftersave',//申请退货
     afterindex:'/api/v1/order/afterindex',//售后申请页
+    afterlog: '/api/v1/order/afterlog',//申请记录
   },
   me: {
     index: '/api/v1/member',//个人中心首页
@@ -42,7 +43,6 @@ export default {
     points: '/api/v1/points',//详情页
     create: '/api/v1/points/create',//兑换
     orderlist: '/api/v1/points/orderlist',//积分商城我的订单
-
   },
   search: {
     index: '/api/v1/search'

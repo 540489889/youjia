@@ -92,6 +92,18 @@
         })
         this.toast.show()
       },
+      showToastType() {
+        let that = this
+        const toast = this.$createToast({
+          txt: 'Correct',
+          type: 'correct',
+          time: 1000,
+          onTimeout: () => {
+            that.$router.push({path:'/refund/index'})
+          }
+        })
+        toast.show()
+      },
       subClick(){
         let id = this.$route.query.id
         if(!this.value){
@@ -132,6 +144,7 @@
             let data = res.data
             this.count = data.count
             this.list = data.res
+            this.showToastType()
           }else{
             this.showToastTxtOnly(res.msg)
           }

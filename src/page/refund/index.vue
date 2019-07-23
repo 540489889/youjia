@@ -9,7 +9,7 @@
               @scroll="scrollHandler">
               <div style="height:1px;"></div>
               <cube-sticky-ele>
-                <order-nav></order-nav>
+                <order-nav @changeClick="changeClick"></order-nav>
               </cube-sticky-ele>
               <div class="nullBox" v-if="!list.length">
                 <img src="../../assets/ico/null-ico.png" alt="">
@@ -62,12 +62,34 @@
       cancelOrder
     },
     methods: {
+      changeClick(val){
+        if(val=='售后申请'){
+          this.getData()
+        }else if(val=='处理中'){
+          this.getAfterlog(1)
+        }else{
+          this.getAfterlog(2)
+        }
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
           type: 'txt'
         })
         this.toast.show()
+      },
+      getAfterlog(type){
+        this.http.get(this.ports.refund.afterlog+'?type='+type, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data.res
+          }else{
+            this.list = []
+//            this.showToastTxtOnly(res.msg)
+          }
+        })
       },
       getData(){
         this.http.get(this.ports.refund.afterindex, res =>{
@@ -77,6 +99,7 @@
             let data = res.data
             this.list = data.res
           }else{
+            this.list = []
 //            this.showToastTxtOnly(res.msg)
           }
         })
