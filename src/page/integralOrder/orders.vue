@@ -57,7 +57,7 @@
           <!--<div class="liVal box-1"><cube-input v-model="goodsarr.remarks" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>-->
         <!--</li>-->
         <li class="subtotal">
-          共一件 小计：<span>{{number*goodsarr.point_price}}元</span>
+          共{{number}}件 小计：<span>{{number*goodsarr.point_price}}元</span>
         </li>
       </ul>
     </div>

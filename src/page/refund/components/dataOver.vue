@@ -2,7 +2,10 @@
   <div class="orderData">
     <ul class="dataList">
       <li class="" v-for="item in list" :key="item.id" v-if="list.length">
-        <!--<div class="tsInfor">卖家已发货</div>-->
+        <!--<div class="tsInfor">处理中...</div>-->
+        <div class="flex-box orderDh">
+          <span>服务单号：{{item.order_sn}}</span>
+        </div>
         <router-link tag="div" :to="'/goods/index/'+item.goods_id" class="goodsBox flex-box">
           <div class="right-img"><img :src="item.goods_logo" alt=""></div>
           <div class="right-text box-1">
@@ -10,15 +13,29 @@
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
               <span>￥<b>{{item.price_selling}}</b></span>
             </div>
-            <p>{{item.goods_spec}}</p>
+            <p>{{item.goods_attr}}</p>
             <p>数量：1</p>
           </div>
         </router-link>
-        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_selling}}</span></h6>
-        <div class="btn-ui">
-          <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
-          <a class="lookBtn">查看物流</a>
+        <div class="flex-box d-ui-center">
+          <span>退换货类型</span>
+          <span class="box-1" v-if="item.return_type==0">退货</span>
+          <span class="box-1" v-if="item.return_type==1">换货</span>
         </div>
+        <div class="flex-box d-ui-center">
+          <span>换货属性</span>
+          <span class="box-1">{{item.attr_val}}</span>
+        </div>
+        <div class="flex-box d-ui-center">
+          <span>退换货原因</span>
+          <span class="box-1">{{item.cause}}</span>
+        </div>
+        <div class="flex-box d-ui-center">
+          <span>备注</span>
+          <span class="box-1">{{item.remark}}</span>
+        </div>
+        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_selling}}</span></h6>
+        <h5 class="flex-box overInfor"><span>已完成</span> <p class="box">服务已完成，感谢您的支持</p></h5>
       </li>
     </ul>
   </div>
@@ -45,7 +62,6 @@
       }
     },
     mounted (){
-
     }
   }
 </script>
@@ -54,6 +70,32 @@
     padding:0 30px;
     overflow: hidden;
     /*position:relative;*/
+    .orderDh{
+      padding:20px 15px;
+    }
+    .overInfor{
+      background-color:#f5f5f5;
+      padding:30px;
+      margin-left:30px;
+      margin-top:30px;
+      span{
+        margin-right:20px;
+        p{
+          color:#eee;
+        }
+      }
+    }
+    .d-ui-center{
+      padding:30px;
+      padding-bottom:0;
+      justify-content: space-between;
+      align-items: flex-start;
+      color:#7f8593;
+      .box-1{
+        text-align: right;
+        margin-left:15px;
+      }
+    }
     .dataList{
       li{
         background-color:white;

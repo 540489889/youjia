@@ -3,19 +3,19 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="orderData">
       <ul class="dataList">
-        <li class="">
+        <li class="" v-for="item in list" :key="item.id">
           <div class="goodsBox flex-box">
-            <div class="right-img"><img src="../../assets/img/goods-b1.png" alt=""></div>
+            <div class="right-img"><img :src="item.goods_logo" alt=""></div>
             <div class="right-text box-1">
               <div class="flex-box tpText">
-                <h2 class="media_desc box-1">事发地点地方范德萨发生放速度方式</h2>
-                <span>￥<b>1256</b></span>
+                <h2 class="media_desc box-1">{{item.goods_title}}</h2>
+                <span>￥<b>{{item.pay_price}}</b></span>
               </div>
-              <p>放大大神了的积极哦</p>
-              <p>数量：1</p>
+              <!--<p>放大大神了的积极哦</p>-->
+              <p class="numBox">数量：{{item.number_goods}}</p>
             </div>
           </div>
-          <h6>共1件商品 共计：<span>￥1000</span></h6>
+          <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.pay_price}}</span></h6>
           <div class="btn-ui">
             <a class="offBtn"> 查看物流</a>
             <!--<a class="payBtn"> 立即付款</a>-->
@@ -91,6 +91,9 @@
           }
           .goodsBox{
             margin-top:20px;
+            .numBox{
+              margin-top:20px;
+            }
             .left-check{
               .cube-checkbox{
                 padding:0 10px;
@@ -135,7 +138,7 @@
             color:#7f8593;
             font-size:24px;
             span{
-              color:black;
+              color:#ff0207;
               font-size:28px;
             }
           }

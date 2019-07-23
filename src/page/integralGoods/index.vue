@@ -12,8 +12,8 @@
         <!--<div class="left box-1">会员价</div>-->
         <!--<div class="right box-1">￥{{parseInt(goods.price_member)}}</div>-->
       <!--</div>-->
-      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
-      <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
+      <!--<div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>-->
+      <!--<div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>-->
 
       <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
 

@@ -39,21 +39,21 @@
         <ul class="flex-box">
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+2">
-              <b v-if="list.order[0]">{{list.order[0]}}</b>
+              <b v-if="index0">{{index0}}</b>
               <img src="./../../assets/ico/mb-l1.png" alt="">
               <h4>待付款</h4>
             </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+3">
-              <b v-if="list.order[1]">{{list.order[1]}}</b>
+              <b v-if="index1">{{index1}}</b>
               <img src="./../../assets/ico/mb-l2.png" alt="">
               <h4>待发货</h4>
             </router-link>
           </li>
           <li class="box-1">
             <router-link tag="a" :to="'/order/index?type='+4">
-              <b v-if="list.order[2]">{{list.order[2]}}</b>
+              <b v-if="index2">{{index2}}</b>
               <img src="./../../assets/ico/mb-l3.png" alt="">
               <h4>待收货</h4>
             </router-link>
@@ -138,6 +138,9 @@
     name: 'MeIndex',
     data (){
       return {
+        index0: 0,
+        index1: 0,
+        index2: 0,
         list: {}
       }
     },
@@ -149,6 +152,9 @@
           if(res.success){
             let data = res.data
             this.list = data
+            this.index0 = data.order[0]
+            this.index1 = data.order[1]
+            this.index2 = data.order[2]
           }else{
             this.showToastTxtOnly(res.msg)
           }

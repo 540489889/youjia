@@ -132,11 +132,11 @@
         }
         let params = {}
         params.id = id
-        params.return_type = this.tell
-        params.receivables_type = this.type
-        params.attr_val = this.attr_val
-        params.cause = this.reason
-        params.remark = this.remark
+        params.return_type = this.type //退换货类型 0退货 1换货
+        params.tell = this.tell // 联系方式
+        params.attr_val = this.attr_val //换货属性
+        params.cause = this.reason  //退换货原因
+        params.remark = this.remark //备注
         this.http.post(this.ports.refund.aftersave,params, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)

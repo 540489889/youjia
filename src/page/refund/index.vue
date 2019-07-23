@@ -15,7 +15,10 @@
                 <img src="../../assets/ico/null-ico.png" alt="">
                 <p>暂无数据</p>
               </div>
-              <order-data :list="list" @changeCallcelOrder="confirmClick"></order-data>
+              <component
+                :is="curentTab"
+                :list="list"
+                @changeCallcelOrder="confirmClick"></component>
             </cube-scroll>
           </cube-sticky>
         </div>
@@ -43,6 +46,8 @@
   import CubePage from '../../components/cube-page.vue'
   import orderNav from './components/nav.vue'
   import orderData from './components/data.vue'
+  import dataCenter from './components/dataCenter.vue'
+  import dataOver from './components/dataOver.vue'
   import cancelOrder from './components/reason.vue'
   export default {
     name: 'OrderIndex',
@@ -52,22 +57,37 @@
         maskShow: false,
         scrollEvents: ['scroll'],
         scrollY: 0,
-        list: []
+        list: [],
+        curentTab: 'orderData',
+        toastTime:null,
       }
     },
     components: {
       orderNav,
       orderData,
       CubePage,
-      cancelOrder
+      cancelOrder,
+      dataCenter,
+      dataOver
     },
     methods: {
+      showToastTime() {
+        this.toastTime = this.$createToast({
+          time: 0,
+          txt: '加载中...'
+        })
+        this.toastTime.show()
+      },
       changeClick(val){
+        this.showToastTime()
         if(val=='售后申请'){
           this.getData()
+          this.curentTab = 'orderData'
         }else if(val=='处理中'){
+          this.curentTab= 'dataCenter'
           this.getAfterlog(1)
         }else{
+          this.curentTab= 'dataOver'
           this.getAfterlog(2)
         }
       },
@@ -79,9 +99,12 @@
         this.toast.show()
       },
       getAfterlog(type){
+        this.list = []
         this.http.get(this.ports.refund.afterlog+'?type='+type, res =>{
           this.$store.commit('changeLoading',false)
-          console.log(res)
+          if(this.toastTime){
+            this.toastTime.hide()
+          }
           if(res.success){
             let data = res.data
             this.list = data.res
@@ -92,8 +115,12 @@
         })
       },
       getData(){
+        this.list = []
         this.http.get(this.ports.refund.afterindex, res =>{
           this.$store.commit('changeLoading',false)
+          if(this.toastTime){
+            this.toastTime.hide()
+          }
           console.log(res)
           if(res.success){
             let data = res.data
