@@ -103,6 +103,7 @@
             })
             console.log(this.list)
           }else{
+            this.list = []
 //            this.showToastTxtOnly(res.msg)
           }
         })

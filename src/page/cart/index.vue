@@ -43,7 +43,7 @@
               </transition-group>
               <div class="nullBox" v-if="!list.length">
                 <img src="../../assets/ico/null-ico.png" alt="">
-                <p>购物车什么也没有哦！</p>
+                <p>购物车什么也没有哦</p>
               </div>
             </cube-swipe>
           </cube-scroll>
@@ -141,6 +141,7 @@
             })
             console.log(this.list)
           }else{
+            this.list = []
 //            this.showToastTxtOnly(res.msg)
           }
         })

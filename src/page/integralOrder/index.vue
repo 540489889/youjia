@@ -12,6 +12,10 @@
               <cube-sticky-ele>
                 <order-nav @changeNavClick="changeNavClick"></order-nav>
               </cube-sticky-ele>
+              <div class="nullBox" v-if="!list.length">
+                <img src="../../assets/ico/null-ico.png" alt="">
+                <p>暂无订单！</p>
+              </div>
               <order-data
                 @deleteOrder="deleteOrder"
                 @changePayClick="changePayClick"
@@ -41,7 +45,6 @@
       </template>
     </cube-page>
   </div>
-
 </template>
 <script>
   import CubePage from '../../components/cube-page.vue'
@@ -132,7 +135,8 @@
             this.list = data.res
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
-            this.showToastTxtOnly(res.msg)
+            this.list = []
+//            this.showToastTxtOnly(res.msg)
           }
         })
       },

@@ -80,6 +80,7 @@
             let data = res.data
             this.list = data.res
           }else{
+            this.list = []
 //            this.showToastTxtOnly(res.msg)
           }
         })
