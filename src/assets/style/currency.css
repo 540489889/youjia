@@ -151,6 +151,17 @@ body{
   z-index: -1;
   text-align: center;
 }
+.nullBox .goShopping{
+  height:80px;
+  line-height:80px;
+  border-radius: 40px;
+  background-color:#ff0207;
+  display: block;
+  width:240px;
+  text-align: center;
+  margin:50px auto;
+  color:white;
+}
 .nullBox img{
   width:200px;
   margin-top:40%;

@@ -14,7 +14,7 @@
               </cube-sticky-ele>
               <div class="nullBox" v-if="!list.length">
                 <img src="../../assets/ico/null-ico.png" alt="">
-                <p>暂无订单！</p>
+                <p>暂无订单</p>
               </div>
               <order-data
                 @deleteOrder="deleteOrder"
@@ -77,6 +77,8 @@
         this.http.get(this.ports.order.pay+'?id='+id, res =>{
           if(res.success){
             this.list.splice(index, 1)
+            let data = res.data
+            location.href = data
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
             this.showToastTxtOnly(res.msg)

@@ -4,12 +4,12 @@
     <goods-swiper :banner="banner"></goods-swiper>
     <div class="gd-ui-1 flex-box">
       <div class="money">
-        ￥{{parseInt(goods.price_selling)}}
-        <b>￥{{parseInt(goods.price_market)}}</b>
+        ￥{{Number(goods.price_selling)}}
+        <b>￥{{Number(goods.price_market)}}</b>
       </div>
       <div class="mb-ui flex-box">
         <div class="left box-1">会员价</div>
-        <div class="right box-1">￥{{parseInt(goods.price_member)}}</div>
+        <div class="right box-1">￥{{Number(goods.price_member)}}</div>
       </div>
 
       <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
@@ -38,7 +38,7 @@
         <li class="flex-box">
           <span>运费</span>
           <div class="text box-1">在线支付免运费</div>
-          <span v-if="parseInt(goods.price_express)">{{parseInt(goods.price_express)}}</span>
+          <span v-if="Number(goods.price_express)">{{Number(goods.price_express)}}</span>
         </li>
       </ul>
     </div>

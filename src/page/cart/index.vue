@@ -44,6 +44,7 @@
               <div class="nullBox" v-if="!list.length">
                 <img src="../../assets/ico/null-ico.png" alt="">
                 <p>购物车什么也没有哦</p>
+                <router-link tag="a" to="/" class="goShopping">马上去购物</router-link>
               </div>
             </cube-swipe>
           </cube-scroll>
@@ -103,7 +104,7 @@
             key +=  tempData[i].goods_spec+'ღ'
             count +=  tempData[i].number+'ღ'
             num+=tempData[i].number*tempData[i].price
-            number += parseInt(tempData[i].number)
+            number += Number(tempData[i].number)
           }
         }
         this.goods_id = encodeURIComponent(goods_id.substr(0,goods_id.length-1))

@@ -7,7 +7,7 @@
         </div>
         <div class="right box-1">
           <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">{{item.title}}</p></h4>
-          <p class="desc">{{item.desc}}</p>
+          <p class="desc media_desc">{{item.desc}}</p>
           <h5 class="sold">已售：{{item.number_sales}}件</h5>
           <div class="money flex-box">
             <div class="left-2">

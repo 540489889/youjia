@@ -4,7 +4,7 @@
     <!--<goods-swiper :banner="banner"></goods-swiper>-->
     <div class="gd-ui-1 flex-box">
       <div class="money">
-        ￥{{parseInt(goods.point_price)}}
+        ￥{{Number(goods.point_price)}}
         <!--<b>￥{{parseInt(goods.price_market)}}</b>-->
       </div>
       <div class="box-1"></div>
@@ -39,7 +39,7 @@
         <li class="flex-box">
           <span>运费</span>
           <div class="text box-1">在线支付免运费</div>
-          <span v-if="parseInt(goods.price_express)">{{parseInt(goods.price_express)}}</span>
+          <span v-if="Number(goods.price_express)">{{Number(goods.price_express)}}</span>
         </li>
       </ul>
     </div>

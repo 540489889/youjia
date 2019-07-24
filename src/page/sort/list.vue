@@ -9,7 +9,9 @@
             @scroll="scrollHandler">
             <home-search></home-search>
             <cube-sticky-ele ele-key="123">
-              <index-sort @changePriceClick="changePriceClick" @changeAmountClick="changeAmountClick"></index-sort>
+              <index-sort
+                @changePriceClick="changePriceClick"
+                @changeAmountClick="changeAmountClick"></index-sort>
             </cube-sticky-ele>
             <div class="nullBox" v-if="!list.length">
               <img src="../../assets/ico/null-ico.png" alt="">
@@ -48,15 +50,15 @@
         if(val){
           this.getListData('price_market+desc')
         }else{
-          this.getListData('number_sales+asc')
+          this.getListData('price_market+asc')
         }
       },
       //销量排序
       changeAmountClick(val){
         if(val){
-          this.getListData('price_market+desc')
+          this.getListData('number_sales+desc')
         }else{
-          this.getListData('price_market+asc')
+          this.getListData('number_sales+asc')
         }
       },
       showToastTxtOnly(text) {

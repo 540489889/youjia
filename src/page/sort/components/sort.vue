@@ -19,8 +19,8 @@
     data (){
       return {
         sortFs: true,
-        cksort: true,
-        amount: false
+        cksort: true, //价格
+        amount: false, //销量
       }
     },
     methods: {

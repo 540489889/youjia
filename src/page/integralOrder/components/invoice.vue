@@ -29,8 +29,8 @@
             leave-active-class="animated fadeOut"
           >
             <div v-if="invoiceCompany">
-              <h6 class="flex-box"><span>单位名称</span>  <cube-input class="box-1" v-model="name" placeholder="请填写单位名称"></cube-input></h6>
-              <h6 class="flex-box"><span>纳税人识别码</span>  <cube-input class="box-1" v-model="sbCode" placeholder="请填写纳税人识别码"></cube-input></h6>
+              <h6 class="flex-box"><span>单位名称</span>  <cube-input class="box-1" @blur="blurLeave" v-model="name" placeholder="请填写单位名称"></cube-input></h6>
+              <h6 class="flex-box"><span>纳税人识别码</span>  <cube-input class="box-1" @blur="blurLeave" v-model="sbCode" placeholder="请填写纳税人识别码"></cube-input></h6>
             </div>
           </transition>
         </li>
@@ -95,6 +95,10 @@
       }
     },
     methods: {
+      blurLeave(){
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      },
       //确定
       invoiceSub(){
         if(this.checkerContent==1&&this.checkerRise==0){

@@ -8,10 +8,10 @@
         </div>
         <div class="right-1 box-1">
           <div class="top flex-box">
-            ￥{{parseInt(goods.price_selling)}}
+            ￥{{Number(goods.price_selling)}}
             <div class="mb-ui flex-box">
               <div class="left box-1">会员价</div>
-              <div class="right box-1">￥{{parseInt(goods.price_member)}}</div>
+              <div class="right box-1">￥{{Number(goods.price_member)}}</div>
             </div>
           </div>
           <p>编号：{{goods.id}}</p>
