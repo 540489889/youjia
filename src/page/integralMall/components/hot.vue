@@ -4,7 +4,7 @@
     <ul>
       <router-link tag="li" :to="'/integralGoods/index/'+item.id" class="flex-box" v-for="item in hot" :key="item.id">
         <div class="left">
-          <img :src="item.image" alt="">
+          <img :src="item.logo" alt="">
         </div>
         <div class="right box-1">
           <h4 class="media_title">{{item.title}}</h4>

@@ -3,7 +3,7 @@
     <ul>
       <router-link tag="li" v-for="item in list" :key="item.id" :to="'/goods/index/'+item.id" class="flex-box">
         <div class="left">
-          <img :src="item.image" alt="">
+          <img :src="item.logo" alt="">
         </div>
         <div class="right box-1">
           <h4 class="title flex-box"><span class="">来点认证</span> <p class="media_title box-1">{{item.title}}</p></h4>

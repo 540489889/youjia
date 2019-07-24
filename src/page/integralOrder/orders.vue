@@ -494,6 +494,7 @@
           }
         }
         .subtotal{
+          margin-top:20px;
           text-align: right;
           font-size:26px;
           span{

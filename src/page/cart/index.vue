@@ -7,7 +7,9 @@
           <cube-scroll>
             <cube-swipe>
               <transition-group name="swipe" tag="ul">
-                <li class="swipe-item-wrapper" v-for="(data,index) in list" :key="data.id">
+                <li class="swipe-item-wrapper"
+                    v-for="(data,index) in list"
+                    :key="data.id">
                   <cube-swipe-item
                     ref="swipeItem"
                     :btns="data.btns"
@@ -18,7 +20,7 @@
                       <cube-checkbox v-else v-model="data.checked" @input="changeCheck" :option="optionNo" ></cube-checkbox>
                       <div class="flex-box box-1 twoItem">
                         <div class="icon">
-                          <img width="168" height="168" :src="data.imgurl">
+                          <img width="168" height="168" :src="data.logo">
                           <b v-if="!data.number_stock" class="stockNo">库存不足</b>
                         </div>
                         <div class="text box-1">
@@ -30,7 +32,7 @@
                             </div>
                             <div class="right flex-box">
                               <span @click="reduce(data)">-</span>
-                              <cube-input :min="1" :max="10" type="number" @change="handleNumChange(data)" v-model="data.number"></cube-input>
+                              <cube-input :min="1" type="number" @change="handleNumChange(data)" v-model="data.number"></cube-input>
                               <span @click="plus(data)">+</span>
                             </div>
                           </h4>

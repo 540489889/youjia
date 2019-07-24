@@ -172,7 +172,7 @@
     min-height:100vh;
     background-color:aliceblue;
     font-size:28px;
-    padding-bottom:120px;
+    padding-bottom:90px;
     .mbTitle{
       .mall-title{
         background-color:white;

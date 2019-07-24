@@ -4,7 +4,7 @@
     <div class="orderData">
       <ul class="dataList">
         <li class="" v-for="item in list" :key="item.id">
-          <div class="goodsBox flex-box">
+          <router-link tag="div" :to="'/integralGoods/index/'+item.goods_id" class="goodsBox flex-box">
             <div class="right-img"><img :src="item.goods_logo" alt=""></div>
             <div class="right-text box-1">
               <div class="flex-box tpText">
@@ -14,7 +14,7 @@
               <!--<p>放大大神了的积极哦</p>-->
               <p class="numBox">数量：{{item.number_goods}}</p>
             </div>
-          </div>
+          </router-link>
           <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.pay_price}}</span></h6>
           <div class="btn-ui">
             <a class="offBtn"> 查看物流</a>

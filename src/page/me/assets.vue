@@ -26,7 +26,8 @@
         <cube-button class="box-1" @click="showDatePicker">其他月份 <i class="cubeic-pulldown"></i></cube-button>
       </h3>
       <ul>
-        <li v-for="item in list">
+        <li  v-if="!list.length">暂无数据...</li>
+        <li v-for="(item,index) in list" :key="index">
           <h4 class="list-tilte">{{item.type}}</h4>
           <div class="flex-box infor">
             <div class="text-1 flex-box box-1">
@@ -79,10 +80,12 @@
             this.list = data.list.res
             let tList = data.list
             if(JSON.stringify(tList) == '{}'){
-              this.showToastTxtOnly('无数据...')
+              this.list = []
+//              this.showToastTxtOnly('无数据...')
             }
           }else{
-            this.showToastTxtOnly(res.msg)
+              this.list = []
+//            this.showToastTxtOnly(res.msg)
           }
         })
       },
