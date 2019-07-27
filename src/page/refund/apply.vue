@@ -179,6 +179,9 @@
   }
 </script>
 <style lang="less" scoped>
+  .cube-page{
+    background:none;
+  }
   .slide-fade-enter-active {
     transition: all .6s ease;
   }

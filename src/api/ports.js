@@ -22,6 +22,7 @@ export default {
     index: '/api/v1/order',//获取订单列表
     create: '/api/v1/order/create',//提交订单
     pay: '/api/v1/order/pay',//支付
+    orderstatus: '/api/v1/order/orderstatus',//订单状态
   },
   refund: {
     aftersave:'/api/v1/order/aftersave',//申请退货

@@ -227,6 +227,11 @@ let router = new Router({
       name: 'AddressEdit',
       component: resolve => require(['@/page/address/edit'], resolve) ,
       meta:{index: 3, title: '地址编辑', requireAuth: false}
+    },{
+      path: '/order/success',
+      name: 'orderSuccess',
+      component: resolve => require(['@/page/order/success'], resolve) ,
+      meta:{index: 7, title: '交易成功', requireAuth: false}
     }
   ],
   //回到顶部

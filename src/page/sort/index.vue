@@ -22,12 +22,20 @@
               :label="item.title"
               :title="item.title">
               <ul>
-                <router-link v-if="item._child" tag="li" :to="'./list?cate='+it.id" :key="it.id" v-for="it in item._child">
-                  <div v-if="it._child" v-for="three in it._child">
-                    <img :src="three.logo">
+                <li v-if="item._child" v-for="it in item._child" :key="it.id">
+                  <h2>{{it.title}}</h2>
+                  <router-link
+                    tag="div"
+                    class="contentInfor"
+                    :to="'./list?cate='+three.id"
+                    v-if="it._child"
+                    v-for="three in it._child"
+                    :key="three.id"
+                  >
+                    <img :src="$store.state.IMGPATH+three.logo">
                     <p>{{three.title}}</p>
-                  </div>
-                </router-link>
+                  </router-link>
+                </li>
               </ul>
             </cube-scroll-nav-panel>
           </cube-scroll-nav>
@@ -152,21 +160,42 @@
           font-size: 14px;
           line-height: 1.4;
           color: #666;
-          padding:0 5px;
+          /*padding:0 5px;*/
           li{
-            float: left;
-            width: 50%;
+            /*background-color:#eee;*/
+            /*float: left;*/
+            width: 100%;
             text-align: center;
             margin-bottom:10px;
-            div{
+            /*border-top:10px solid #eee;*/
+            overflow: hidden;
+            h2{
+              padding:15px;
+              text-align: left;
+              color:black;
+            }
+            .contentInfor{
+              float:left;
+              width:50%;
+              padding:0 10px;
+              box-sizing: border-box;
               /*width: 114px;*/
               margin:0 auto;
+              img{
+                /*width:100%;*/
+              }
               p{
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 margin-bottom:10px;
               }
+            }
+            .contentInfor:nth-child(even){
+              padding-right:5px;
+            }
+            .contentInfor:nth-child(odd){
+              padding-left:5px;
             }
           }
         }
@@ -177,6 +206,7 @@
         background-color: #fff;
         text-align: left;
         line-height:1.6;
+        display: none;
       }
     }
 

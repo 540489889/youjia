@@ -5,7 +5,7 @@ export default new Vuex.Store({
   state: {
     staticImg: '/static/img/',
     defaultTitle: '首页',
-    IMGPATH: '',
+    IMGPATH: 'http://youjia.svkeji.cn',
     isLoading: true,
     cartNum: localStorage.cartNum?localStorage.cartNum:0,//购物车数量
     // 存储token

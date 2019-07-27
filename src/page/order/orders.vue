@@ -75,7 +75,7 @@
       <div class="left box-1">
         共一件 合计：<span>{{total_price}}元</span>
       </div>
-      <div class="rightBtn" @click="rightSubClick">提交订单</div>
+      <div class="rightBtn" @click="rightSubClick()">提交订单</div>
     </div>
     <!--安装信息-->
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
@@ -150,9 +150,7 @@
             this.toastTime.hide()
           }
           if(res.success){
-            let data = res.data
-            this.list = data.res
-//            this.$store.commit('changeCartNum',this.cart)
+
           }else{
             this.showToastTxtOnly(res.msg)
           }

@@ -101,6 +101,7 @@
       getAfterlog(type){
         this.list = []
         this.http.get(this.ports.refund.afterlog+'?type='+type, res =>{
+          console.log(res)
           this.$store.commit('changeLoading',false)
           if(this.toastTime){
             this.toastTime.hide()
