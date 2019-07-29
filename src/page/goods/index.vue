@@ -37,7 +37,7 @@
         </li>
         <li class="flex-box">
           <span>运费</span>
-          <div class="text box-1">在线支付免运费</div>
+          <div class="text box-1"></div>
           <span v-if="Number(goods.price_express)">{{Number(goods.price_express)}}</span>
         </li>
       </ul>

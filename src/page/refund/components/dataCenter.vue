@@ -11,7 +11,7 @@
           <div class="right-text box-1">
             <div class="flex-box tpText">
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-              <span>￥<b>{{item.price_selling}}</b></span>
+              <span>￥<b>{{item.price_real}}</b></span>
             </div>
             <p>{{item.goods_attr}}</p>
             <p>数量：1</p>

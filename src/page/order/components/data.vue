@@ -5,7 +5,7 @@
         <!--{{item}}-->
         <template v-if="item.childOrder">
           <div class="tsInfor">等待买家付款</div>
-          <router-link tag="div" :to="'/goods/index/'+it.goods_id" class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
+          <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
             <!--</div>-->
@@ -13,7 +13,7 @@
             <div class="right-text box-1">
               <div class="flex-box tpText">
                 <h2 class="media_desc box-1">{{it.goods_title}}</h2>
-                <span>￥<b>{{it.price_selling}}</b></span>
+                <span>￥<b>{{it.price_real}}</b></span>
               </div>
               <p>{{it.goods_spec}}</p>
               <p>数量：1</p>
@@ -28,7 +28,7 @@
         <template v-else>
           <div class="tsInfor" v-if="type==3">等待卖家发货</div>
           <div class="tsInfor" v-if="type==4">等待卖家收货</div>
-          <router-link tag="div" :to="'/goods/index/'+item.goods_id" class="goodsBox flex-box">
+          <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box">
           <!--<div class="goodsBox flex-box" >-->
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
@@ -37,7 +37,7 @@
             <div class="right-text box-1">
               <div class="flex-box tpText">
                 <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-                <span>￥<b>{{item.price_selling}}</b></span>
+                <span>￥<b>{{item.price_real}}</b></span>
               </div>
               <p>{{item.goods_spec}}</p>
               <p>数量：1</p>

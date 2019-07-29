@@ -89,6 +89,13 @@ let router = new Router({
       component: resolve => require(['@/page/order/index'], resolve) ,
       meta:{index: 4, title: '我的订单', requireAuth: false}
     },
+    //订单信息
+    {
+      path: '/order/details',
+      name: 'OrderDetails',
+      component: resolve => require(['@/page/order/details'], resolve) ,
+      meta:{index: 6, title: '订单形详情', requireAuth: false}
+    },
     //退款
     {
       path: '/refund/index',

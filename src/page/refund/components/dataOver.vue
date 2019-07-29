@@ -11,7 +11,7 @@
           <div class="right-text box-1">
             <div class="flex-box tpText">
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-              <span>￥<b>{{item.price_selling}}</b></span>
+              <span>￥<b>{{item.price_real}}</b></span>
             </div>
             <p>{{item.goods_attr}}</p>
             <p>数量：1</p>
@@ -34,7 +34,7 @@
           <span>备注</span>
           <span class="box-1">{{item.remark}}</span>
         </div>
-        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_selling}}</span></h6>
+        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_real}}</span></h6>
         <h5 class="flex-box overInfor"><span>已完成</span> <p class="box">服务已完成，感谢您的支持</p></h5>
       </li>
     </ul>

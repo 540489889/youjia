@@ -8,13 +8,13 @@
           <div class="right-text box-1">
             <div class="flex-box tpText">
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-              <span>￥<b>{{item.price_selling}}</b></span>
+              <span>￥<b>{{item.price_real}}</b></span>
             </div>
             <p>{{item.goods_spec}}</p>
             <p>数量：1</p>
           </div>
         </router-link>
-        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_selling}}</span></h6>
+        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_real}}</span></h6>
         <div class="btn-ui">
           <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
           <a class="lookBtn">查看物流</a>
