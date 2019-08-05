@@ -261,7 +261,6 @@ let router = new Router({
 // 使用 router.beforeEach 注册一个全局前置守卫，
 // 判断用户是否登陆
 router.beforeEach((to, from, next) => {
-  console.log(to.fullPath,from,999)
   //重置title
   if (to.meta.title) {
     document.title = to.meta.title
@@ -269,14 +268,14 @@ router.beforeEach((to, from, next) => {
   let path = to.path
   let openId = localStorage.getItem('openId');
   // 判断是否已授权
-  if(!openId){
-    next({
-      path: '/author/index',
-      query: {redirect: to.fullPath} // 将要跳转路由的path作为参数，传递到登录页面
-    })
-  }else{
-    next()
-  }
+  // if(!openId){
+  //   next({
+  //     path: '/author/index',
+  //     query: {redirect: to.fullPath} // 将要跳转路由的path作为参数，传递到登录页面
+  //   })
+  // }else{
+  // }
+  next()
 
   // if (to.matched.some(record => record.meta.requireAuth)){
   //   if(token!=0){

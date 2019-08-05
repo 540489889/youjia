@@ -48,7 +48,6 @@ axios.interceptors.response.use(function (response) {
   // 未授权
   if (response.data.code===30005){
     localStorage.clear()
-    // next("/author/index");
     router.replace({
       path:'/author/index',
       query: {redirect: router.currentRoute.fullPath}
