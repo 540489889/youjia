@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.withCredentials=true;
 
-// 添加请求拦截器，在请求头中加token
+// 添加请求拦截器，在请求头中加openId
 axios.interceptors.request.use(
   config => {
     if (localStorage.getItem('openId')) {
@@ -49,14 +49,12 @@ axios.interceptors.response.use(function (response) {
   if (response.data.code===30005){
     localStorage.clear()
     router.replace({
-      path:'/author/index',
-      query: {redirect: router.currentRoute.fullPath}
+      path:'/author/index'
     })
   }else if(response.data.code===30006){
     // 未关注
     router.replace({
-      path:'/author/code',
-      query: {redirect: router.currentRoute.fullPath}
+      path:'/author/code'
     })
   }else{
     return response

@@ -267,6 +267,7 @@ router.beforeEach((to, from, next) => {
   }
   let path = to.path
   let openId = localStorage.getItem('openId');
+  next()
   // 判断是否已授权
   // if(!openId){
   //   next({
@@ -275,8 +276,6 @@ router.beforeEach((to, from, next) => {
   //   })
   // }else{
   // }
-  next()
-
   // if (to.matched.some(record => record.meta.requireAuth)){
   //   if(token!=0){
   //     next()
