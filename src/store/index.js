@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
-    AuthorizedUrl: 'http://192.168.137.1:8081/author/index',//授权url
+    AuthorizedUrl: 'http://yj.svkeji.cn/author/index',//授权url
     staticImg: '/static/img/',
     defaultTitle: '首页',
     IMGPATH: 'http://youjia.svkeji.cn',
