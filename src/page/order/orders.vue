@@ -145,12 +145,21 @@
       rightSubClick(){
         this.http.post(this.ports.order.index,this.orderInfor, res =>{
           this.$store.commit('changeLoading',false)
-          console.log(res)
           if(this.toastTime){
             this.toastTime.hide()
           }
           if(res.success){
-
+            let id = res.data
+            this.http.get(this.ports.order.pay+'?id='+id, result =>{
+              if(result.success){
+                let url = res.data
+//                console.log(data)
+                location.href = url
+//            this.$store.commit('changeCartNum',this.cart)
+              }else{
+                this.showToastTxtOnly(res.msg)
+              }
+            })
           }else{
             this.showToastTxtOnly(res.msg)
           }
