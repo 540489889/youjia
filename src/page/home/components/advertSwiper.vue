@@ -5,8 +5,8 @@
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
         <swiper-slide  v-for="(item,index) in information" :key="index">
-          <div class="media_title" v-if="index==0"><span>最新</span>{{item.content}}</div>
-          <div v-else class="media_title">{{item.content}}</div>
+          <div class=" flex-box adverBd" v-if="index==0"><span>最新</span><div class="box-1 media_title" v-html="">{{item.content}}</div></div>
+          <div v-else class="adverBd flex-box"><div class="box-1 media_title">{{item.content}}</div></div>
         </swiper-slide>
         <!--<div class="swiper-pagination"  slot="pagination"></div>-->
       </swiper>
@@ -93,13 +93,15 @@
           height:50px;
           line-height:50px;
         }
-        .media_title{
+        .adverBd{
           height:50px;
-          display: block;
+          /*display: block;*/
           padding-left:15px;
           font-size:28px;
           color:black;
           span{
+            height:36px;
+            line-height:36px;
             border:1px solid #d6001e;
             border-radius: 5px;
             padding:0 4px;

@@ -9,12 +9,12 @@
         </router-link>
         <div class="flex-box">
           <div class="left">
-            <img v-if="list.headimg" src="./../../assets/ico/mb-tx.png" alt="">
+            <img v-if="list.headimg" :src="list.headimg" alt="">
             <img v-else src="./../../assets/ico/mb-tx.png" alt="">
           </div>
           <div class="right">
             <h4 class="media_title">{{list.nickname}}</h4>
-            <p class="flex-box">ID：{{list.openid}} <span :class="'mb-bz-'+list.vip_level"></span></p>
+            <p class="flex-box">ID：{{list.id}} <span :class="'mb-bz-'+list.vip_level"></span></p>
           </div>
         </div>
         <router-link tag="div" v-if="!list.vip_level" to="/reg/register" class="mbbt">
