@@ -26,6 +26,46 @@ Vue.config.debug = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.withCredentials=true;
+
+// 添加请求拦截器，在请求头中加token
+axios.interceptors.request.use(
+  config => {
+    if (localStorage.getItem('openId')) {
+      config.headers.openId = localStorage.getItem('openId');
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  });
+
+axios.interceptors.response.use(function (response) {
+  // let openId = localStorage.getItem('openId')
+  // if(openId){
+  //   console.log(response)
+  //   return false
+  // }
+  // 未授权
+  if (response.data.code===30005){
+    localStorage.clear()
+    // next("/author/index");
+    router.replace({
+      path:'/author/index',
+      query: {redirect: router.currentRoute.fullPath}
+    })
+  }else if(response.data.code===30006){
+    // 未关注
+    router.replace({
+      path:'/author/code',
+      query: {redirect: router.currentRoute.fullPath}
+    })
+  }else{
+    return response
+  }
+}, function (error) {
+  // Do something with response error
+  return Promise.reject(error)
+})
 //swiper轮播插件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'

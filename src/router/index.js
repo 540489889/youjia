@@ -11,6 +11,18 @@ let router = new Router({
       meta:{index: 0, title: '注册', requireAuth: false}
     },
     {
+      path: '/author/index',
+      name: 'authorIndex',
+      component: resolve => require(['@/page/author/index'], resolve) ,
+      meta:{index: 0, title: '微信授权中...', requireAuth: false}
+    },
+    {
+      path: '/author/code',
+      name: 'authorCode',
+      component: resolve => require(['@/page/author/code'], resolve) ,
+      meta:{index: 0, title: '优家商城', requireAuth: false}
+    },
+    {
       path: '/reg/index',
       name: 'RgeIndex',
       component: resolve => require(['@/page/reg/index'], resolve) ,
@@ -249,14 +261,23 @@ let router = new Router({
 // 使用 router.beforeEach 注册一个全局前置守卫，
 // 判断用户是否登陆
 router.beforeEach((to, from, next) => {
+  console.log(to.fullPath,from,999)
   //重置title
   if (to.meta.title) {
     document.title = to.meta.title
   }
   let path = to.path
-  let token = localStorage.getItem('Authorization');
-  console.log(token)
-  // 判断该路由是否需要登录权限
+  let openId = localStorage.getItem('openId');
+  // 判断是否已授权
+  if(!openId){
+    next({
+      path: '/author/index',
+      query: {redirect: to.fullPath} // 将要跳转路由的path作为参数，传递到登录页面
+    })
+  }else{
+    next()
+  }
+
   // if (to.matched.some(record => record.meta.requireAuth)){
   //   if(token!=0){
   //     next()
@@ -267,6 +288,5 @@ router.beforeEach((to, from, next) => {
   //     })
   //   }
   // }
-  next()
 })
 export default router

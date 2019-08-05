@@ -3,19 +3,20 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
+    AuthorizedUrl: 'http://192.168.137.1:8081/author/index',//授权url
     staticImg: '/static/img/',
     defaultTitle: '首页',
     IMGPATH: 'http://youjia.svkeji.cn',
     isLoading: true,
     cartNum: localStorage.cartNum?localStorage.cartNum:0,//购物车数量
     // 存储token
-    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
+    openId: localStorage.getItem('openId') ? localStorage.getItem('openId') : ''
   },
   mutations: {
     // 修改token，并将token存入localStorage
     changeLogin (state, user) {
-      state.Authorization = user.Authorization;
-      localStorage.setItem('Authorization', user.Authorization);
+      state.openId = user.openId;
+      localStorage.setItem('openId', user.openId);
     },
     //导航
     changeTitle (state, title){

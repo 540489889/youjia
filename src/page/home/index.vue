@@ -52,7 +52,7 @@
         this.http.get(this.ports.home.index, res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
-          console.log(res)
+          console.log(res,999999)
           if(res.success){
             let data = res.data
             this.banner = data.banner
@@ -69,7 +69,6 @@
       }
     },
     mounted (){
-      console.log(this.$store.state.isLoading)
       this.getIndexData()
     }
   }
