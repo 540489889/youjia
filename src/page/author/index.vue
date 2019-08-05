@@ -16,8 +16,7 @@
       let openId = GetQueryString("openId");
       //未授权
       if(!openId){
-        let newUrl = this.$store.state.AuthorizedUrl
-        console.log(newUrl)
+        let newUrl = encodeURIComponent(this.$store.state.AuthorizedUrl)
         let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+newUrl
         location.href = data
       }else{
