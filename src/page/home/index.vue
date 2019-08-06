@@ -11,6 +11,7 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
   import HomeSearch from '../../components/searchBar.vue'
   import HomeSwiper from './components/swiper.vue'
   import NavSwiper from './components/navSwiper.vue'
@@ -49,8 +50,7 @@
         this.toast.show()
       },
       getIndexData(){
-
-        this.http.get(this.ports.home.index, res =>{
+        axios.get('http://youjia.svkeji.cn/api/v1/index').then(res=>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
           console.log(res,999999)
@@ -66,7 +66,24 @@
           }else{
             this.showToastTxtOnly(res.msg)
           }
-        })
+        });
+//        this.http.get(this.ports.home.index, res =>{
+//          this.isLoading = false
+//          this.$store.commit('changeLoading',false)
+//          console.log(res,999999)
+//          if(res.success){
+//            let data = res.data
+//            this.banner = data.banner
+//            this.choice = data.choice
+//            this.newList = data.new
+//            this.cart = data.cart
+//            this.menu = data.menu
+//            this.information = data.information
+//            this.$store.commit('changeCartNum',this.cart)
+//          }else{
+//            this.showToastTxtOnly(res.msg)
+//          }
+//        })
       }
     },
     mounted (){
