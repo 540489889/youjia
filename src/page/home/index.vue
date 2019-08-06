@@ -49,7 +49,8 @@
         this.toast.show()
       },
       getIndexData(){
-        this.http.get(this.ports.home.index, res =>{
+        let openId = this.$route.query.openId
+        this.http.get(this.ports.home.index+'?openId='+openId, res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
           console.log(res,999999)
