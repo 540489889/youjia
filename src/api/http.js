@@ -105,7 +105,9 @@ export default {
       url: handleUrl(url),
       timeout: TIME_OUT_MS,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
+        'Content-Type': 'application/json; charset=UTF-8',
+        // 'Access-Control-Request-Headers': openId,
+
       }
     }).then(
       (result) => {
