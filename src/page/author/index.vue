@@ -22,8 +22,18 @@
         let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+thisUrl
         window.location.href = data
       }else{
-        this.$store.commit('changeLogin',openId)
-        this.$router.push({path: '/'})
+        this.http.get(this.ports.me.code, res =>{
+          console.log(res,'测试')
+          if(res.success){
+            let data = res.data
+            this.count = data.count
+            this.list = data.res
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+//        this.$store.commit('changeLogin',openId)
+//        this.$router.push({path: '/'})
 //        location.href = 'http://yj.svkeji.cn/'
       }
     },
