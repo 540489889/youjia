@@ -17,7 +17,7 @@ export default new Vuex.Store({
     // 修改token，并将token存入localStorage
     changeLogin (state, user) {
       console.log(9999)
-      state.openId = openId;
+      state.openId = user;
       localStorage.setItem('openId', user);
     },
     //导航
