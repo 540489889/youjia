@@ -39,7 +39,6 @@
 //      loading
     },
     created (){
-      alert(555)
     },
     methods: {
       showToastTxtOnly(text) {

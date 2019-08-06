@@ -13,11 +13,13 @@
       }
     },
     created(){
+      let thisUrl = window.location.href;
+      console.log(thisUrl)
       let openId = GetQueryString("openId");
       //未授权
       if(!openId){
-        let newUrl = encodeURIComponent(this.$store.state.AuthorizedUrl)
-        let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+newUrl
+//        let newUrl = encodeURIComponent(thisUrl)
+        let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+thisUrl
         window.location.href = data
       }else{
         localStorage.setItem('openId',openId);
