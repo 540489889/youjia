@@ -40,14 +40,10 @@ axios.interceptors.request.use(
   });
 
 axios.interceptors.response.use(function (response) {
-  // let openId = localStorage.getItem('openId')
-  // if(openId){
-  //   console.log(response)
-  //   return false
-  // }
   // 未授权
   if (response.data.code===30005){
     localStorage.clear()
+    //未授权
     router.replace({
       path:'/author/index'
     })

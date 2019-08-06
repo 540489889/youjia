@@ -18,10 +18,11 @@
       if(!openId){
         let newUrl = encodeURIComponent(this.$store.state.AuthorizedUrl)
         let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+newUrl
-        location.href = data
+        window.location.href = data
       }else{
         localStorage.setItem('openId',openId);
-        location.href = 'http://yj.svkeji.cn/'
+        this.$router.push('/')
+//        location.href = 'http://yj.svkeji.cn/'
       }
     },
     methods: {
