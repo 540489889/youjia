@@ -31,7 +31,7 @@ axios.defaults.withCredentials=true;
 axios.interceptors.request.use(
   config => {
     if (localStorage.getItem('openId')) {
-      config.headers.openId = localStorage.getItem('openId');
+      config.headers.openid = localStorage.getItem('openId');
     }
     return config;
   },
