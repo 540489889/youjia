@@ -23,9 +23,8 @@
         window.location.href = data
       }else{
         localStorage.setItem('openId',openId);
-        alert(999)
-//        this.$router.push('/')
-        location.href = 'http://yj.svkeji.cn/'
+        this.$router.push('/me/index')
+//        location.href = 'http://yj.svkeji.cn/'
       }
     },
     methods: {
