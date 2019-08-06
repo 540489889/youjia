@@ -50,7 +50,7 @@
       },
       getIndexData(){
         let openId = this.$route.query.openId
-        this.http.get(this.ports.home.index+'?openId='+openId, res =>{
+        this.http.get(this.ports.home.index+'?openId='+'be4f6b0f64b9d0090325d6ea4fad554f86fb74aa1de9bcc74c4f2034f6d5305d', res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
           console.log(res,999999)
