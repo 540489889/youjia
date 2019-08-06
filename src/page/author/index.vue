@@ -25,7 +25,7 @@
         localStorage.setItem('openId',openId);
         alert(999)
 //        this.$router.push('/')
-        location.href = 'http://yj.svkeji.cn'
+        location.href = 'http://www.baidu.com'
       }
     },
     methods: {
