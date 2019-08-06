@@ -42,7 +42,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(function (response) {
   // 未授权
   if (response.data.code===30005){
-    // localStorage.clear()
+    localStorage.clear()
     //未授权
     router.replace({
       path:'/author/index'

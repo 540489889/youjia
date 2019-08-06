@@ -22,8 +22,8 @@
         let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+thisUrl
         window.location.href = data
       }else{
-        localStorage.setItem('openId',openId);
-        this.$router.push({path: '/',query:{openId:openId}})
+        this.$store.commit('changeLogin',openId)
+        this.$router.push({path: '/'})
 //        location.href = 'http://yj.svkeji.cn/'
       }
     },

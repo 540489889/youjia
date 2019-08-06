@@ -259,14 +259,13 @@ let router = new Router({
   },
 })
 // 使用 router.beforeEach 注册一个全局前置守卫，
-// 判断用户是否登陆
 router.beforeEach((to, from, next) => {
   //重置title
   if (to.meta.title) {
     document.title = to.meta.title
   }
   let path = to.path
-  let openId = localStorage.getItem('openId');
+  let openId = localStorage.openId;
   next()
   // 判断是否已授权
   // if(!openId){
