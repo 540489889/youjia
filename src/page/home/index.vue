@@ -55,7 +55,7 @@
         axios({
           url:'http://youjia.svkeji.cn/api/v1/index',
           method: 'get',
-          headers:{'Content-Type':'application/x-www-form-urlencoded'}
+          headers:{'Content-Type': 'application/json; charset=UTF-8'}
         }).then(res=>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
