@@ -51,14 +51,34 @@
     methods: {
       //删除
       deleteAddress(id,index){
-        this.http.delete(this.ports.me.address+'/'+id, res =>{
-          console.log(res)
-          if(res.success){
-            this.list.splice(index, 1)
-          }else{
-            this.showToastTxtOnly(res.msg)
+        this.$createDialog({
+          type: 'confirm',
+//          icon: 'cubeic-alert',
+          title: '您确认删除该地址吗',
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onConfirm: () => {
+            this.http.delete(this.ports.me.address+'/'+id, res =>{
+              console.log(res)
+              if(res.success){
+                this.list.splice(index, 1)
+              }else{
+                this.showToastTxtOnly(res.msg)
+              }
+            })
           }
-        })
+        }).show()
+
       },
       //设置默认地址
       defaultClick(item){

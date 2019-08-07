@@ -106,8 +106,6 @@ export default {
       timeout: TIME_OUT_MS,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        // 'Access-Control-Request-Headers': openId,
-
       }
     }).then(
       (result) => {

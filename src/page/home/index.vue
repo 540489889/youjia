@@ -29,6 +29,7 @@
         cart: 0, //
         information: [],//来点快讯
         menu: [],//menu
+        openId: '',
       }
     },
     components: {
@@ -40,6 +41,7 @@
 //      loading
     },
     created (){
+      this.openId = this.$store.state.openId
     },
     methods: {
       showToastTxtOnly(text) {
@@ -50,7 +52,11 @@
         this.toast.show()
       },
       getIndexData(){
-        axios.get('http://youjia.svkeji.cn/api/v1/index').then(res=>{
+        axios({
+          url:'http://youjia.svkeji.cn/api/v1/index',
+          method: 'get',
+          headers:{'Content-Type':'application/x-www-form-urlencoded'}
+        }).then(res=>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
           console.log(res,999999)
@@ -84,6 +90,11 @@
 //            this.showToastTxtOnly(res.msg)
 //          }
 //        })
+      }
+    },
+    watch:{
+      openId(){
+        this.getIndexData()
       }
     },
     mounted (){

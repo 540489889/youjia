@@ -24,8 +24,8 @@
       }else{
         alert(1)
         this.$store.commit('changeLogin',openId)
-//        this.$router.push({path: '/'})
-        window.location.href = 'http://yj.svkeji.cn/'
+        this.$router.push({path: '/'})
+//        window.location.href = 'http://yj.svkeji.cn/'
       }
     },
     methods: {
