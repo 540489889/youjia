@@ -5,7 +5,7 @@
         <!--{{item}}-->
         <template v-if="item.childOrder">
           <div class="tsInfor">等待买家付款</div>
-          <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
+          <router-link tag="div" :to="'/order/details?id='+it.id" class="goodsBox flex-box"  v-for="it in item.childOrder" :key="it.id">
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
             <!--</div>-->
@@ -28,7 +28,7 @@
         <template v-else>
           <div class="tsInfor" v-if="type==3">等待卖家发货</div>
           <div class="tsInfor" v-if="type==4">等待卖家收货</div>
-          <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box">
+          <router-link tag="div" :to="'/order/details?id='+it.id" class="goodsBox flex-box">
           <!--<div class="goodsBox flex-box" >-->
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->

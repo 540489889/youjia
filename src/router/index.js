@@ -26,7 +26,7 @@ let router = new Router({
       path: '/reg/index',
       name: 'RgeIndex',
       component: resolve => require(['@/page/reg/index'], resolve) ,
-      meta:{index: 0, title: '登录', requireAuth: false}
+      meta:{index: 0, title: '绑定手机号码', requireAuth: false}
     },
     {
       path: '/reg/forgetPwd',
@@ -106,7 +106,7 @@ let router = new Router({
       path: '/order/details',
       name: 'OrderDetails',
       component: resolve => require(['@/page/order/details'], resolve) ,
-      meta:{index: 6, title: '订单形详情', requireAuth: false}
+      meta:{index: 6, title: '订单详情', requireAuth: false}
     },
     //退款
     {

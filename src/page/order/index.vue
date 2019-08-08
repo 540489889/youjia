@@ -87,14 +87,34 @@
       },
       //删除订单
       deleteOrder(id,index){
-        this.http.delete(this.ports.order.index+'/'+id, res =>{
-          if(res.success){
-            this.list.splice(index, 1)
+        this.$createDialog({
+          type: 'confirm',
+//          icon: 'cubeic-alert',
+          title: '您是否真的要取消订单？',
+//          content: '我是内容',
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onConfirm: () => {
+            this.http.delete(this.ports.order.index+'/'+id, res =>{
+              if(res.success){
+                this.list.splice(index, 1)
 //            this.$store.commit('changeCartNum',this.cart)
-          }else{
-            this.showToastTxtOnly(res.msg)
+              }else{
+                this.showToastTxtOnly(res.msg)
+              }
+            })
           }
-        })
+        }).show()
       },
       showToastTime() {
          this.toastTime = this.$createToast({

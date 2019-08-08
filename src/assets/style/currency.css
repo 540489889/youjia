@@ -170,3 +170,11 @@ body{
   color: #aaa;
   margin-top:20px;
 }
+input,button,.btnStyle{
+  background:none;
+  outline:none;
+}
+input:focus,button:focus,.btnStyle:focus{
+  border:none;
+}
+

@@ -4,7 +4,7 @@
       <i class="closeBtn cubeic-wrong" @click="closeSelected()"></i>
       <div class="goods-infor flex-box">
         <div class="left-1">
-          <img :src="goods.image" alt="">
+          <img :src="goods.logo" alt="">
         </div>
         <div class="right-1 box-1">
           <div class="top flex-box">
@@ -29,7 +29,7 @@
         <h2>数量</h2>
         <div class="right flex-box">
           <span @click="reduce()">-</span>
-          <cube-input :min="1" :max="10" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>
+          <cube-input :min="1" :max="10" @blur="blurInput" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>
           <span @click="plus()">+</span>
         </div>
       </div>
@@ -68,6 +68,10 @@
       goods: Object
     },
     methods: {
+      blurInput(){
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+      },
       //提交订单
       createOrder(){
         this.$router.push({
@@ -201,6 +205,7 @@
       color:#ccc;
       font-size:45px;
       font-weight: bold;
+      z-index: 10;
     }
     .goods-infor{
       align-items: flex-end;

@@ -35,6 +35,8 @@ export default {
     team: '/api/v1/distribution/team',//我的团队
     distribution:'/api/v1/distribution',//成为分销商
     code:'/api/v1/qrcode/index',//我的推广码
+    dxCode: 'api/v1/member/code', //获取验证码 参数 ?phone=
+    bindTell: '/api/v1/member/bind',//绑定手机
   },
   integral: {
     index: '/api/v1/points',//积分首页

@@ -463,12 +463,12 @@
             height:70px;
             line-height:70px;
             text-align: center;
-            background-color:#f2f2f2;
+            /*background-color:#f2f2f2;*/
             color:#7f8593;
-            padding:0 30px;
-            border-radius: 35px;
+            /*padding:0 30px;*/
+            /*border-radius: 35px;*/
             display: inline-block;
-            margin-top:20px;
+            /*margin-top:20px;*/
           }
         }
       }

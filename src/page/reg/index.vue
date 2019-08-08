@@ -6,13 +6,13 @@
         mode="out-in"
         name="component-fade"
       >
-      <conmponents :is="who"></conmponents>
+      <sms-login></sms-login>
       </transition>
-      <a class="targetA" @click="changeComponent">{{loginText}}</a>
-      <h6 class="flex-box itBtn">
-        <router-link tag="a" to="/reg/register">立即注册</router-link>
-        <router-link tag="a" to="/reg/forgetPwd">忘记密码</router-link>
-      </h6>
+      <!--<a class="targetA" @click="changeComponent">{{loginText}}</a>-->
+      <!--<h6 class="flex-box itBtn">-->
+        <!--<router-link tag="a" to="/reg/register">立即注册</router-link>-->
+        <!--<router-link tag="a" to="/reg/forgetPwd">忘记密码</router-link>-->
+      <!--</h6>-->
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@
     name: 'registerWrapper',
     data (){
       return{
-        loginTitle: '帐号密码登录',
+        loginTitle: '绑定手机号码',
         loginText: '短信登录',
         who: 'accountsLogin',
         type: 'password',

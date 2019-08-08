@@ -3,10 +3,10 @@
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="mbTitle">
       <div class="title">
-        <router-link tag="div" to="/setUp/index" class="set-up flex-box">
-          <i class="cubeic-setting"></i>
-          设置
-        </router-link>
+        <!--<router-link tag="div" to="/setUp/index" class="set-up flex-box">-->
+          <!--<i class="cubeic-setting"></i>-->
+          <!--设置-->
+        <!--</router-link>-->
         <div class="flex-box">
           <div class="left">
             <img v-if="list.headimg" :src="list.headimg" alt="">
@@ -17,7 +17,7 @@
             <p class="flex-box">ID：{{list.id}} <span :class="'mb-bz-'+list.vip_level"></span></p>
           </div>
         </div>
-        <router-link tag="div" v-if="!list.vip_level" to="/reg/register" class="mbbt">
+        <router-link tag="div" v-if="!list.vip_level" to="/reg/index" class="mbbt">
           <img  src="../../assets/ico/mbbt.png" alt="">
         </router-link>
       </div>

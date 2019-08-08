@@ -1,19 +1,20 @@
 <template>
   <ul>
-    <li> <cube-input v-model="inputTell" placeholder="输入手机号" :clearable="clearable"></cube-input></li>
+    <li> <cube-input v-model="inputTell" type="number" placeholder="输入手机号" :clearable="clearable"></cube-input></li>
     <li class="flex-box">
       <cube-input class="input-ui box-1"
                   placeholder="输入验证码"
                   v-model="inputCode">
       </cube-input>
       <cube-button
+        class="btnStyle"
         :inline="true"
         :disabled="captchaDisable"
         @click="codeBtnAction"
       >{{captchaLabel}}</cube-button>
     </li>
     <li class="registerLi">
-      <cube-button class="registerBtn">登录</cube-button>
+      <cube-button class="registerBtn" @click="accountsSign">确定</cube-button>
     </li>
   </ul>
 </template>
@@ -24,6 +25,10 @@
       font-weight: bold;
       margin:70px auto;
       text-align: left;
+    }
+    .cube-btn_disabled:after{
+      content: initial;
+      border:none;
     }
     .itBtn{
       padding:20px;
@@ -44,6 +49,8 @@
           background:none;
           border:none;
           border-radius: 40px;
+          outline:none;
+          border:none;
         }
         .cube-input:after{
           content: initial;
@@ -54,6 +61,8 @@
           border-left:1px solid white;
           padding:0 20px;
           font-size:14px;
+          outline:none;
+          /*border:none;*/
         }
         .registerBtn{
           background:#ff0207;
@@ -109,7 +118,56 @@
       }
     },
     methods:{
-      ...mapMutations(['changeLogin']),
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
+      //定义倒计时数据
+      countdown () {
+        if (this.seconds < 1) {
+          this.captchaLabel = '获取验证码';
+        } else {
+          this.captchaDisable = true;
+          this.seconds --;
+          this.captchaLabel = this.seconds + '秒后重新获取'
+        }
+      },
+      //获取验证码
+      codeBtnAction () {
+        let tellReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
+        if(!tellReg.test(this.inputTell)){
+          this.showToastTxtOnly('请填写正确的手机号!');
+          return false
+        }
+        //发送请求
+        this.getCode();
+        //启动1s步长倒计时
+        this.timer = setInterval(()=>{
+          this.countdown()
+          if(this.seconds === 0){
+            this.captchaLabel = '重新获取';
+            this.seconds = 60;
+            this.captchaDisable = false;
+            //停止倒计时
+            clearTimeout(this.timer)
+          }
+        },1000);
+
+      },
+      getCode () {
+        let _this =this
+        this.http.get(this.ports.me.dxCode+'?phone='+this.inputTell,res=>{
+          console.log(res)
+          if(res.success){
+
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       //显示密码
       showPwd (){
         if(this.visible === 'password'){
@@ -118,56 +176,28 @@
           this.visible = 'password'
         }
       },
-      //登录
+      //确定
       accountsSign(){
-        let nameReg = /^[a-zA-Z][a-zA-Z0-9]{3,15}$/;
-        if (!this.inputName) {
-          this.$message.error('请输入正确的用户名称')
+        let tellReg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0-9]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
+        if(!tellReg.test(this.inputTell)){
+          this.showToastTxtOnly('请填写正确的手机号!');
           return false
         }
 //        let pwdReg=/^[a-zA-Z0-9]{4,10}$/;
-        if (!this.inputPwd) {
-          this.$message.error('请输入密码');
+        if (!this.inputCode) {
+          this.showToastTxtOnly('请填写正确的验证码!');
           return false
         }
         this.subAccountsSign()
       },
       subAccountsSign(){
-        let _this = this
-        this.fullscreenLoading = true;
-        let params = new URLSearchParams();
-        params.append('loginName',this.inputName );
-        params.append('pwd', this.inputPwd);
-        axios({
-          method: 'post',
-          url: '/Home/Person/login',
-          data: params
-        }).then(function (res) {
-          _this.fullscreenLoading = false;
-          const data = res.data
-          if(data.status){
-            _this.userToken = 'Bearer ' + data.token;
-            // 将用户token保存到vuex中
-            _this.changeLogin({ Authorization: _this.userToken });
-            //如果存在参数
-            if(_this.$route.query.redirect) {
-              let redirect = _this.$route.query.redirect;
-              //则跳转至进入登录页前的路由
-              _this.$router.replace(redirect);
-            }else{
-              _this.$router.replace({ path: '/' });
-            }
+        this.http.get(this.ports.me.bindTell+'?phone='+this.inputTell+'&'+'code='+this.inputCode,res=>{
+          console.log(res)
+          if(res.success){
+            this.$router.push({path:'/me/index'})
           }else{
-            _this.$notify.error({
-              title: '错误',
-              message: data.msg,
-              showClose: false,
-              duration: 2000
-            });
+            this.showToastTxtOnly(res.msg)
           }
-
-        }).catch(function (error) {
-          console.log(error);
         })
       }
     }
