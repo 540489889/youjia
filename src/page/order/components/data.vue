@@ -28,7 +28,7 @@
         <template v-else>
           <div class="tsInfor" v-if="type==3">等待卖家发货</div>
           <div class="tsInfor" v-if="type==4">等待卖家收货</div>
-          <router-link tag="div" :to="'/order/details?id='+it.id" class="goodsBox flex-box">
+          <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box">
           <!--<div class="goodsBox flex-box" >-->
             <!--<div class="left-check">-->
             <!--<cube-checkbox v-model="checked" :option="option"></cube-checkbox>-->
@@ -50,7 +50,7 @@
           <div class="btn-ui" v-if="type==4">
             <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
             <router-link tag="a" to="'/refund/apply" class="offBtn"> 查看物流</router-link>
-            <router-link tag="a" to="/refund/apply" class="offBtn"> 确认收货</router-link>
+            <a @click="confirmOrder(item.id,index)" class="offBtn"> 确认收货</a>
           </div>
           <div class="btn-ui" v-if="type==5">
             <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
@@ -86,6 +86,10 @@
       confirmClick(id,index){
         console.log(id)
         this.$emit('deleteOrder',id,index)
+      },
+      //确认收货
+      confirmOrder(id,index){
+        this.$emit('confirmGoodsOrder',id,index)
       }
     },
     mounted (){

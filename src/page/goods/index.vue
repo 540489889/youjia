@@ -11,11 +11,13 @@
         <div class="left box-1">会员价</div>
         <div class="right box-1">￥{{Number(goods.price_member)}}</div>
       </div>
+      <div class="box-1 flex-box" style="justify-content: flex-end">
+        <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
+        <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
 
-      <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
-      <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
+        <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
+      </div>
 
-      <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
     </div>
     <div class="gd-ui-2">
       <div class="content-1 flex-box">
@@ -32,7 +34,7 @@
       <ul>
         <li class="flex-box">
           <span>已选</span>
-          <div class="text box-1">型号 颜色 数量</div>
+          <div class="text box-1">{{goods.goods_spec}}</div>
           <i @click="confirmClick()"></i>
         </li>
         <li class="flex-box">
@@ -54,7 +56,7 @@
     <cube-page v-if="maskShow" type="swipe-scroll" title="Scroll">
       <template slot="content">
         <div class="scroll-list-wrap">
-          <cube-scroll>
+          <cube-scroll :scrolY="true">
             <transition
               name="slide-fade"
             >
@@ -207,7 +209,8 @@
         }
       },
       //关闭规格选择
-      changeSelected(val) {
+      changeSelected(val,data) {
+        this.goods.goods_spec = data.join(',')
         this.selected = false
         if(!this.selected){
           setTimeout(()=>{

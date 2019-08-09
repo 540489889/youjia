@@ -59,7 +59,7 @@
         @input="changeAllCheck"
         :option="option"></cube-checkbox>
       <div class="all-money box-1">
-        合计: <span>￥{{total}}</span>
+        合计: <span>￥{{total.toFixed(2)}}</span>
       </div>
       <a class="go-ck" @click="Settlement">去结算({{number}})</a>
     </div>

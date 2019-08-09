@@ -4,7 +4,7 @@
     <ul>
       <router-link tag="li" :to="'/integralGoods/index/'+item.id" class="flex-box" v-for="item in list" :key="item.id">
         <a>
-          <img :src="item.image" alt="">
+          <img :src="item.logo" alt="">
           <h4 class="media_title">{{item.title}}</h4>
           <h5><span>{{item.point_price}}</span>积分</h5>
         </a>

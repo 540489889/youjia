@@ -1,7 +1,7 @@
 <template>
   <div class="selectedWrapper flex-box">
     <div class="goodsSelected">
-      <i class="closeBtn cubeic-wrong" @click="closeSelected()"></i>
+      <i class="closeBtn" @click="closeSelected()"></i>
       <div class="goods-infor flex-box">
         <div class="left-1">
           <img :src="goods.logo" alt="">
@@ -17,22 +17,26 @@
           <p>编号：{{goods.id}}</p>
         </div>
       </div>
-      <div class="specs-infor" v-for="(item,i) in goods.specs">
-        <h2>{{item.name}}</h2>
-        <ul>
-          <li @click="checkSpecs($event,it,i)" :class="index==0?'cube-checker-item_active':''"  v-for="(it,index) in item.list" class="cube-checker-item">
-            {{it.name}}
-          </li>
-        </ul>
-      </div>
-      <div class="nummber-infor flex-box">
-        <h2>数量</h2>
-        <div class="right flex-box">
-          <span @click="reduce()">-</span>
-          <cube-input :min="1" :max="10" @blur="blurInput" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>
-          <span @click="plus()">+</span>
+      <div class="heightBox">
+        <div class="specs-infor" v-for="(item,i) in goods.specs">
+          <h2>{{item.name}}</h2>
+          <ul>
+            <li @click="checkSpecs($event,it,i)" :class="index==0?'cube-checker-item_active':''"  v-for="(it,index) in item.list" class="cube-checker-item">
+              {{it.name}}
+            </li>
+          </ul>
+        </div>
+        <div class="nummber-infor flex-box">
+          <h2>数量</h2>
+          <div class="right flex-box">
+            <span @click="reduce()">-</span>
+            <cube-input :min="1" :max="10" @blur="blurInput" type="number" @change="handleNumChange(data.item)" v-model="number"></cube-input>
+            <span @click="plus()">+</span>
+          </div>
         </div>
       </div>
+
+
       <div class="btn-infor">
         <a class="btn-1" @click="addCart">加入购物车</a>
         <a ref="shop" @click="createOrder()" id="shop" class="btn-2">立即购买</a>
@@ -127,6 +131,8 @@
         $(that).addClass('cube-checker-item_active')
         $(that).siblings('li').removeClass('cube-checker-item_active')
         this.checkerList[index] = val.name
+        console.log(this.checkerList,555554464)
+
         this.goods.lists.forEach((e,index,array)=> {
           if(JSON.stringify(e[0].spec)===JSON.stringify(this.checkerList)){
             this.key = e[0].key
@@ -142,7 +148,7 @@
       //关闭规格弹窗
       closeSelected(){
 //        alert(1)
-        this.$emit('changeSelected','close')
+        this.$emit('changeSelected','close',this.checkerList)
       },
       computed(){
 
@@ -193,15 +199,19 @@
     width:100%;
     box-sizing: border-box;
     background-color:white;
-    height:800px;
+    min-height:500px;
     padding:30px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     z-index: 200;
     .closeBtn{
       position:absolute;
-      top:20px;
       right:20px;
+      top:20px;
+      width:40px;
+      height:40px;
+      background:url(../../../assets/ico/close-ico.png) no-repeat center;
+      background-size:100%;
       color:#ccc;
       font-size:45px;
       font-weight: bold;
@@ -259,6 +269,10 @@
         }
       }
     }
+    .heightBox{
+      /*height:480px;*/
+      /*overflow: auto;*/
+    }
     .specs-infor{
       text-align: left;
       h2{
@@ -274,10 +288,10 @@
       .cube-checker-item{
         background-color:#f2f2f2;
         color:#7f8593;
-        height:40px;
-        line-height:40px;
+        height:30px;
+        line-height:30px;
         border-radius: 100px;
-        min-width:60px;
+        min-width:50px;
         padding:0 10px;
         margin-bottom:15px;
         border:none;

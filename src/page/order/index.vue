@@ -21,6 +21,7 @@
                 @changePayClick="changePayClick"
                 :list="list"
                 :type="type"
+                @confirmGoodsOrder="confirmGoodsOrder"
                 @changeCallcelOrder="confirmClick"></order-data>
             </cube-scroll>
           </cube-sticky>
@@ -72,6 +73,39 @@
       cancelOrder
     },
     methods: {
+      //确认收货
+      confirmGoodsOrder(id,index){
+        this.$createDialog({
+          type: 'confirm',
+//          icon: 'cubeic-alert',
+          title: '确认收货？',
+//          content: '我是内容',
+          confirmBtn: {
+            text: '确定',
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          cancelBtn: {
+            text: '取消',
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onConfirm: () => {
+            this.http.get(this.ports.order.confirm_order+'?id='+id, res =>{
+              if(res.success){
+                this.list.splice(index, 1)
+                let data = res.data
+//            this.$store.commit('changeCartNum',this.cart)
+              }else{
+                this.showToastTxtOnly(res.msg)
+              }
+            })
+          }
+        }).show()
+
+      },
       //去付款
       changePayClick(id,index){
         this.http.get(this.ports.order.pay+'?id='+id, res =>{
@@ -180,7 +214,6 @@
         }
       },
       changeDeleteOrder(val){
-        alert(val)
         this.changeSelected(false)
 
       },

@@ -73,7 +73,7 @@
     </div>
     <div class="subOrder flex-box">
       <div class="left box-1">
-        共一件 合计：<span>{{total_price}}元</span>
+        共{{total_count}}件 合计：<span>{{total_price}}元</span>
       </div>
       <div class="rightBtn" @click="rightSubClick()">提交订单</div>
     </div>
@@ -132,7 +132,9 @@
         goodsarr: {},//商品信息
         express: {},
         total_price: 0,// 总金额
-        orderInfor: {}
+        total_count: 0,//总件数
+        orderInfor: {},
+
       }
     },
     components: {
@@ -195,6 +197,7 @@
             }
             this.goodsarr = data.goodsarr
             this.total_price = data.total_price
+            this.total_count = data.total_count
             //订单提交基本数据
             let goods = []
             this.goodsarr.forEach((even,i)=>{
