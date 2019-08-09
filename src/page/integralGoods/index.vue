@@ -31,11 +31,11 @@
     </div>
     <div class="gd-ui-3">
       <ul>
-        <li class="flex-box">
-          <span>已选</span>
-          <div class="text box-1">型号 颜色 数量</div>
+        <!--<li class="flex-box">-->
+          <!--<span>已选</span>-->
+          <!--<div class="text box-1">型号 颜色 数量</div>-->
           <!--<i @click="confirmClick()"></i>-->
-        </li>
+        <!--</li>-->
         <li class="flex-box">
           <span>运费</span>
           <div class="text box-1">在线支付免运费</div>

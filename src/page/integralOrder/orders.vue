@@ -67,7 +67,7 @@
     </div>
     <div class="subOrder flex-box">
       <div class="left box-1">
-        共一件 合计：<span>{{number*goodsarr.point_price}}元</span>
+        共{{number}}件 合计：<span>{{(number*goodsarr.point_price).toFixed(2)}}元</span>
       </div>
       <div class="rightBtn" @click="rightSubClick">提交订单</div>
     </div>
