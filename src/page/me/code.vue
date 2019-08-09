@@ -11,8 +11,18 @@
         <h3>重庆有线优家商城</h3>
         <img src="http://youjia.svkeji.cn/api/v1/qrcode/index" alt="">
       </div>
-      <cube-button class="shareBtn">分享给好友</cube-button>
+      <cube-button class="shareBtn" @click="shareClick">分享给好友</cube-button>
     </div>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated bounceOutRight"
+    >
+      <div class="popup_layer shareWrapper" @click="changeCloseShare" v-if="isShare">
+        <img src="../../assets/ico/arrow.png" alt="">
+        <h4>点击右上角分享给好友哟！</h4>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -20,10 +30,18 @@
     name: 'MeCode',
     data (){
       return {
-
+        isShare: false
       }
     },
     methods: {
+      //分享
+      shareClick(){
+        this.isShare = true
+      },
+      //分享关闭
+      changeCloseShare(){
+        this.isShare = false
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
@@ -57,6 +75,19 @@
     min-height:100vh;
     background-color:aliceblue;
     font-size:28px;
+    .shareWrapper{
+      color:white;
+      padding:30px;
+      text-align: right;
+      box-sizing: border-box;
+      img{
+        width:186px;
+      }
+      h4{
+        text-align: center;
+        line-height:2;
+      }
+    }
     .content{
       padding:0 60px;
       overflow: hidden;
