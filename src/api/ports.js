@@ -23,7 +23,7 @@ export default {
     create: '/api/v1/order/create',//提交订单
     pay: '/api/v1/order/pay',//支付
     orderstatus: '/api/v1/order/orderstatus',//订单状态
-    confirm_order: 'api/v1/order/confirm'//确认收货
+    confirm_order: '/api/v1/order/confirm'//确认收货
   },
   refund: {
     aftersave:'/api/v1/order/aftersave',//申请退货
@@ -36,7 +36,7 @@ export default {
     team: '/api/v1/distribution/team',//我的团队
     distribution:'/api/v1/distribution',//成为分销商
     code:'/api/v1/qrcode/index',//我的推广码
-    dxCode: 'api/v1/member/code', //获取验证码 参数 ?phone=
+    dxCode: '/api/v1/member/code', //获取验证码 参数 ?phone=
     bindTell: '/api/v1/member/bind',//绑定手机
   },
   integral: {
