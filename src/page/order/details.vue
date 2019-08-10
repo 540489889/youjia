@@ -39,6 +39,10 @@
             </div>
           </div>
         </li>
+        <!--<li class="flex-box checkLi">-->
+          <!--<span>订单编号</span>-->
+          <!--<div class="liVal" v-if="goods.price_express">{{goods.price_express}}</div>-->
+        <!--</li>-->
         <li class="flex-box checkLi">
           <span>运费</span>
           <div class="liVal" v-if="goods.price_express">{{goods.price_express}}</div>
@@ -474,6 +478,7 @@
         }
       }
       .infor-list{
+        margin-top:10px;
         li{
           .nummber-infor{
             justify-content: space-between;

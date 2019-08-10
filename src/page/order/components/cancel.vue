@@ -66,7 +66,7 @@
     align-items: flex-end;
   }
   .serviceWrapper{
-    height:800px;
+    min-height:800px;
     width:100%;
     box-sizing: border-box;
     padding:30px;

@@ -26,8 +26,8 @@
         <div class="right">重庆</div>
       </div>
       <div class="content-2 flex-box">
-        <span>认证</span>
-        <p class="box-1 media_title">{{goods.title}}</p>
+        <!--<span>认证</span>-->
+        <p class="box-1">{{goods.title}}</p>
       </div>
     </div>
     <div class="gd-ui-3">
@@ -367,6 +367,7 @@
       .content-2{
         padding-bottom:30px;
         text-align: left;
+        align-items: flex-start;
         span{
           font-size:22px;
           height:34px;
@@ -380,6 +381,7 @@
         p{
           font-size:30px;
           color:black;
+          line-height:1.4;
         }
       }
     }

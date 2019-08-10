@@ -95,14 +95,16 @@
       },
       //签到
       sign(){
-        this.isSign = true
         this.http.get(this.ports.integral.sign, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
           if(res.success){
             let data = res.data
+            this.isSign = true
             this.signScore = data
             this.list.score += this.signScore
+            this.list.sign = true
+
           }else{
             this.showToastTxtOnly(res.msg)
           }
