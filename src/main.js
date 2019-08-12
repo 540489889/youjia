@@ -33,6 +33,9 @@ axios.interceptors.request.use(
     if (localStorage.getItem('openId')) {
       config.headers.openid = localStorage.getItem('openId');
     }
+    if(localStorage.parentmid){
+      config.headers.parentmid = localStorage.getItem('parentmid');
+    }
     return config;
   },
   error => {

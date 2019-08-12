@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isLoading: true,
     cartNum: localStorage.cartNum?localStorage.cartNum:0,//购物车数量
     // 存储openId
-    openId: localStorage.getItem('openId') ? localStorage.getItem('openId') : null
+    openId: localStorage.getItem('openId') ? localStorage.getItem('openId') : null,
+    parentmid: localStorage.parentmid ? localStorage.parentmid : null,
   },
   mutations: {
     // 修改token，并将token存入localStorage
