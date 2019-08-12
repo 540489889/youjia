@@ -66,7 +66,7 @@
           </li>
         </ul>
       </div>
-      <div class="mb-list-2 mb-list">
+      <div class="mb-list-2 mb-list" v-if="list.distribution">
         <h2 class="flex-box list-title">
           分销中心
           <!--<span class="flex-box">全部订单 <i class="cubeic-arrow"></i></span>-->

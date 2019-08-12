@@ -31,10 +31,11 @@
     position:relative;
     .codeBox{
       position:absolute;
+      left:0;
       top:45%;
-      left:50%;
-      transform: translate(-50%,-50%);
+      width:100%;
       text-align: center;
+      transform: translateY(-50%);
       img{
         width:280px;
         height:280px;

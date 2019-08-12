@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="right">
-            <h5>级别：一级</h5>
+            <h5>级别：二级</h5>
             <p>加入时间：{{item.create_at}}</p>
           </div>
         </li>
