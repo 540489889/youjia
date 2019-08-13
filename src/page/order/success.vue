@@ -5,7 +5,7 @@
         <h1>
           <div v-if="succ" >
             <i class="cubeic-right"></i>
-            <p>{{msg}}</p>
+            <p>交易成功</p>
 
           </div>
           <div v-if="!succ">
@@ -26,7 +26,8 @@
     data (){
       return {
         succ: false,
-        msg: ''
+        msg: '',
+        id: ''
       }
     },
     created(){
@@ -37,17 +38,18 @@
         let id = this.$route.query.id
         this.http.get(this.ports.order.orderstatus+'?id='+id, res =>{
           this.$store.commit('changeLoading',false)
-          this.msg = res.data
+          this.id = res.data.id
           if(res.success){
             this.succ = true
           }else{
             this.succ = false
+            this.msg = res.data
           }
         })
       },
       lookDetails(){
         this.$router.push({path: '/order/details',query:{
-          goods_id: id,
+          goods_id: this.id,
         }})
       }
     },
