@@ -49,7 +49,7 @@
       },
       lookDetails(){
         this.$router.push({path: '/order/details',query:{
-          goods_id: this.id,
+          id: this.id,
         }})
       }
     },
