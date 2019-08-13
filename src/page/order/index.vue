@@ -159,6 +159,7 @@
       },
       //nav切换
       changeNavClick(val){
+        this.list = []
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
         this.type = val

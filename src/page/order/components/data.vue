@@ -16,7 +16,7 @@
                 <span>￥<b>{{it.price_real}}</b></span>
               </div>
               <p>{{it.goods_spec}}</p>
-              <p>数量：1</p>
+              <p>数量：{{it.number_goods}}</p>
             </div>
           </router-link>
           <h6>共{{item.childOrder.length}}件商品 共计：<span>￥{{item.price_goods}}</span></h6>
@@ -27,7 +27,7 @@
         </template>
         <template v-else>
           <div class="tsInfor" v-if="type==3">等待卖家发货</div>
-          <div class="tsInfor" v-if="type==4">等待卖家收货</div>
+          <div class="tsInfor" v-if="type==4">等待买家收货</div>
           <router-link tag="div" :to="'/order/details?id='+item.id" class="goodsBox flex-box">
           <!--<div class="goodsBox flex-box" >-->
             <!--<div class="left-check">-->
@@ -40,7 +40,7 @@
                 <span>￥<b>{{item.price_real}}</b></span>
               </div>
               <p>{{item.goods_spec}}</p>
-              <p>数量：1</p>
+              <p>数量：{{item.number_goods}}</p>
             </div>
           <!--</div>-->
           </router-link>
