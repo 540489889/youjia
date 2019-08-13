@@ -256,8 +256,10 @@
 
       }
     },
-    mounted (){
+    created(){
       this.getIndexData()
+    },
+    mounted (){
     }
   }
 </script>
@@ -286,7 +288,8 @@
       color:#7f8593;
       text-align: left;
       span{
-        color:black;
+        font-weight: bold;
+        color:#ff3747;
         font-size:32px;
       }
     }

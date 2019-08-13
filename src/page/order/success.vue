@@ -1,20 +1,20 @@
 <template>
   <div class="success">
+    <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="content">
         <h1>
           <div v-if="succ" >
             <i class="cubeic-right"></i>
-            <p>交易成功！</p>
+            <p>{{msg}}</p>
 
           </div>
           <div v-if="!succ">
             <i class="cubeic-wrong"></i>
             <p>{{msg}}</p>
-
           </div>
         </h1>
         <div class="btnBox flex-box">
-          <a class="lookInfo">查看详情</a>
+          <a class="lookInfo" @click="lookDetails">查看详情</a>
           <router-link tag="a" to="/" class="home">商城首页</router-link>
         </div>
     </div>
@@ -29,22 +29,29 @@
         msg: ''
       }
     },
+    created(){
+      this.getOrderState()
+    },
     methods: {
       getOrderState(){
         let id = this.$route.query.id
         this.http.get(this.ports.order.orderstatus+'?id='+id, res =>{
           this.$store.commit('changeLoading',false)
+          this.msg = res.data
           if(res.success){
             this.succ = true
           }else{
-            this.succ = true
-            this.msg = res.data
+            this.succ = false
           }
         })
+      },
+      lookDetails(){
+        this.$router.push({path: '/order/details',query:{
+          goods_id: id,
+        }})
       }
     },
     mounted (){
-      this.getOrderState()
     }
   }
 </script>

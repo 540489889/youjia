@@ -134,6 +134,7 @@
         total_price: 0,// 总金额
         total_count: 0,//总件数
         orderInfor: {},
+        makeToast: null,
 
       }
     },
@@ -142,13 +143,25 @@
       orderInvoice,
       CubePage
     },
+    created(){
+      this.getOrdersData()
+    },
     methods: {
+      showToastMask () {
+        this.makeToast = this.$createToast({
+          txt: 'Loading...',
+          mask: true,
+          time:0,
+        })
+        this.makeToast.show()
+      },
       //确认订单
       rightSubClick(){
+        this.showToastMask()
         this.http.post(this.ports.order.index,this.orderInfor, res =>{
           this.$store.commit('changeLoading',false)
-          if(this.toastTime){
-            this.toastTime.hide()
+          if(this.makeToast){
+            this.makeToast.show()
           }
           if(res.success){
             let id = res.data
@@ -328,7 +341,6 @@
       },
     },
     mounted (){
-      this.getOrdersData()
     }
   }
 </script>

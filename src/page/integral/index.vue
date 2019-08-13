@@ -72,6 +72,13 @@
       integralPopul
     },
     methods: {
+      showToastTxtOnly(text) {
+        this.toast = this.$createToast({
+          txt: text,
+          type: 'txt'
+        })
+        this.toast.show()
+      },
       //分享
       shareClick(){
         this.isShare = true
@@ -96,7 +103,6 @@
       //签到
       sign(){
         this.http.get(this.ports.integral.sign, res =>{
-          this.$store.commit('changeLoading',false)
           console.log(res)
           if(res.success){
             let data = res.data

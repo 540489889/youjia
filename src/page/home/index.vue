@@ -42,6 +42,7 @@
     },
     created (){
       this.openId = this.$store.state.openId
+      this.getIndexData()
     },
     methods: {
       showToastTxtOnly(text) {
@@ -94,7 +95,6 @@
       }
     },
     mounted (){
-      this.getIndexData()
     }
   }
 </script>

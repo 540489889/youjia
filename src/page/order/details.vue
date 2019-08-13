@@ -28,6 +28,14 @@
         </div>
       </div>
       <ul class="infor-list">
+        <li class="flex-box checkLi">
+          <span>订单编号</span>
+          <div class="liVal" v-if="goods.order_no">{{goods.order_no}}</div>
+        </li>
+        <li class="flex-box checkLi">
+          <span>下单时间</span>
+          <div class="liVal" v-if="goods.create_at">{{goods.create_at}}</div>
+        </li>
         <li>
           <div class="nummber-infor flex-box">
             <h2>数量</h2>
@@ -39,10 +47,7 @@
             </div>
           </div>
         </li>
-        <!--<li class="flex-box checkLi">-->
-          <!--<span>订单编号</span>-->
-          <!--<div class="liVal" v-if="goods.price_express">{{goods.price_express}}</div>-->
-        <!--</li>-->
+
         <li class="flex-box checkLi">
           <span>运费</span>
           <div class="liVal" v-if="goods.price_express">{{goods.price_express}}</div>
@@ -59,8 +64,12 @@
           <span>订单备注</span>
           <div class="liVal box-1"><cube-input v-model="goods.remark" :readonly="readonly" @input="remarksVal" placeholder="选填请提前与商家协商一致" ></cube-input></div>
         </li>
+        <li class="flex-box checkLi">
+          <span>支付方式</span>
+          <div class="liVal">微信支付</div>
+        </li>
         <li class="subtotal">
-          共{{goods.count}}件 小计：<span>{{(goods.number_goods*goods.price_real)+Number(goods.price_express)}}元</span>
+          共{{goods.number_goods}}件 小计：<span>{{(goods.number_goods*goods.price_real)+Number(goods.price_express)}}元</span>
         </li>
       </ul>
     </div>
@@ -510,8 +519,11 @@
         .subtotal{
           text-align: right;
           font-size:26px;
+          margin-top:10px;
           span{
             color:#ff3747;
+            font-weight: bold;
+            font-size:32px;
           }
         }
       }

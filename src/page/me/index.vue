@@ -161,8 +161,10 @@
         })
       }
     },
-    mounted (){
+    created(){
       this.getMeData()
+    },
+    mounted (){
     }
   }
 </script>
