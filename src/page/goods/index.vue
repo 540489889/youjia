@@ -17,7 +17,6 @@
 
         <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
       </div>
-
     </div>
     <div class="gd-ui-2">
       <div class="content-1 flex-box">
@@ -167,19 +166,37 @@
       //获取列表数据
       getIndexData(){
         let id = this.$route.params.id
-        this.http.get(this.ports.goods.index+'/'+id, res =>{
-          this.$store.commit('changeLoading',false)
-          if(res.success){
-            let data = res.data
-            this.goods = data
-            this.lists = data.lists
-            this.banner = data.image
-            this.collect = data.collect
-            console.log(this.goods)
-          }else{
-            this.showToastTxtOnly(res.msg)
-          }
-        })
+        let shareId = this.$route.query.share_id
+        if(shareId){
+          this.http.get(this.ports.goods.index+'/'+id+'?share_id='+shareId, res =>{
+            this.$store.commit('changeLoading',false)
+            if(res.success){
+              let data = res.data
+              this.goods = data
+              this.lists = data.lists
+              this.banner = data.image
+              this.collect = data.collect
+              console.log(this.goods)
+            }else{
+              this.showToastTxtOnly(res.msg)
+            }
+          })
+        }else{
+          this.http.get(this.ports.goods.index+'/'+id, res =>{
+            this.$store.commit('changeLoading',false)
+            if(res.success){
+              let data = res.data
+              this.goods = data
+              this.lists = data.lists
+              this.banner = data.image
+              this.collect = data.collect
+              console.log(this.goods)
+            }else{
+              this.showToastTxtOnly(res.msg)
+            }
+          })
+        }
+
       },
       //弹出规格选择
       confirmClick(){

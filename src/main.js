@@ -23,6 +23,7 @@ Vue.prototype.http = http
 Vue.prototype.ports = ports
 import axios from 'axios'
 Vue.config.debug = true
+//阻止启动生产消息
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 axios.defaults.withCredentials=true;
