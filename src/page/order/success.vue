@@ -43,7 +43,7 @@
             this.succ = true
           }else{
             this.succ = false
-            this.msg = res.data
+            this.msg = res.msg
           }
         })
       },
