@@ -6,6 +6,7 @@
     <cube-popup type="my-popup" ref="myPopup">
       <div class="fxContent">
         <i class="closeBtn" @click="closePopup('myPopup')"></i>
+        <h2>记得长按图片保存图片呦！</h2>
         `<img :src="fxImg" alt="">
       </div>
     </cube-popup>
@@ -285,6 +286,14 @@
   .fxContent{
     z-index: 39;
     position:relative;
+  }
+  .fxContent h2{
+    position:absolute;
+    top:-150px;
+    color:white;
+    font-weight: bold;
+    text-align: center;
+    width:100%;
   }
   .fxContent .closeBtn{
     position:absolute;
