@@ -13,11 +13,12 @@
                 @changePriceClick="changePriceClick"
                 @changeAmountClick="changeAmountClick"></index-sort>
             </cube-sticky-ele>
-            <div class="nullBox" v-if="!list.length">
+
+            <data-sort v-if="list.length" :list="list"></data-sort>
+            <div class="nullBox" v-else>
               <img src="../../assets/ico/null-ico.png" alt="">
               <p>暂无数据</p>
             </div>
-            <data-sort :list="list"></data-sort>
           </cube-scroll>
         </cube-sticky>
       </div>

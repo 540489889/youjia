@@ -7,7 +7,7 @@ export default new Vuex.Store({
     AuthorizedUrl: 'http://yj.svkeji.cn/author/index',
     staticImg: '/static/img/',
     defaultTitle: '首页',
-    IMGPATH: 'http://youjia.svkeji.cn',
+    IMGPATH: 'http://yj.svkeji.cn/',
     isLoading: true,
     cartNum: localStorage.cartNum?localStorage.cartNum:0,//购物车数量
     // 存储openId

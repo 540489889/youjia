@@ -2,6 +2,14 @@
   <div class="goodsIndex">
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <goods-swiper :banner="banner"></goods-swiper>
+
+    <cube-popup type="my-popup" ref="myPopup">
+      <div class="fxContent">
+        <i class="closeBtn" @click="closePopup('myPopup')"></i>
+        `<img :src="fxImg" alt="">
+      </div>
+    </cube-popup>
+
     <div class="gd-ui-1 flex-box">
       <div class="money">
         ￥{{Number(goods.price_selling)}}
@@ -14,8 +22,8 @@
       <div class="box-1 flex-box" style="justify-content: flex-end">
         <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
         <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
-
-        <div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
+        <!--<div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>-->
+        <div class="disBtn share" @click="disClick('myPopup')">分销</div>
       </div>
     </div>
     <div class="gd-ui-2">
@@ -101,7 +109,8 @@
         banner: [],//商品轮播图
         isBall: false,//加入购物车动画元素
         collect: 0, //是否收藏
-        isShare: false
+        isShare: false,
+        fxImg: '',
       }
     },
     components: {
@@ -111,6 +120,24 @@
       CubePage
     },
     methods: {
+      closePopup(refId){
+        const component = this.$refs[refId]
+        component.hide()
+      },
+      //分销
+      disClick(refId){
+        let id = this.$route.params.id
+        const component = this.$refs[refId]
+        this.http.get(this.ports.goods.dis+'?goodsid='+id, res =>{
+          console.log(res)
+          if(res.success){
+            this.fxImg = res.data
+            component.show()
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       //分享
       shareClick(){
         this.isShare = true
@@ -254,6 +281,27 @@
     top:20%;
     left:45%;
     z-index: 203;
+  }
+  .fxContent{
+    z-index: 39;
+    position:relative;
+  }
+  .fxContent .closeBtn{
+    position:absolute;
+    right:0;
+    top:-160px;
+    width:50px;
+    height:50px;
+    background:url(../../assets/ico/close-ico.png) no-repeat center;
+    background-size:100%;
+    color:#ccc;
+    font-size:45px;
+    font-weight: bold;
+  }
+  .fxContent img{
+    width:692px;
+    height:902px;
+    margin-top:-85px;
   }
   .slide-fade-enter-active {
     transition: all .6s ease;

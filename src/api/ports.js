@@ -9,6 +9,7 @@ export default {
   goods: {
     index: '/api/v1/goods',//商品详情
     collection: '/api/v1/collection', //商品收藏
+    dis: '/api/v1/goods/dis',//分销
 
   },
   sort: {

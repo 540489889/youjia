@@ -92,10 +92,10 @@
         })
         this.toast.show()
       },
-      showToastType() {
+      showToastType(txt) {
         let that = this
         const toast = this.$createToast({
-          txt: 'Correct',
+          txt: txt,
           type: 'correct',
           time: 1000,
           onTimeout: () => {
@@ -144,7 +144,7 @@
             let data = res.data
             this.count = data.count
             this.list = data.res
-            this.showToastType()
+            this.showToastType(res.msg)
           }else{
             this.showToastTxtOnly(res.msg)
           }
