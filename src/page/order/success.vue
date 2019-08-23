@@ -6,9 +6,8 @@
           <div v-if="succ" >
             <i class="cubeic-right"></i>
             <p>交易成功</p>
-
           </div>
-          <div v-if="!succ">
+          <div v-else>
             <i class="cubeic-wrong"></i>
             <p>{{msg}}</p>
           </div>
@@ -38,6 +37,7 @@
         let id = this.$route.query.id
         this.http.get(this.ports.order.orderstatus+'?id='+id, res =>{
           this.$store.commit('changeLoading',false)
+          console.log(res)
           this.id = res.data.id
           if(res.success){
             this.succ = true
@@ -54,6 +54,7 @@
       }
     },
     mounted (){
+
     }
   }
 </script>

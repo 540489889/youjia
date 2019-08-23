@@ -17,6 +17,8 @@ function handleResults (response) {
   if(res.code===200){
     result.data = res.data
     result.success = true
+  }else{
+    result.success = false
   }
   if(!result.code===404){
     result.success = false
