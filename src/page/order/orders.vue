@@ -157,6 +157,10 @@
       },
       //确认订单
       rightSubClick(){
+        if(!this.address.name){
+          this.showToastTxtOnly('请填写收货地址')
+          return false
+        }
         this.showToastMask()
         this.http.post(this.ports.order.index,this.orderInfor, res =>{
           this.$store.commit('changeLoading',false)
