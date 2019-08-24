@@ -115,6 +115,7 @@
             let data = res.data
             this.count = data.count
             this.list = data.res
+            this.showToastTxtOnly(res.msg)
           }else{
             this.showToastTxtOnly(res.msg)
           }
