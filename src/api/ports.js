@@ -39,6 +39,8 @@ export default {
     code:'/api/v1/qrcode/index',//我的推广码
     dxCode: '/api/v1/member/code', //获取验证码 参数 ?phone=
     bindTell: '/api/v1/member/bind',//绑定手机
+    fxcode: '/api/v1/qrcode/code',//我的推广二维码
+    qrcode: '/api/v1/qrcode'
   },
   integral: {
     index: '/api/v1/points',//积分首页

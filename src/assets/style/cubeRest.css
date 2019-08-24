@@ -59,6 +59,6 @@
 .orderIndex .cube-sticky-ele{
   min-height: 45px;
 }
-.goodsIndex .cube-popup .cube-popup-mask{
+.goodsIndex .cube-popup .cube-popup-mask,.MeCode .cube-popup .cube-popup-mask{
   opacity: .8 !important;
 }
