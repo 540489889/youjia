@@ -145,7 +145,7 @@
         }, 1000)
       },
       selectHandle(selectedVal, selectedIndex, selectedText) {
-        this.city = selectedText[0]
+        this.city = selectedText[1]
         this.area = selectedText[2]
         this.province = selectedText[0]
         this.cityAll = selectedText.join('')

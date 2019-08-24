@@ -21,7 +21,7 @@
         <div class="specs-infor" v-for="(item,i) in goods.specs">
           <h2>{{item.name}}</h2>
           <ul>
-            <li @click="checkSpecs($event,it,i)" :class="index==0?'cube-checker-item_active':''"  v-for="(it,index) in item.list" class="cube-checker-item">
+            <li @click="checkSpecs($event,it,i)" :class="checkerList[i]==it.name?'cube-checker-item_active':''"  v-for="(it,index) in item.list" class="cube-checker-item">
               {{it.name}}
             </li>
           </ul>

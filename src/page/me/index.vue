@@ -66,7 +66,7 @@
           </li>
         </ul>
       </div>
-      <div class="mb-list-2 mb-list" v-if="list.distribution">
+      <div class="mb-list-2 mb-list" v-if="list.distribution==1">
         <h2 class="flex-box list-title">
           分销中心
           <!--<span class="flex-box">全部订单 <i class="cubeic-arrow"></i></span>-->
@@ -90,6 +90,27 @@
               <h4>我的团队</h4>
             </router-link>
           </li>
+          <li class="box-1">
+            <router-link tag="a" to="/me/reseller">
+              <img src="./../../assets/ico/mb-a4.png" alt="">
+              <h4>成为分销商</h4>
+            </router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="mb-list-2 mb-list" v-if="list.distribution==2">
+        <h2 class="flex-box list-title">
+          分销中心
+          <!--<span class="flex-box">全部订单 <i class="cubeic-arrow"></i></span>-->
+        </h2>
+        <ul class="flex-box">
+          <li class="box-1">
+            <router-link tag="a" to="/me/assets">
+              <img src="./../../assets/ico/mb-a1.png" alt="">
+              <h4>佣金资产</h4>
+            </router-link>
+          </li>
+
           <li class="box-1">
             <router-link tag="a" to="/me/reseller">
               <img src="./../../assets/ico/mb-a4.png" alt="">

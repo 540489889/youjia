@@ -23,8 +23,8 @@
       <div class="box-1 flex-box" style="justify-content: flex-end">
         <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
         <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
-        <!--<div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>-->
-        <div class="disBtn share flex-box" @click="disClick('myPopup')"><img src="./../../assets/ico/fx-bico.png" alt="">分销</div>
+        <div v-if="goods.distribution==0" @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>
+        <div v-if="goods.distribution==1" class="disBtn share flex-box" @click="disClick('myPopup')"><img src="./../../assets/ico/fx-bico.png" alt="">分销</div>
       </div>
     </div>
     <div class="gd-ui-2">

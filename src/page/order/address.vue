@@ -104,7 +104,8 @@
             let data = res.data
             this.list = data.res
           }else{
-            this.showToastTxtOnly(res.msg)
+//            this.showToastTxtOnly(res.msg)
+            this.list = []
           }
         })
       }

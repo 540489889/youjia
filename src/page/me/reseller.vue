@@ -2,8 +2,8 @@
   <div class="resellerWrapper">
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title flex-box">
-      <img src="../../assets/img/p2.png" alt="">
-      <p>不吃萝卜的小可爱</p>
+      <img v-if="list.headimg" :src="list.headimg" alt="">
+      <p>{{list.nickname}}</p>
     </div>
     <ul class="resellerList">
       <li><cube-input v-model="name" placeholder="请填写姓名"></cube-input></li>
@@ -53,10 +53,23 @@
         captchaDisable: false,
         inputCode: '',
         options: ['支付宝', '银行卡'],
-        value: '银行卡'
+        value: '银行卡',
+        list: {}
       }
     },
     methods: {
+      getMeData(){
+        this.http.get(this.ports.me.index, res =>{
+          this.$store.commit('changeLoading',false)
+          console.log(res)
+          if(res.success){
+            let data = res.data
+            this.list = data
+          }else{
+            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       showToastTxtOnly(text) {
         this.toast = this.$createToast({
           txt: text,
@@ -109,7 +122,7 @@
       }
     },
     mounted (){
-      this.$store.commit('changeLoading',false)
+      this.getMeData()
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="ordersWrapper">
     <my-loading v-if="$store.state.isLoading"></my-loading>
-    <div v-if="address" @click="checkAddress" class="adderssBox flex-box">
+    <div v-if="address.name" @click="checkAddress" class="adderssBox flex-box">
       <div class="address-ico flex-box"><i></i></div>
       <div class="address-text box-1">
         <h4>{{address.name}}  <span>{{address.phone}}</span></h4>
