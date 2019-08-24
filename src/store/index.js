@@ -8,6 +8,7 @@ export default new Vuex.Store({
     staticImg: '/static/img/',
     defaultTitle: '首页',
     IMGPATH: 'http://yj.svkeji.cn/',
+    __IMG__: 'http://youjia.svkeji.cn/',
     isLoading: true,
     cartNum: localStorage.cartNum?localStorage.cartNum:0,//购物车数量
     // 存储openId

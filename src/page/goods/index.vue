@@ -7,7 +7,7 @@
       <div class="fxContent">
         <i class="closeBtn" @click="closePopup('myPopup')"></i>
         <h2>记得长按图片保存图片呦！</h2>
-        `<img :src="fxImg" alt="">
+        `<img :src="$store.state.__IMG__+fxImg" alt="">
       </div>
     </cube-popup>
 
@@ -308,8 +308,8 @@
     font-weight: bold;
   }
   .fxContent img{
-    width:692px;
-    height:902px;
+    width:600px;
+    height:800px;
     margin-top:-85px;
   }
   .slide-fade-enter-active {
