@@ -2,7 +2,7 @@
   <div class="assetsWrapper">
     <my-loading v-if="$store.state.isLoading"></my-loading>
     <div class="title">
-      <p class="test">6月佣金余额 (元)</p>
+      <p class="test">{{month}}月佣金余额 (元)</p>
       <h1 class="money">￥<span>{{all}}</span></h1>
       <ul class="flex-box">
         <li class="box-1">
@@ -55,7 +55,8 @@
         all: 0,//总金额
         cash: 0,//累计提现
         wait: 0,//带发放
-        list: []
+        list: [],
+        month: 0,
       }
     },
     computed:{
@@ -76,6 +77,7 @@
           if(res.success){
             let data = res.data
             this.all = data.all
+            this.month = data.month
             this.cash = data.cash
             this.list = data.list.res
             let tList = data.list

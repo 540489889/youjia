@@ -6,7 +6,7 @@
     <cube-popup type="my-popup" ref="myPopup">
       <div class="fxContent">
         <i class="closeBtn" @click="closePopup('myPopup')"></i>
-        <h2>记得长按图片保存图片呦！</h2>
+        <h2>长按图片保存图片呦！</h2>
         `<img :src="$store.state.__IMG__+fxImg" alt="">
       </div>
     </cube-popup>
@@ -24,7 +24,7 @@
         <div class="collect flex-box" v-if="collect" @click="cancelClick(goods.goods_id)"><i class="collect-ico collect-yes"></i>取消收藏</div>
         <div v-else class="collect flex-box" @click="collectionClick(goods.goods_id)"><i class="collect-ico"></i>收藏</div>
         <!--<div @click="shareClick" class="share flex-box"><i class="share-ico"></i>分享</div>-->
-        <div class="disBtn share" @click="disClick('myPopup')">分销</div>
+        <div class="disBtn share flex-box" @click="disClick('myPopup')"><img src="./../../assets/ico/fx-bico.png" alt="">分销</div>
       </div>
     </div>
     <div class="gd-ui-2">
@@ -283,6 +283,14 @@
     left:45%;
     z-index: 203;
   }
+  .disBtn img{
+    width:48px;
+    height:48px;
+    margin-right:5px;
+  }
+  .cube-popup{
+    z-index: 599 !important;
+  }
   .fxContent{
     z-index: 39;
     position:relative;
@@ -301,7 +309,7 @@
     top:-160px;
     width:50px;
     height:50px;
-    background:url(../../assets/ico/close-ico.png) no-repeat center;
+    background:url(../../assets/ico/close-ico3.png) no-repeat center;
     background-size:100%;
     color:#ccc;
     font-size:45px;
