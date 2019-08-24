@@ -116,6 +116,7 @@
             this.count = data.count
             this.list = data.res
             this.showToastTxtOnly(res.msg)
+            this.$router.push({path:'/me/index'})
           }else{
             this.showToastTxtOnly(res.msg)
           }
