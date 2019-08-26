@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import router from './router'
+
 // By default we import all the components.
 // Only reserve the components on demand and remove the rest.
 // Style is always required.
@@ -48,13 +50,14 @@ axios.interceptors.response.use(function (response) {
   if (response.data.code===30005){
     localStorage.clear()
     //未授权
-    router.replace({
-      path:'/author/index'
+    router.push({
+      path:'/author/index',
     })
   }else if(response.data.code===30006){
     // 未关注
     router.replace({
-      path:'/author/code'
+      path:'/author/code',
+      params: {ab: 12}
     })
   }else{
     return response
@@ -116,7 +119,6 @@ import {
   RecycleList
 } from 'cube-ui'
 import App from './App'
-import router from './router'
 //注册全局加载组件
 import myLoading from './components/loading.vue'  // 引入组件
 Vue.component("my-loading",myLoading); // 全局注册组件

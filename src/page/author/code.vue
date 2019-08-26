@@ -1,7 +1,7 @@
 <template>
   <div class="authorCode">
       <div class="codeBox">
-        <img src="../../assets/img/ewm.png" alt="">
+        <img src="../../assets/ico/codeEwm.png" alt="">
         <h4>长按识别二维码，关注公众号</h4>
       </div>
   </div>

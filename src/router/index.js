@@ -270,7 +270,6 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title
   }
   let path = to.path
-  let openId = localStorage.openId;
   next()
   // 判断是否已授权
   // if(!openId){

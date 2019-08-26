@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
+    redirect: localStorage.redirect?localStorage.redirect:'/',  //保存 授权前路由
     // AuthorizedUrl: 'http://192.168.137.1:8081/author/index',//授权地址
     AuthorizedUrl: 'http://yj.svkeji.cn/author/index',
     staticImg: '/static/img/',
