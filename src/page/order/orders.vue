@@ -54,7 +54,11 @@
         <li class="flex-box checkLi">
           <span>安装服务</span>
           <div v-if="item.goods.is_install">
-            <div  v-if="item.goods.ress" @click="confirmClick('service',item.goods)" class="liVal">{{item.goods.ress.address}}<i class="cubeic-arrow"></i></div>
+            <div @click="confirmClick('service',item.goods)" class="liVal">
+              <span v-if="item.goods.ress">本次安装共需 <b style="color:red;">{{item.goods.ressPrice}}</b> 元</span>
+              <span v-else>本次不需要安装</span>
+              <i class="cubeic-arrow"></i>
+            </div>
           </div>
           <div  v-else class="liVal">本次不需要安装</div>
         </li>
@@ -73,7 +77,7 @@
     </div>
     <div class="subOrder flex-box">
       <div class="left box-1">
-        共{{total_count}}件 合计：<span>{{total_price}}元</span>
+        共{{total_count}}件 合计：<span>{{total}}元</span>
       </div>
       <div class="rightBtn" @click="rightSubClick()">提交订单</div>
     </div>
@@ -85,12 +89,17 @@
             <transition
               name="slide-fade"
             >
-              <order-service
+              <!--<order-service-->
+                <!--v-if="selected"-->
+                <!--:list="address"-->
+                <!--@changeServiceClick="changeServiceClick"-->
+                <!--@changeSelected="changeSelected()"></order-service>-->
+              <order-reason
                 v-if="selected"
-                :list="address"
-                @changeServiceClick="changeServiceClick"
-                @changeSelected="changeSelected()"></order-service>
+                @changeOkSelected="changeOkSelected"
+                @changeSelected="changeSelected()"></order-reason>
             </transition>
+
           </cube-scroll>
         </div>
       </template>
@@ -112,16 +121,36 @@
         </div>
       </template>
     </cube-page>
+    <!--new安装-->
+    <!--<cube-page v-if="maskAzShow" type="swipe-scroll" title="Scroll">-->
+      <!--<template slot="content">-->
+        <!--<div class="scroll-list-wrap">-->
+          <!--<cube-scroll>-->
+            <!--<transition-->
+              <!--name="slide-fade"-->
+            <!--&gt;-->
+              <!--<order-reason-->
+                <!--v-if="selectedNew"-->
+                <!--@changeDeleteOrder="changeDeleteOrder"-->
+                <!--@changeSelected="changeSelected"></order-reason>-->
+            <!--</transition>-->
+          <!--</cube-scroll>-->
+        <!--</div>-->
+      <!--</template>-->
+    <!--</cube-page>-->
   </div>
 </template>
 <script>
   import CubePage from '../../components/cube-page.vue'
   import orderService from './components/service.vue'
   import orderInvoice from './components/invoice.vue'
+  import orderReason from './components/reason.vue'
   export default {
     name: 'ordersWrapper',
     data (){
       return {
+        maskAzShow: false,
+        selectedNew:false,
         selected: false,
         selectedTwo: false,
         maskShowTwo: false,
@@ -141,12 +170,55 @@
     components: {
       orderService,
       orderInvoice,
+      orderReason,
       CubePage
     },
     created(){
       this.getOrdersData()
     },
+    computed: {
+      total: function () {
+        let allMoney = 0;
+        for(let i=0;i<this.goodsarr.length;i++){
+          console.log(this.goodsarr[i].goods.ress,'测试')
+          if(this.goodsarr[i].goods.ress){
+            allMoney+= this.goodsarr[i].goods.ressPrice
+
+          }
+        }
+        allMoney += this.total_price
+        return allMoney
+      }
+    },
     methods: {
+      //安装服务new
+      changeOkSelected(val){
+        if(val){
+          let money = 0;
+          this.goodsarr.forEach((even,i)=>{
+            if(even.goods.b=='b'){
+              this.$set(even.goods,'ress',val)
+              this.$set(even.goods,'ressPrice',even.goods.count*even.goods.install_price)
+              money = even.goods.count*even.goods.install_price
+            }
+          })
+          this.selected = false
+          const that = this
+          if(!this.selected){
+            setTimeout( ()=>{
+              that.maskShow = false
+            },300)
+          }
+        }else{
+          this.goodsarr.forEach((even,i)=>{
+            if(even.goods.b=='b'){
+              this.$set(even.goods,'ress',val)
+              this.$set(even.goods,'ressPrice','本次不需要安装')
+            }
+          })
+          this.changeSelected(false)
+        }
+      },
       showToastMask () {
         this.makeToast = this.$createToast({
           txt: 'Loading...',
@@ -222,7 +294,6 @@
               this.orderInfor.goods = goods
             })
             this.orderInfor.address = this.address
-            console.log(this.orderInfor)
 //            this.goods = data.goods
 //            this.$store.commit('changeCartNum',this.cart)
           }else{
