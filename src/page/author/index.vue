@@ -20,7 +20,7 @@
       //未授权
       if(!openId){
 //        let newUrl = encodeURIComponent(thisUrl)
-        let data = 'http://ccnwx.itlw.cn/service/weixin/web/authorize?returnUrl='+thisUrl
+        let data = 'http://ccnwx.cqccn.com/service/weixin/web/authorize?returnUrl='+thisUrl
         window.location.href = data
       }else{
         this.$store.commit('changeLogin',openId)

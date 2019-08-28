@@ -112,6 +112,8 @@
           if(res.success){
             this.list.splice(index, 1)
             let data = res.data
+            alert(5)
+            console.log(data)
             location.href = data
 //            this.$store.commit('changeCartNum',this.cart)
           }else{

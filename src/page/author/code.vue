@@ -1,7 +1,7 @@
 <template>
   <div class="authorCode">
       <div class="codeBox">
-        <img src="../../assets/ico/codeEwm.png" alt="">
+        <img src="../../assets/ico/gzcode.jpg" alt="">
         <h4>长按识别二维码，关注公众号</h4>
       </div>
   </div>
@@ -37,8 +37,8 @@
       text-align: center;
       transform: translateY(-50%);
       img{
-        width:280px;
-        height:280px;
+        width:300px;
+        height:300px;
       }
       h4{
         line-height:2.2;

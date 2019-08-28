@@ -13,7 +13,7 @@
           </div>
         </h1>
         <div class="btnBox flex-box">
-          <a class="lookInfo" @click="lookDetails">查看详情</a>
+          <!--<a class="lookInfo" @click="lookDetails">查看详情</a>-->
           <router-link tag="a" to="/" class="home">商城首页</router-link>
         </div>
     </div>

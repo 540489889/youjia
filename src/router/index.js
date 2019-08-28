@@ -191,7 +191,7 @@ let router = new Router({
       path: '/integral/order',
       name: 'IntegralOrder',
       component: resolve => require(['@/page/integral/order'], resolve) ,
-      meta:{index: 4, title: '我的订单', requireAuth: false}
+      meta:{index: 4, title: '我的积分订单', requireAuth: false}
     },
     {
       path: '/integral/detailed',

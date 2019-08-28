@@ -183,7 +183,6 @@
           console.log(this.goodsarr[i].goods.ress,'测试')
           if(this.goodsarr[i].goods.ress){
             allMoney+= this.goodsarr[i].goods.ressPrice
-
           }
         }
         allMoney += this.total_price
@@ -200,6 +199,8 @@
               this.$set(even.goods,'ress',val)
               this.$set(even.goods,'ressPrice',even.goods.count*even.goods.install_price)
               money = even.goods.count*even.goods.install_price
+            }else{
+              this.$set(even.goods,'ress',0)
             }
           })
           this.selected = false
@@ -229,10 +230,17 @@
       },
       //确认订单
       rightSubClick(){
+
         if(!this.address.name){
           this.showToastTxtOnly('请填写收货地址')
           return false
         }
+        //订单提交数据
+        let goods = []
+        this.goodsarr.forEach((even,i)=>{
+          goods.push(even.goods)
+          this.orderInfor.goods = goods
+        })
         this.showToastMask()
         this.http.post(this.ports.order.index,this.orderInfor, res =>{
           this.$store.commit('changeLoading',false)
