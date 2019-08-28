@@ -3,7 +3,7 @@
     <ul class="dataList">
       <li class="" v-for="item in list" :key="item.id" v-if="list.length">
         <!--<div class="tsInfor">卖家已发货</div>-->
-        <router-link tag="div" :to="'/goods/index/'+item.goods_id" class="goodsBox flex-box">
+        <div class="goodsBox flex-box">
           <div class="right-img"><img :src="item.goods_logo" alt=""></div>
           <div class="right-text box-1">
             <div class="flex-box tpText">
@@ -13,7 +13,7 @@
             <p>{{item.goods_spec}}</p>
             <p>数量：1</p>
           </div>
-        </router-link>
+        </div>
         <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_real}}</span></h6>
         <div class="btn-ui">
           <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>

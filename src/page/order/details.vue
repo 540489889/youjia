@@ -1,13 +1,13 @@
 <template>
   <div class="ordersWrapper">
     <my-loading v-if="$store.state.isLoading"></my-loading>
-    <div v-if="goods.address" @click="checkAddress" class="adderssBox flex-box">
+    <div v-if="goods.express_province" class="adderssBox flex-box">
       <div class="address-ico flex-box"><i></i></div>
       <div class="address-text box-1">
-        <h4>{{address.name}}  <span>{{address.phone}}</span></h4>
-        <h6 class="media_desc">{{address.city+address.area+address.address}}</h6>
+        <h4>{{goods.express_name}}  <span>{{goods.express_phone}}</span></h4>
+        <h6 class="media_desc">{{goods.express_province+goods.express_province+goods.express_area+goods.express_address}}</h6>
       </div>
-      <div class="address-right cubeic-arrow"></div>
+      <!--<div class="address-right cubeic-arrow"></div>-->
     </div>
     <!--<div v-else @click="checkAddress" class="adderssBox flex-box">-->
       <!--<div class="address-ico flex-box"><i></i></div>-->
@@ -17,7 +17,11 @@
       <!--<div class="address-right cubeic-arrow"></div>-->
     <!--</div>-->
     <div class="orderInfor">
+      <div class="tsInfor" v-if="goods.express_state==0">未发货</div>
+      <div class="tsInfor" v-if="goods.express_state==1">已发货</div>
+      <div class="tsInfor" v-if="goods.express_state==2">已签收</div>
       <div class="infor-1 flex-box">
+
         <div class="left"><img :src="goods.goods_logo" alt=""></div>
         <div class="text box-1">
           <div class="flex-box">
@@ -28,6 +32,14 @@
         </div>
       </div>
       <ul class="infor-list">
+        <li class="flex-box checkLi">
+          <span>快递公司</span>
+          <div class="liVal" v-if="goods.express_company_title">{{goods.express_company_title}}</div>
+        </li>
+        <li class="flex-box checkLi">
+          <span>快递单号</span>
+          <div class="liVal" v-if="goods.express_send_no">{{goods.express_send_no}}</div>
+        </li>
         <li class="flex-box checkLi">
           <span>订单编号</span>
           <div class="liVal" v-if="goods.order_no">{{goods.order_no}}</div>
@@ -344,6 +356,14 @@
   }
 </script>
 <style lang="less" scoped>
+  .tsInfor{
+    text-align: left;
+    padding:20px;
+    /*border-bottom:1px solid #f2f2f2;*/
+    color:#ff3747;
+    font-weight: bold;
+    margin-bottom:20px;
+  }
   .cube-page{
     background:none;
   }
