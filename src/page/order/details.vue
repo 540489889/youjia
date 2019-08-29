@@ -70,7 +70,8 @@
         </li>
         <li class="flex-box checkLi">
           <span>安装服务</span>
-          <div class="liVal">{{goods.install_address}}</div>
+          <div class="liVal" v-if="goods.is_install">{{goods.install_price}}</div>
+          <div class="liVal" v-else>无</div>
         </li>
         <li class="flex-box checkLi">
           <span>订单备注</span>
@@ -80,7 +81,10 @@
           <span>支付方式</span>
           <div class="liVal">微信支付</div>
         </li>
-        <li class="subtotal">
+        <li class="subtotal" v-if="goods.install_price">
+          共{{goods.number_goods}}件 小计：<span>{{(goods.number_goods*goods.price_real)+Number(goods.price_express)+Number(goods.install_price)}}元</span>
+        </li>
+        <li class="subtotal" v-else>
           共{{goods.number_goods}}件 小计：<span>{{(goods.number_goods*goods.price_real)+Number(goods.price_express)}}元</span>
         </li>
       </ul>
