@@ -49,7 +49,7 @@
           </div>
           <div class="btn-ui" v-if="type==4">
             <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
-            <router-link tag="a" to="'/refund/apply" class="offBtn"> 查看物流</router-link>
+            <a class="offBtn" @click="lookWl(item.express_company_title,item.express_send_no)"> 查看物流</a>
             <a @click="confirmOrder(item.id,index)" class="offBtn"> 确认收货</a>
           </div>
           <div class="btn-ui" v-if="type==5">
@@ -78,6 +78,15 @@
       type: Number
     },
     methods: {
+      //查看物流
+      lookWl(title,send){
+        this.$createDialog({
+          type: 'alert',
+          title: '物流信息',
+          content: '<p style="line-height:2;">快递公司：'+title+'</p>'+'<p style="line-height:2;">快递单号：'+send+'</p>',
+          icon: ''
+        }).show()
+      },
       //去付款
       payClick(id,index){
         this.$emit('changePayClick',id,index)
@@ -97,6 +106,9 @@
   }
 </script>
 <style lang="less" scoped>
+  .my-content{
+    line-height:3;
+  }
   .orderData{
     padding:0 30px;
     overflow: hidden;

@@ -17,7 +17,7 @@
         <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_real}}</span></h6>
         <div class="btn-ui">
           <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
-          <a class="lookBtn">查看物流</a>
+          <a class="lookBtn"  @click="lookWl(item.express_company_title,item.express_send_no)">查看物流</a>
         </div>
       </li>
     </ul>
@@ -40,6 +40,15 @@
       list: Array,
     },
     methods: {
+      //查看物流
+      lookWl(title,send){
+        this.$createDialog({
+          type: 'alert',
+          title: '物流信息',
+          content: '<p style="line-height:2;">快递公司：'+title+'</p>'+'<p style="line-height:2;">快递单号：'+send+'</p>',
+          icon: ''
+        }).show()
+      },
       confirmClick(){
         this.$emit('changeCallcelOrder',true)
       }

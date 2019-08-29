@@ -79,7 +79,7 @@
       </template>
     </cube-page>
     <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-      <img class="circle" src="../../assets/img/l-banner-1.png" v-if="isBall"/>
+      <img class="circle" :src="goods.logo" v-if="isBall"/>
     </transition>
     <transition
       name="custom-classes-transition"
