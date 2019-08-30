@@ -45,15 +45,24 @@
           <!--</div>-->
           </router-link>
           <div class="btn-ui" v-if="type==3">
-            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <router-link v-if="item.refund_status==0" tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <a class="offBtn shSty" v-if="item.refund_status==1"> 售后处理中</a>
+            <a class="offBtn shSty" v-if="item.refund_status==2"> 售后已完成</a>
+            <a class="offBtn shSty" v-if="item.refund_status==3"> 审核未通过</a>
           </div>
           <div class="btn-ui" v-if="type==4">
-            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <router-link tag="a" v-if="item.refund_status==0" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <a class="offBtn shSty" v-if="item.refund_status==1"> 售后处理中</a>
+            <a class="offBtn shSty" v-if="item.refund_status==2"> 售后已完成</a>
+            <a class="offBtn shSty" v-if="item.refund_status==3"> 审核未通过</a>
             <a class="offBtn" @click="lookWl(item.express_company_title,item.express_send_no)"> 查看物流</a>
             <a @click="confirmOrder(item.id,index)" class="offBtn"> 确认收货</a>
           </div>
           <div class="btn-ui" v-if="type==5">
-            <router-link tag="a" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <router-link v-if="" tag="a" v-if="item.refund_status==0" :to="'/refund/apply?id='+item.id" class="offBtn"> 申请退款</router-link>
+            <a class="offBtn shSty" v-if="item.refund_status==1"> 售后处理中</a>
+            <a class="offBtn shSty" v-if="item.refund_status==2"> 售后已完成</a>
+            <a class="offBtn shSty" v-if="item.refund_status==3"> 审核未通过</a>
           </div>
         </template>
       </li>
@@ -106,6 +115,9 @@
   }
 </script>
 <style lang="less" scoped>
+  .shSty{
+    border:none !important;
+  }
   .my-content{
     line-height:3;
   }

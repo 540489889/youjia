@@ -11,10 +11,10 @@
           <div class="right-text box-1">
             <div class="flex-box tpText">
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-              <span>￥<b>{{item.price_real}}</b></span>
+              <span>￥<b>{{item.price_item}}</b></span>
             </div>
             <p>{{item.goods_attr}}</p>
-            <p>数量：1</p>
+            <p>数量：{{item.goods_number}}</p>
           </div>
         </router-link>
         <div class="flex-box d-ui-center">
@@ -30,12 +30,16 @@
           <span>退换货原因</span>
           <span class="box-1">{{item.cause}}</span>
         </div>
+        <div class="flex-box d-ui-center" v-if="item.install_price">
+          <span>安装费</span>
+          <span class="box-1">{{item.install_price}}</span>
+        </div>
         <div class="flex-box d-ui-center">
           <span>备注</span>
           <span class="box-1">{{item.remark}}</span>
         </div>
         <div class="btn-ui">
-          <a class="lookBtn">查看物流</a>
+          <!--<a class="lookBtn"  @click="lookWl(item.express_company_title,item.express_send_no)">查看物流</a>-->
         </div>
       </li>
     </ul>
@@ -58,6 +62,15 @@
       list: Array,
     },
     methods: {
+      //查看物流
+      lookWl(title,send){
+        this.$createDialog({
+          type: 'alert',
+          title: '物流信息',
+          content: '<p style="line-height:2;">快递公司：'+title+'</p>'+'<p style="line-height:2;">快递单号：'+send+'</p>',
+          icon: ''
+        }).show()
+      },
       confirmClick(){
         this.$emit('changeCallcelOrder',true)
       }

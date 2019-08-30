@@ -11,10 +11,10 @@
           <div class="right-text box-1">
             <div class="flex-box tpText">
               <h2 class="media_desc box-1">{{item.goods_title}}</h2>
-              <span>￥<b>{{item.price_real}}</b></span>
+              <span>￥<b>{{item.price_item}}</b></span>
             </div>
             <p>{{item.goods_attr}}</p>
-            <p>数量：1</p>
+            <p>数量：{{item.goods_number}}</p>
           </div>
         </router-link>
         <div class="flex-box d-ui-center">
@@ -30,11 +30,16 @@
           <span>退换货原因</span>
           <span class="box-1">{{item.cause}}</span>
         </div>
+        <div class="flex-box d-ui-center" v-if="item.install_price">
+          <span>安装费</span>
+          <span class="box-1">{{item.install_price}}</span>
+        </div>
         <div class="flex-box d-ui-center">
           <span>备注</span>
           <span class="box-1">{{item.remark}}</span>
         </div>
-        <h6>共{{item.number_goods}}件商品 共计：<span>￥{{item.number_goods*item.price_real}}</span></h6>
+        <h6 v-if="item.install_price">共{{item.goods_number}}件商品 共计：<span>￥{{item.goods_number*item.price_item+Number(item.install_price)}}</span></h6>
+        <h6 v-else>共{{item.goods_number}}件商品 共计：<span>￥{{item.goods_number*item.price_item}}</span></h6>
         <h5 class="flex-box overInfor"><span>已完成</span> <p class="box">服务已完成，感谢您的支持</p></h5>
       </li>
     </ul>
