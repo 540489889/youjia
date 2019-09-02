@@ -58,6 +58,53 @@
       }
     },
     methods: {
+      getFxState(){
+        this.http.get(this.ports.me.fxState, res =>{
+          console.log(res)
+          let msg = res.msg
+          if(res.success){
+
+          }else{
+            if(res.code == 30002){
+              this.$createDialog({
+                type: 'confirm',
+                icon: 'cubeic-alert',
+                title: '',
+                content: msg,
+                confirmBtn: {
+                  text: '去绑定',
+                  active: true,
+                  disabled: false,
+                  href: 'javascript:;'
+                },
+                cancelBtn: {
+                  text: '取消',
+                  active: false,
+                  disabled: false,
+                  href: 'javascript:;'
+                },
+                onConfirm: () => {
+                  this.$router.push('/reg/index')
+                },
+                onCancel: () => {
+                  this.$router.go(-1)
+                }
+              }).show()
+            }else{
+              this.$createDialog({
+                type: 'alert',
+                title: '',
+                content: 'msg',
+                icon: 'cubeic-alert',
+                onConfirm: () => {
+                  this.$router.go(-1)
+                },
+              }).show()
+            }
+//            this.showToastTxtOnly(res.msg)
+          }
+        })
+      },
       getMeData(){
         this.http.get(this.ports.me.index, res =>{
           this.$store.commit('changeLoading',false)
@@ -125,6 +172,7 @@
     },
     mounted (){
       this.getMeData()
+      this.getFxState()
     }
   }
 </script>

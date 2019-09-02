@@ -173,7 +173,7 @@ let router = new Router({
       path: '/me/reseller',
       name: 'MeReseller',
       component: resolve => require(['@/page/me/reseller'], resolve) ,
-      meta:{index: 2, title: '分销商', requireAuth: false}
+      meta:{index: 2, title: '成为分销商', requireAuth: false}
     },
     {
       path: '/me/assets',

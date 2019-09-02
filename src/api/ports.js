@@ -40,7 +40,8 @@ export default {
     dxCode: '/api/v1/member/code', //获取验证码 参数 ?phone=
     bindTell: '/api/v1/member/bind',//绑定手机
     fxcode: '/api/v1/qrcode/code',//我的推广二维码
-    qrcode: '/api/v1/qrcode'
+    qrcode: '/api/v1/qrcode',
+    fxState: '/api/v1/distribution/state',//分销商状态
   },
   integral: {
     index: '/api/v1/points',//积分首页
