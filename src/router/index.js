@@ -20,7 +20,7 @@ let router = new Router({
       path: '/author/code',
       name: 'authorCode',
       component: resolve => require(['@/page/author/code'], resolve) ,
-      meta:{index: 0, title: '优家商城', requireAuth: false}
+      meta:{index: 0, title: '关注', requireAuth: false}
     },
     {
       path: '/reg/index',

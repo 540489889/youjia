@@ -26,7 +26,6 @@
         this.$store.commit('changeLogin',openId)
         console.log(this.$store.state.redirect)
         this.$router.push({path: this.$store.state.redirect})
-//        window.location.href = 'http://yj.svkeji.cn/'
       }
     },
     beforeRouteEnter(to, from, next){

@@ -180,7 +180,7 @@
       total: function () {
         let allMoney = 0;
         for(let i=0;i<this.goodsarr.length;i++){
-          console.log(this.goodsarr[i].goods.ress,'测试')
+          console.log(this.goodsarr[i].goods.ress)
           if(this.goodsarr[i].goods.ress){
             allMoney+= this.goodsarr[i].goods.ressPrice
           }

@@ -57,7 +57,6 @@ axios.interceptors.response.use(function (response) {
     // 未关注
     router.replace({
       path:'/author/code',
-      params: {ab: 12}
     })
   }else{
     return response

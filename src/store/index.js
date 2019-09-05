@@ -19,7 +19,6 @@ export default new Vuex.Store({
   mutations: {
     // 修改token，并将token存入localStorage
     changeLogin (state, user) {
-      console.log(9999)
       state.openId = user;
       localStorage.setItem('openId', user);
     },

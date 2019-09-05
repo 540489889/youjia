@@ -53,27 +53,9 @@
         this.toast.show()
       },
       getIndexData(){
-//        $.ajax({
-//          //请求方式
-//          type : "get",
-//          //请求的媒体类型
-//          contentType: "application/json;charset=UTF-8",
-//          //请求地址
-//          url : "http://youjia.svkeji.cn/api/v1/index",
-//          //请求成功
-//          success : function(result) {
-//            console.log(result,55555);
-//          },
-//          //请求失败，包含具体的错误信息
-//          error : function(e){
-//            console.log(e,555559999);
-//            console.log(e.responseText);
-//          }
-//        });
         this.http.get(this.ports.home.index, res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
-          console.log(res,999999)
           if(res.success){
             let data = res.data
             this.banner = data.banner

@@ -55,15 +55,15 @@
         options: [
           {
             value: 0,
-            text: 'mini蓝牙蓝色版小猴套装'
+            text: '测试1'
           },
           {
             value: 1,
-            text: '米兔卡片学习机'
+            text: '测试2'
           },
           {
             value: 2,
-            text: 'mini蓝牙蓝色版小猴套装'
+            text: '测试3'
           }
         ]
       }
@@ -131,8 +131,7 @@
         $(that).addClass('cube-checker-item_active')
         $(that).siblings('li').removeClass('cube-checker-item_active')
         this.checkerList[index] = val.name
-        console.log(this.checkerList,555554464)
-
+        console.log(this.checkerList)
         this.goods.lists.forEach((e,index,array)=> {
           if(JSON.stringify(e[0].spec)===JSON.stringify(this.checkerList)){
             this.key = e[0].key
@@ -147,7 +146,6 @@
       },
       //关闭规格弹窗
       closeSelected(){
-//        alert(1)
         this.$emit('changeSelected','close',this.checkerList)
       },
       computed(){

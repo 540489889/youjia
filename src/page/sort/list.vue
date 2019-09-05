@@ -14,8 +14,8 @@
                 @changeAmountClick="changeAmountClick"></index-sort>
             </cube-sticky-ele>
 
-            <data-sort v-if="list.length" :list="list"></data-sort>
-            <div class="nullBox" v-else>
+            <data-sort :list="list"></data-sort>
+            <div class="nullBox" v-if="isData">
               <img src="../../assets/ico/null-ico.png" alt="">
               <p>暂无数据</p>
             </div>
@@ -37,6 +37,7 @@
         scrollEvents: ['scroll'],
         scrollY: 0,
         list: [],//商品列表
+        isData: false
       }
     },
     components: {
@@ -82,8 +83,10 @@
           if(res.success){
             let data = res.data
             this.list = data.res
+            this.isData = false
           }else{
             this.list = []
+            this.isData = true
 //            this.showToastTxtOnly(res.msg)
           }
         })

@@ -178,8 +178,6 @@
             onSelect: () => {
               this.http.delete(this.ports.cart.index+'/'+this.list[index].id, res =>{
                 if(res.success){
-//                  let data = res.data
-//                  this.list = data.res
                   this.list.splice(index, 1)
                 }else{
                   this.showToastTxtOnly(res.msg)
@@ -253,7 +251,6 @@
             this.number = 0
           }
         }
-
       }
     },
     created(){
