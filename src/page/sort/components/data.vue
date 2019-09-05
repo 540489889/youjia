@@ -11,8 +11,8 @@
           <h5 class="sold">已售：{{item.number_sales}}件</h5>
           <div class="money flex-box">
             <div class="left-2">
-              ￥<span>{{item.price_market}}</span>
-              <b>￥{{item.price_selling}}</b>
+              ￥<span>{{item.price_selling}}</span>
+              <b>￥{{item.price_market}}</b>
             </div>
             <div class="right-2">查看详情</div>
           </div>
