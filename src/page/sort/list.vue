@@ -49,9 +49,9 @@
       //价格排序
       changePriceClick(val){
         if(val){
-          this.getListData('price_market+desc')
+          this.getListData('price_selling+desc')
         }else{
-          this.getListData('price_market+asc')
+          this.getListData('price_selling+asc')
         }
       },
       //销量排序
