@@ -6,6 +6,7 @@
       <div slot="content">
         <div class="view-wrapper">
           <cube-scroll-nav
+            ref="sortNav"
             :side="true"
             :data="data"
             :current="current"
@@ -17,10 +18,12 @@
               <!--<li>333</li>-->
             <!--</ul>-->
             <cube-scroll-nav-panel
+              v-if="data.length"
               v-for="item in data"
               :key="item.title"
               :label="item.title"
-              :title="item.title">
+              :title="item.title"
+              >
               <ul>
                 <li v-if="item._child" v-for="it in item._child" :key="it.id">
                   <h2>{{it.title}}</h2>
@@ -56,17 +59,13 @@
       CubePage,
       HomeSearch
     },
-//    data() {
-//      return {
-//        data: goods,
-//        current: goods[3].name
-//      }
-//    },
     data (){
       return {
-        data: [],
+        data: null,
         current: ''
       }
+    },
+    created(){
     },
     methods: {
       showToastTxtOnly(text) {
@@ -98,7 +97,12 @@
     },
     mounted (){
       this.getIndexData()
-    }
+    },
+    watch:{
+      data (){
+        this.$refs.sortNav.refresh()
+      }
+    },
   }
 </script>
 <style lang="less">

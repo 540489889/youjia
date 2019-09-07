@@ -94,7 +94,7 @@
               this.$createDialog({
                 type: 'alert',
                 title: '',
-                content: 'msg',
+                content: msg,
                 icon: 'cubeic-alert',
                 onConfirm: () => {
                   this.$router.go(-1)

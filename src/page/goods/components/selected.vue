@@ -116,11 +116,14 @@
       //默认规格
       defaulCheck(){
         this.goods.lists.forEach((e,index)=>{
-          if(index===0){
-            this.checkerList = e[0].spec
-            this.key = e[0].key
+          for(let i=0;i<e.length;i++){
+            if(e[i].key===this.goods.goods_spec){
+              this.checkerList.push(e[i].name)
+              this.key = e[i].key
+            }
           }
         })
+        console.log(this.checkerList,123)
       },
       //规格选择
       checkSpecs(e,val,index){

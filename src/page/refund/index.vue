@@ -11,7 +11,7 @@
               <cube-sticky-ele>
                 <order-nav @changeClick="changeClick"></order-nav>
               </cube-sticky-ele>
-              <div class="nullBox" v-if="!list.length">
+              <div class="nullBox" v-if="isData">
                 <img src="../../assets/ico/null-ico.png" alt="">
                 <p>暂无数据</p>
               </div>
@@ -60,6 +60,7 @@
         list: [],
         curentTab: 'orderData',
         toastTime:null,
+        isData: false
       }
     },
     components: {
@@ -109,8 +110,10 @@
           if(res.success){
             let data = res.data
             this.list = data.res
+            this.isData = false
           }else{
             this.list = []
+            this.isData = true
 //            this.showToastTxtOnly(res.msg)
           }
         })
@@ -126,8 +129,10 @@
           if(res.success){
             let data = res.data
             this.list = data.res
+            this.isData = false
           }else{
             this.list = []
+            this.isData = true
 //            this.showToastTxtOnly(res.msg)
           }
         })

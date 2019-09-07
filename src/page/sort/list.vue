@@ -71,6 +71,7 @@
         this.toast.show()
       },
       scrollHandler({ y }) {
+        console.log(y)
         this.scrollY = -y
       },
       getListData(order){
