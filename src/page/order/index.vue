@@ -12,7 +12,7 @@
               <cube-sticky-ele>
                 <order-nav @changeNavClick="changeNavClick"></order-nav>
               </cube-sticky-ele>
-              <div class="nullBox" v-if="!list.length">
+              <div class="nullBox" v-if="isData">
                 <img src="../../assets/ico/null-ico.png" alt="">
                 <p>暂无订单</p>
               </div>
@@ -64,6 +64,7 @@
         list: [],//列表数据
         toastTime:null,
         type: 2, //默认待付款
+        isData: false
       }
     },
     components: {
@@ -225,6 +226,15 @@
     mounted (){
       this.getOrderData()
 //      this.$store.commit('changeLoading',false)
+    },
+    watch:{
+      list(){
+        if(!this.list.length){
+          this.isData = true
+        }else{
+          this.isData = false
+        }
+      }
     }
   }
 </script>
