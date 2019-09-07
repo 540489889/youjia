@@ -15,10 +15,10 @@
     <div class="rmSearch">
       <h2>热门搜索</h2>
       <div class="label">
-        <span>小龙虾</span>
-        <span>手机</span>
-        <span>牛奶</span>
-        <span>啤酒</span>
+        <!--<span>小龙虾</span>-->
+        <!--<span>手机</span>-->
+        <!--<span>牛奶</span>-->
+        <!--<span>啤酒</span>-->
       </div>
     </div>
   </div>

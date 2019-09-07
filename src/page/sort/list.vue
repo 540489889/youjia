@@ -37,7 +37,8 @@
         scrollEvents: ['scroll'],
         scrollY: 0,
         list: [],//商品列表
-        isData: false
+        isData: false,
+        toastLoading: null,
       }
     },
     components: {
