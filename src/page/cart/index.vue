@@ -176,7 +176,15 @@
               {content: '删除'}
             ],
             onSelect: () => {
+              // 显示
+              this.$vux.loading.show({
+                text: 'Loading'
+              })
               this.http.delete(this.ports.cart.index+'/'+this.list[index].id, res =>{
+                if(this.$vux.loading.isVisible()){
+                  // 隐藏
+                  this.$vux.loading.hide()
+                }
                 if(res.success){
                   this.list.splice(index, 1)
                 }else{

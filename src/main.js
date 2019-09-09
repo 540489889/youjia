@@ -160,6 +160,9 @@ Vue.use(ScrollNav)
 Vue.use(ScrollNavBar)
 Vue.use(RecycleList)
 
+//vux
+import { LoadingPlugin } from 'vux'
+Vue.use(LoadingPlugin)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

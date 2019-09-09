@@ -80,7 +80,10 @@
         this.toastTime.show()
       },
       changeClick(val){
-        this.showToastTime()
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         if(val=='售后申请'){
           this.getData()
           this.curentTab = 'orderData'
@@ -104,8 +107,9 @@
         this.http.get(this.ports.refund.afterlog+'?type='+type, res =>{
           console.log(res)
           this.$store.commit('changeLoading',false)
-          if(this.toastTime){
-            this.toastTime.hide()
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
           }
           if(res.success){
             let data = res.data
@@ -122,8 +126,9 @@
         this.list = []
         this.http.get(this.ports.refund.afterindex, res =>{
           this.$store.commit('changeLoading',false)
-          if(this.toastTime){
-            this.toastTime.hide()
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
           }
           console.log(res)
           if(res.success){

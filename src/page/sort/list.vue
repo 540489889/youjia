@@ -50,6 +50,10 @@
     methods: {
       //价格排序
       changePriceClick(val){
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         if(val){
           this.getListData('price_selling+desc')
         }else{
@@ -58,6 +62,10 @@
       },
       //销量排序
       changeAmountClick(val){
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         if(val){
           this.getListData('number_sales+desc')
         }else{
@@ -82,6 +90,10 @@
         this.http.get(this.ports.search.index+'?cate='+id+'&title='+title+'&type='+type+'&order='+order, res =>{
           console.log(res)
           this.$store.commit('changeLoading',false)
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
+          }
           if(res.success){
             let data = res.data
             this.list = data.res

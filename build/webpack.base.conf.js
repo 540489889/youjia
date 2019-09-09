@@ -6,10 +6,6 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 const PostCompilePlugin = require('webpack-post-compile-plugin')
 const webpack = require('webpack')
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -21,7 +17,8 @@ const createLintingRule = () => ({
   }
 })
 
-module.exports = {
+// module.exports = {
+const originalConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
@@ -34,7 +31,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.less'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -105,3 +102,11 @@ module.exports = {
     })
   ]
 }
+const vuxLoader = require('vux-loader')
+const webpackConfig = originalConfig // 原来的 module.exports 代码赋值给变量 webpackConfig
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui']
+})

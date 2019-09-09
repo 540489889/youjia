@@ -241,11 +241,15 @@
           goods.push(even.goods)
           this.orderInfor.goods = goods
         })
-        this.showToastMask()
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         this.http.post(this.ports.order.index,this.orderInfor, res =>{
           this.$store.commit('changeLoading',false)
-          if(this.makeToast){
-            this.makeToast.show()
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
           }
           if(res.success){
             let id = res.data

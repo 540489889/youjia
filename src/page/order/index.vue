@@ -94,7 +94,15 @@
             href: 'javascript:;'
           },
           onConfirm: () => {
+            // 显示
+            this.$vux.loading.show({
+              text: 'Loading'
+            })
             this.http.get(this.ports.order.confirm_order+'?id='+id, res =>{
+              if(this.$vux.loading.isVisible()){
+                // 隐藏
+                this.$vux.loading.hide()
+              }
               if(res.success){
                 this.list.splice(index, 1)
                 let data = res.data
@@ -109,7 +117,15 @@
       },
       //去付款
       changePayClick(id,index){
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         this.http.get(this.ports.order.pay+'?id='+id, res =>{
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
+          }
           if(res.success){
             this.list.splice(index, 1)
             let data = res.data
@@ -140,7 +156,15 @@
             href: 'javascript:;'
           },
           onConfirm: () => {
+            // 显示
+            this.$vux.loading.show({
+              text: 'Loading'
+            })
             this.http.delete(this.ports.order.index+'/'+id, res =>{
+              if(this.$vux.loading.isVisible()){
+                // 隐藏
+                this.$vux.loading.hide()
+              }
               if(res.success){
                 this.list.splice(index, 1)
 //            this.$store.commit('changeCartNum',this.cart)
@@ -161,10 +185,13 @@
       //nav切换
       changeNavClick(val){
         this.list = []
+        // 显示
+        this.$vux.loading.show({
+          text: 'Loading'
+        })
         document.body.scrollTop = 0
         document.documentElement.scrollTop = 0
         this.type = val
-        this.showToastTime()
         this.getOrderData(val)
       },
       showToastTxtOnly(text) {
@@ -186,8 +213,9 @@
         this.http.get(this.ports.order.index+'?type='+index, res =>{
           this.$store.commit('changeLoading',false)
           console.log(res)
-          if(this.toastTime){
-            this.toastTime.hide()
+          if(this.$vux.loading.isVisible()){
+            // 隐藏
+            this.$vux.loading.hide()
           }
           if(res.success){
             let data = res.data
