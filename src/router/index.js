@@ -260,7 +260,7 @@ let router = new Router({
 })
 // 使用 router.beforeEach 注册一个全局前置守卫，
 router.beforeEach((to, from, next) => {
-  localStorage.removeItem('parentmid');
+  // localStorage.removeItem('parentmid');
   let parentmid = to.query.parent_mid
   if(parentmid){
     localStorage.parentmid = parentmid

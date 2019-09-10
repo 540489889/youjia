@@ -48,7 +48,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(function (response) {
   // 未授权
   if (response.data.code===30005){
-    localStorage.clear()
+    localStorage.removeItem('openId')
     //未授权
     router.push({
       path:'/author/index',
