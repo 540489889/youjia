@@ -110,6 +110,7 @@
     width:100%;
     height:100vh;
     overflow: hidden;
+    background-color:white;
     .cube-scroll-wrapper{
       width:100%;
     }

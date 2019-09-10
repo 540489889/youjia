@@ -177,7 +177,7 @@ input,button,.btnStyle{
 input:focus,button:focus,.btnStyle:focus{
   border:none;
 }
-.cube-dialog-fade-enter-active{
+.cube-dialog-fade-enter-active,.cube-toast-fade-enter-active{
   animation-duration: initial !important;
   animation-timing-function: initial !important;
   animation-delay: initial !important;

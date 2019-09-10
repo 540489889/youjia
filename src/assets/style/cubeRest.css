@@ -62,15 +62,15 @@
 .goodsIndex .cube-popup .cube-popup-mask,.MeCode .cube-popup .cube-popup-mask{
   opacity: .8 !important;
 }
-.cube-dialog-fade-enter-active,.cube-dialog-fade-enter-to{
+.cube-dialog-fade-enter-active,.cube-dialog-fade-enter-to,.cube-toast-fade-enter-to,.cube-toast-fade-enter-active{
   animation:initial !important;
   transition: initial !important;
 }
-.cube-dialog-fade-enter-active *,.cube-dialog-fade-enter-to *{
+.cube-dialog-fade-enter-active *,.cube-dialog-fade-enter-to *,.cube-toast-fade-enter-active *,.cube-toast-fade-enter-to *{
   animation:initial !important;
   transition: initial !important;
 }
-.cube-dialog-fade-enter-active{
+.cube-dialog-fade-enter-active,.cube-toast-fade-enter-active{
   animation-duration: initial !important;
   animation-timing-function: initial !important;
   animation-delay: initial !important;
