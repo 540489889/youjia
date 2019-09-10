@@ -177,4 +177,14 @@ input,button,.btnStyle{
 input:focus,button:focus,.btnStyle:focus{
   border:none;
 }
+.cube-dialog-fade-enter-active{
+  animation-duration: initial !important;
+  animation-timing-function: initial !important;
+  animation-delay: initial !important;
+  animation-iteration-count: initial !important;
+  animation-direction: initial !important;
+  animation-fill-mode: initial !important;
+  animation-play-state: initial !important;
+  animation-name: initial !important;
+}
 
