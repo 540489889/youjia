@@ -117,7 +117,11 @@
       defaulCheck(){
         this.goods.lists.forEach((e,index)=>{
           for(let i=0;i<e.length;i++){
+            console.log(e[i])
             if(e[i].key===this.goods.goods_spec){
+              this.checkerList.push(e[i].name)
+              this.key = e[i].key
+            }else if(e[i].name===this.goods.goods_spec){
               this.checkerList.push(e[i].name)
               this.key = e[i].key
             }
