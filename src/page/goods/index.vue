@@ -112,6 +112,7 @@
         collect: 0, //是否收藏
         isShare: false,
         fxImg: '',
+        isMenber: 1,//1为会员0不是
       }
     },
     components: {
@@ -192,39 +193,54 @@
 //        this.flag = !this.flag
       },
       //获取列表数据
-      getIndexData(){
+      getIndexData() {
         let id = this.$route.params.id
         let shareId = this.$route.query.share_id
-        if(shareId){
-          this.http.get(this.ports.goods.index+'/'+id+'?share_id='+shareId, res =>{
-            this.$store.commit('changeLoading',false)
-            if(res.success){
-              let data = res.data
-              this.goods = data
-              this.lists = data.lists
-              this.banner = data.image
-              this.collect = data.collect
-              console.log(this.goods)
-            }else{
-              this.showToastTxtOnly(res.msg)
-            }
-          })
-        }else{
-          this.http.get(this.ports.goods.index+'/'+id, res =>{
-            this.$store.commit('changeLoading',false)
-            if(res.success){
-              let data = res.data
-              this.goods = data
-              this.lists = data.lists
-              this.banner = data.image
-              this.collect = data.collect
-              console.log(this.goods)
-            }else{
-              this.showToastTxtOnly(res.msg)
-            }
-          })
+        let port = this.ports.goods.index + '/' + id
+        if (shareId) {
+          port = this.ports.goods.index + '/' + id + '?share_id=' + shareId
         }
-
+        this.http.get(port, res => {
+          this.$store.commit('changeLoading', false)
+          if (res.success) {
+            let data = res.data
+            this.goods = data
+            this.lists = data.lists
+            this.banner = data.image
+            this.collect = data.collect
+            this.isMenber = data.member_type
+//            this.isMenber = 0
+            if(!this.isMenber){
+              this.$createDialog({
+                type: 'confirm',
+                icon: 'cubeic-alert',
+                title: '',
+                content: '您还不是会员哟',
+                confirmBtn: {
+                  text: '去绑定',
+                  active: true,
+                  disabled: false,
+                  href: 'javascript:;'
+                },
+                cancelBtn: {
+                  text: '取消',
+                  active: false,
+                  disabled: false,
+                  href: 'javascript:;'
+                },
+                onConfirm: () => {
+                  this.$router.push('/reg/index')
+                },
+                onCancel: () => {
+//                  this.$router.go(-1)
+                }
+              }).show()
+            }
+            console.log(this.goods)
+          } else {
+            this.showToastTxtOnly(res.msg)
+          }
+        })
       },
       //弹出规格选择
       confirmClick(){
