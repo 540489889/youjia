@@ -5,14 +5,13 @@
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
         <swiper-slide  v-for="(item,index) in information" :key="index">
-          <div class=" flex-box adverBd" v-if="index==0"><span>最新</span><div class="box-1 media_title" v-html="">{{item.content}}</div></div>
-          <div v-else class="adverBd flex-box"><div class="box-1 media_title">{{item.content}}</div></div>
+          <router-link tag="div" :to="'/information/index/'+item.id" class=" flex-box adverBd" v-if="index==0"><span>最新</span><div class="box-1 media_title" v-html="">{{item.title}}</div></router-link>
+          <router-link tag="div" :to="'/information/index/'+item.id" v-else class="adverBd flex-box"><router-link class="box-1 media_title">{{item.title}}</router-link></router-link>
         </swiper-slide>
         <!--<div class="swiper-pagination"  slot="pagination"></div>-->
       </swiper>
     </div>
   </div>
-
 </template>
 <script>
   export default {

@@ -41,6 +41,12 @@ let router = new Router({
       meta:{index: 1, title: '首页', requireAuth: false}
     },
     {
+      path: '/information/index/:id',
+      name: 'Information',
+      component: resolve => require(['@/page/information/index'], resolve) ,
+      meta:{index: 2, title: '来点资讯', requireAuth: false}
+    },
+    {
       path: '/search/index',
       name: 'SearchIndex',
       component: resolve => require(['@/page/search/index'], resolve) ,

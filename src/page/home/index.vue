@@ -56,6 +56,7 @@
         this.http.get(this.ports.home.index, res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
+          console.log(res)
           if(res.success){
             let data = res.data
             this.banner = data.banner
@@ -63,7 +64,7 @@
             this.newList = data.new
             this.cart = data.cart
             this.menu = data.menu
-            this.information = data.information
+            this.information = data.information.res
             this.$store.commit('changeCartNum',this.cart)
           }else{
             this.showToastTxtOnly(res.msg)
