@@ -6,7 +6,7 @@
         <!-- slides -->
         <swiper-slide  v-for="(item,index) in information" :key="index">
           <router-link tag="div" :to="'/information/index/'+item.id" class=" flex-box adverBd" v-if="index==0"><span>最新</span><div class="box-1 media_title" v-html="">{{item.title}}</div></router-link>
-          <router-link tag="div" :to="'/information/index/'+item.id" v-else class="adverBd flex-box"><router-link class="box-1 media_title">{{item.title}}</router-link></router-link>
+          <router-link v-else tag="div" :to="'/information/index/'+item.id" class="adverBd flex-box"><div class="box-1 media_title">{{item.title}}</div></router-link>
         </swiper-slide>
         <!--<div class="swiper-pagination"  slot="pagination"></div>-->
       </swiper>

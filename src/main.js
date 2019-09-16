@@ -46,7 +46,6 @@ axios.interceptors.request.use(
   });
 //请求拦截
 axios.interceptors.response.use(function (response) {
-  // 未授权
   if (response.data.code===30005){
     localStorage.removeItem('openId')
     //未授权

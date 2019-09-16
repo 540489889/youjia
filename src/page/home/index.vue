@@ -56,7 +56,6 @@
         this.http.get(this.ports.home.index, res =>{
           this.isLoading = false
           this.$store.commit('changeLoading',false)
-          console.log(res)
           if(res.success){
             let data = res.data
             this.banner = data.banner
