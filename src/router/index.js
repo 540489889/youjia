@@ -71,7 +71,7 @@ let router = new Router({
       path: '/sort/mb',
       name: 'Sortmb',
       component: resolve => require(['@/page/sort/mb'], resolve) ,
-      meta:{index: 2, title: '分类', requireAuth: false}
+      meta:{index: 2, title: '测试', requireAuth: false}
     },
     //商品详情
     {

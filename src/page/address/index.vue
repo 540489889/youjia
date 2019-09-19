@@ -68,7 +68,15 @@
             href: 'javascript:;'
           },
           onConfirm: () => {
+            // 显示
+            this.$vux.loading.show({
+              text: 'Loading'
+            })
             this.http.delete(this.ports.me.address+'/'+id, res =>{
+              if(this.$vux.loading.isVisible()){
+                // 隐藏
+                this.$vux.loading.hide()
+              }
               console.log(res)
               if(res.success){
                 this.list.splice(index, 1)
